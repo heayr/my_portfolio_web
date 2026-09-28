@@ -45,3 +45,29 @@ export interface EpochItem {
   };
   velocity: string;
 }
+
+export type LocalizedText = {
+  en: string;
+  ru: string;
+};
+
+export interface StackCategory {
+  title: LocalizedText;
+  items: {
+    name: string;
+    tag: LocalizedText;
+  }[];
+}
+
+export interface FAQItem {
+  q: LocalizedText;
+  a: LocalizedText;
+}
+
+export interface MetricItem {
+  value: string;
+  unit: string;
+  label: LocalizedText;
+  desc: LocalizedText;
+}
+

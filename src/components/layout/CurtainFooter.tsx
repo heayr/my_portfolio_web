@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useApp } from '../../i18n/context';
+import { profileData } from '../../data/profile';
 
 export const CurtainFooter: React.FC = () => {
   const { t } = useApp();
@@ -9,7 +10,7 @@ export const CurtainFooter: React.FC = () => {
 
   const handleCopyEmail = async () => {
     try {
-      await navigator.clipboard.writeText('egormyshinsky@gmail.com');
+      await navigator.clipboard.writeText(profileData.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2400);
     } catch {
@@ -41,7 +42,7 @@ export const CurtainFooter: React.FC = () => {
         {/* Action Controls & Contacts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 my-12 items-center">
           <a
-            href="https://t.me/PotatoChipasu"
+            href={profileData.telegram}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between p-5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-black font-bold text-sm transition-all shadow-lg"
@@ -55,22 +56,22 @@ export const CurtainFooter: React.FC = () => {
             onClick={handleCopyEmail}
             className="flex items-center justify-between p-5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-medium text-sm border border-white/10 transition-all text-left"
           >
-            <span>{copied ? t.footer.copied : 'egormyshinsky@gmail.com'}</span>
+            <span>{copied ? t.footer.copied : profileData.email}</span>
             <span className="text-amber-400">{copied ? '✓' : '⧉'}</span>
           </button>
 
           <a
-            href="https://github.com/heayr"
+            href={profileData.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between p-5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-medium text-sm border border-white/10 transition-all"
           >
-            <span>GitHub @heayr</span>
+            <span>GitHub {profileData.githubHandle}</span>
             <span className="text-zinc-500">↗</span>
           </a>
 
           <a
-            href="https://linkedin.com/in/potatochipasu"
+            href={profileData.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-between p-5 rounded-2xl bg-white/5 hover:bg-white/10 text-white font-medium text-sm border border-white/10 transition-all"
