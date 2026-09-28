@@ -41,22 +41,36 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     }
   };
 
+  const isLight = theme === 'light';
+
+  const headerBg = isLight
+    ? scrolled
+      ? 'bg-white/90 backdrop-blur-xl border-b border-black/10 shadow-md text-zinc-900'
+      : 'bg-white/65 backdrop-blur-md border-b border-black/10 text-zinc-900'
+    : scrolled
+      ? 'bg-[#040406]/85 backdrop-blur-xl border-b border-white/15 shadow-xl text-white'
+      : 'bg-black/45 backdrop-blur-md border-b border-white/10 text-white';
+
+  const capsuleBg = isLight
+    ? 'bg-white/80 backdrop-blur-md border border-black/15 text-zinc-900 shadow-sm'
+    : 'bg-black/60 backdrop-blur-md border border-white/15 text-zinc-100 shadow-md';
+
+  const linkHover = isLight
+    ? 'hover:text-amber-600 transition-colors'
+    : 'hover:text-amber-400 transition-colors';
+
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-5 sm:px-10 transition-all duration-400 ${
-          scrolled
-            ? 'bg-black/85 dark:bg-black/85 light:bg-white/90 backdrop-blur-xl border-b border-white/15 dark:border-white/15 light:border-black/10 shadow-xl'
-            : 'bg-black/45 backdrop-blur-md border-b border-white/10'
-        }`}
+        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-5 sm:px-10 transition-all duration-400 ${headerBg}`}
       >
         {/* Left: Minimal Monochrome Social Acronyms with Glass Capsule */}
-        <div className="flex items-center gap-3.5 sm:gap-5 font-mono text-xs tracking-wider uppercase font-bold text-zinc-100 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-md">
+        <div className={`flex items-center gap-3.5 sm:gap-5 font-mono text-xs tracking-wider uppercase font-bold px-3.5 py-1.5 rounded-full ${capsuleBg}`}>
           <a
             href="https://t.me/PotatoChipasu"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-amber-400 transition-colors"
+            className={linkHover}
           >
             TG
           </a>
@@ -64,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href="https://github.com/heayr"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-amber-400 transition-colors"
+            className={linkHover}
           >
             GH
           </a>
@@ -72,14 +86,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href="https://linkedin.com/in/potatochipasu"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-amber-400 transition-colors"
+            className={linkHover}
           >
             LI
           </a>
           <button
             type="button"
             onClick={handleCopyEmail}
-            className="hover:text-amber-400 transition-colors text-left"
+            className={`${linkHover} text-left`}
             title="Copy email: egormyshinsky@gmail.com"
           >
             {copiedEmail ? 'COPIED!' : 'EMAIL'}
@@ -90,18 +104,22 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         <div className="w-[140px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
         {/* Right: Controls + Minimalist 2-line Burger Menu with Glass Capsule */}
-        <div className="flex items-center gap-2.5 sm:gap-4 font-mono text-xs px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-md">
+        <div className={`flex items-center gap-2.5 sm:gap-4 font-mono text-xs px-3.5 py-1.5 rounded-full ${capsuleBg}`}>
           {/* Moscow Clock */}
-          <div className="hidden md:flex items-center gap-1.5 text-zinc-200 text-xs pr-2 border-r border-white/15 font-bold">
-            <span className="text-zinc-500 font-bold">MSK</span>
-            <span className="text-white font-bold">{clock}</span>
+          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-2 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
+            <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
+            <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
           </div>
 
           {/* Language Switcher */}
           <button
             type="button"
             onClick={toggleLocale}
-            className="px-2.5 py-0.5 rounded-full border border-white/20 bg-white/10 text-xs font-bold hover:border-amber-400 hover:text-amber-400 transition-colors text-white"
+            className={`px-2.5 py-0.5 rounded-full border text-xs font-bold transition-colors ${
+              isLight
+                ? 'border-black/20 bg-black/5 text-zinc-900 hover:border-amber-600 hover:text-amber-600'
+                : 'border-white/20 bg-white/10 text-white hover:border-amber-400 hover:text-amber-400'
+            }`}
             title="Toggle Language"
           >
             {locale === 'ru' ? 'EN' : 'RU'}
@@ -111,17 +129,23 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleTheme}
-            className="w-7 h-7 rounded-full border border-white/20 bg-white/10 flex items-center justify-center text-xs hover:border-amber-400 hover:text-amber-400 transition-colors text-white"
+            className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors ${
+              isLight
+                ? 'border-black/20 bg-black/5 text-amber-600 hover:border-amber-600'
+                : 'border-white/20 bg-white/10 text-amber-400 hover:border-amber-400'
+            }`}
             title="Toggle Dark / Light Theme"
           >
-            {theme === 'dark' ? '☀' : '☾'}
+            {isLight ? '☀' : '☾'}
           </button>
 
           {/* Minimal 2-Line Burger Button */}
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="w-7 h-7 flex flex-col items-end justify-center gap-1.5 text-white hover:text-amber-400 transition-colors p-1"
+            className={`w-7 h-7 flex flex-col items-end justify-center gap-1.5 transition-colors p-1 ${
+              isLight ? 'text-zinc-900 hover:text-amber-600' : 'text-white hover:text-amber-400'
+            }`}
             aria-label="Toggle Navigation Drawer"
           >
             <span
@@ -140,12 +164,22 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
 
       {/* Full-Screen Drawer Menu (Arpeggio Style) */}
       {menuOpen && (
-        <div className="fixed inset-0 z-30 bg-black/95 backdrop-blur-2xl flex flex-col justify-between p-8 sm:p-16 pt-28 text-white transition-opacity duration-300">
+        <div
+          className={`fixed inset-0 z-30 flex flex-col justify-between p-8 sm:p-16 pt-28 backdrop-blur-2xl transition-opacity duration-300 ${
+            isLight
+              ? 'bg-[#f7f6f2]/98 text-zinc-900'
+              : 'bg-[#040406]/98 text-white'
+          }`}
+        >
           {/* Top Status Meta */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/10 pb-8 font-mono text-xs text-zinc-400">
+          <div
+            className={`flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-8 font-mono text-xs border-b ${
+              isLight ? 'border-black/10 text-zinc-600' : 'border-white/10 text-zinc-400'
+            }`}
+          >
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="tracking-widest uppercase text-emerald-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className={`tracking-widest uppercase font-semibold ${isLight ? 'text-emerald-700' : 'text-emerald-400'}`}>
                 {locale === 'ru' ? 'ДОСТУПЕН ДЛЯ КОНТРАКТОВ И АРХИТЕКТУРЫ' : 'AVAILABLE FOR ARCHITECTURAL ROLES'}
               </span>
             </div>
@@ -159,40 +193,52 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             <a
               href="#works"
               onClick={() => setMenuOpen(false)}
-              className="text-3xl sm:text-6xl font-black tracking-tight text-zinc-300 hover:text-amber-400 transition-colors"
+              className={`text-3xl sm:text-6xl font-black tracking-tight transition-colors ${
+                isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
+              }`}
             >
               {t.nav.work}
             </a>
             <a
               href="#philosophy"
               onClick={() => setMenuOpen(false)}
-              className="text-3xl sm:text-6xl font-black tracking-tight text-zinc-300 hover:text-amber-400 transition-colors"
+              className={`text-3xl sm:text-6xl font-black tracking-tight transition-colors ${
+                isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
+              }`}
             >
               {t.nav.philosophy}
             </a>
             <a
               href="#stack"
               onClick={() => setMenuOpen(false)}
-              className="text-3xl sm:text-6xl font-black tracking-tight text-zinc-300 hover:text-amber-400 transition-colors"
+              className={`text-3xl sm:text-6xl font-black tracking-tight transition-colors ${
+                isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
+              }`}
             >
               {t.nav.stack}
             </a>
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
-              className="text-3xl sm:text-6xl font-black tracking-tight text-zinc-300 hover:text-amber-400 transition-colors"
+              className={`text-3xl sm:text-6xl font-black tracking-tight transition-colors ${
+                isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
+              }`}
             >
               {t.nav.contact}
             </a>
           </nav>
 
           {/* Footer Contacts */}
-          <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs text-zinc-500">
+          <div
+            className={`pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-xs border-t ${
+              isLight ? 'border-black/10 text-zinc-600' : 'border-white/10 text-zinc-500'
+            }`}
+          >
             <div className="flex gap-6">
-              <a href="https://t.me/PotatoChipasu" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
+              <a href="https://t.me/PotatoChipasu" target="_blank" rel="noopener noreferrer" className={linkHover}>
                 Telegram: @PotatoChipasu
               </a>
-              <a href="https://github.com/heayr" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400">
+              <a href="https://github.com/heayr" target="_blank" rel="noopener noreferrer" className={linkHover}>
                 GitHub: @heayr
               </a>
             </div>

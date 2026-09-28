@@ -11,13 +11,21 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
   dockProgress,
   windowHeight,
 }) => {
-  // Initial vertical position: centered vertically in the hero stage
-  const startY = Math.max(220, windowHeight * 0.44 - 40);
-  const targetY = 22; // Aligned with the center of the 70px fixed header
+  // Height of the fixed navbar is 70px
+  const headerHeight = 70;
+
+  // The wrapper is h-[70px] with flex items-center.
+  // When currentY = 0, the wordmark is centered at Y = 35px (exact center of 70px header).
+  // When dockProgress = 0, we want the wordmark centered at windowHeight * 0.44:
+  // startY = (windowHeight * 0.44) - (headerHeight / 2)
+  const startY = Math.max(140, windowHeight * 0.44 - headerHeight / 2);
+  const targetY = 0; // Exactly inside the 70px header
 
   const clampedProgress = Math.min(1, Math.max(0, dockProgress));
   const currentY = startY - clampedProgress * (startY - targetY);
-  const currentScale = 1 - clampedProgress * 0.82;
+  
+  // Scale down from 1 (hero title) to 0.22 (compact navbar wordmark)
+  const currentScale = 1 - clampedProgress * 0.78;
 
   const isDocked = clampedProgress > 0.85;
 
@@ -30,7 +38,7 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
 
   return (
     <div
-      className="fixed inset-x-0 top-0 pointer-events-none z-50 flex justify-center"
+      className="fixed inset-x-0 top-0 h-[70px] pointer-events-none z-50 flex items-center justify-center"
       style={{
         transform: `translate3d(0, ${currentY}px, 0)`,
         willChange: 'transform',
@@ -46,8 +54,8 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
           transform: `scale(${currentScale})`,
           transformOrigin: 'center center',
           willChange: 'transform',
-          fontSize: 'clamp(54px, 12vw, 150px)',
-          lineHeight: 0.9,
+          fontSize: 'clamp(54px, 11vw, 110px)',
+          lineHeight: 1,
           whiteSpace: 'nowrap',
           color: isDocked ? 'var(--text-primary)' : '#ffffff',
           textShadow: clampedProgress < 0.8 ? '0 12px 48px rgba(0,0,0,0.85)' : 'none',
@@ -61,3 +69,4 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
     </div>
   );
 };
+
