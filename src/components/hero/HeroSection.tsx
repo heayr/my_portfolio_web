@@ -99,38 +99,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
       >
         <div className="scrollytelling-stage sticky top-0 w-full h-screen overflow-hidden flex items-center justify-center">
           {/* Top theme subtle blend */}
-          <div className="stage-gradient-top opacity-50" aria-hidden="true" />
+          <div className="stage-gradient-top opacity-40" aria-hidden="true" />
 
-          {/* Ambient blurred backdrop for seamless edge bleeding on wide screens */}
-          <div className="story-ambient-wrapper absolute inset-0 w-full h-full overflow-hidden pointer-events-none z-0">
-            <img
-              src="/storyboard/act1_spark.jpg"
-              alt=""
-              className={`story-ambient-layer ${activeAct === 0 ? 'active' : ''}`}
-              aria-hidden="true"
-            />
-            <img
-              src="/storyboard/act2_davinci.jpg"
-              alt=""
-              className={`story-ambient-layer ${activeAct === 1 ? 'active' : ''}`}
-              aria-hidden="true"
-            />
-            <img
-              src="/storyboard/act3_wright.jpg"
-              alt=""
-              className={`story-ambient-layer ${activeAct === 2 ? 'active' : ''}`}
-              aria-hidden="true"
-            />
-            <img
-              src="/storyboard/act4_moon.jpg"
-              alt=""
-              className={`story-ambient-layer ${activeAct === 3 ? 'active' : ''}`}
-              aria-hidden="true"
-            />
-          </div>
-
-          {/* 4 Storyboard Visual Layers (Crisp, 100% visible, no cut-off text) */}
-          <div className="story-layers-wrapper absolute inset-0 w-full h-full z-1 flex items-center justify-center p-2 sm:p-4">
+          {/* 4 Storyboard Visual Layers (Edge-to-edge full bleed, zero black bars) */}
+          <div className="story-layers-wrapper absolute inset-0 w-full h-full z-1">
             <img
               src="/storyboard/act1_spark.jpg"
               alt="Act 1: Michelangelo Adam & Cybernetic Hand Creation Spark"

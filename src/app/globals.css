@@ -92,24 +92,7 @@
   justify-content: center;
 }
 
-/* Ambient Blurred Backdrop */
-.story-ambient-layer {
-  position: absolute;
-  inset: -30px;
-  width: calc(100% + 60px);
-  height: calc(100% + 60px);
-  object-fit: cover;
-  filter: blur(54px) brightness(0.35);
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  will-change: opacity;
-}
-
-.story-ambient-layer.active {
-  opacity: 0.7;
-}
-
-/* Background Visual Layers (Crisp, Contain, 100% visible, no cut-off text) */
+/* Background Visual Layers (Full Bleed, Edge to Edge, Zero Black Bars) */
 .story-layers-wrapper {
   position: absolute;
   inset: 0;
@@ -120,12 +103,11 @@
 
 .story-layer {
   position: absolute;
-  max-width: 100%;
-  max-height: 100%;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center center;
+  object-fit: cover;
+  object-position: center bottom;
   opacity: 0;
   transform: scale(1.01);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -135,13 +117,6 @@
 .story-layer.active {
   opacity: 1;
   transform: scale(1);
-}
-
-@media (max-width: 640px) {
-  .story-layer {
-    object-fit: cover;
-    object-position: center center;
-  }
 }
 
 /* Light / Dark Transition Gradients */
