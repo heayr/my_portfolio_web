@@ -24,7 +24,7 @@ export const projectsData: ProjectItem[] = [
       en: 'High-throughput privacy platform with live recurring subscriptions, asynchronous FastAPI billing webhooks, and production Wireguard/Hysteria2 tunneling topology with Let\'s Encrypt SSL automation.',
       ru: 'Действующий коммерческий privacy-сервис с платными подписками, асинхронными вебхуками YooKassa на FastAPI и production-топологией защищенных туннелей Wireguard/Hysteria2.'
     },
-    image: '/projects/nologs.webp',
+    image: '/projects/nologs_art.webp',
     githubUrl: 'https://github.com/heayr/nologs-bot-docs',
     liveUrl: undefined,
     featuredColor: '#3b82f6'
@@ -52,7 +52,7 @@ export const projectsData: ProjectItem[] = [
       en: 'Comprehensive digital portal and administrative media management suite for a full-cycle regional media and advertising agency. Features mathematical fluid typography, broadcast scheduling, dynamic client project showcase, and admin moderation.',
       ru: 'Комплексный веб-портал и административная панель управления контентом для рекламного медиа-агентства полного цикла. Включает fluid-типографику, расписание эфиров и панель модерации.'
     },
-    image: '/projects/radiotochka.webp',
+    image: '/projects/radiotochka_art.webp',
     githubUrl: 'https://github.com/heayr/pet-b-fm',
     liveUrl: 'https://radiotochka.nologs.website/',
     featuredColor: '#10b981'
@@ -80,7 +80,7 @@ export const projectsData: ProjectItem[] = [
       en: 'Exclusive interactive event invitation application crafted with an editorial dark liquid-gold aesthetic. Offers seamless guest RSVP registration, timeline preview, and real-time backend guest validation.',
       ru: 'Эксклюзивное интерактивное веб-приложение с темной liquid-gold эстетикой. Включает бесшовную RSVP-регистрацию гостей, интерактивный таймлайн и серверную валидацию.'
     },
-    image: '/projects/birthday.webp',
+    image: '/projects/birthday_art.webp',
     githubUrl: 'https://github.com/heayr/birthday-invitation-web',
     liveUrl: undefined,
     featuredColor: '#f59e0b'
