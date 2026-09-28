@@ -338,18 +338,15 @@
   font-family: var(--font-mono);
 }
 
-/* --- Preloader Bar Animations --- */
+/* --- Preloader Bar Animations (Arpeggio Staggered Vertical Columns Reveal) --- */
 .preloader-bar {
   transform: translateY(0);
-  transition: transform 0.9s cubic-bezier(0.85, 0, 0.15, 1);
+  transition: transform 0.85s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform;
 }
 
-.preloader-hidden .preloader-bar:nth-child(odd) {
+.preloader-hidden .preloader-bar {
   transform: translateY(-100%);
-}
-
-.preloader-hidden .preloader-bar:nth-child(even) {
-  transform: translateY(100%);
 }
 
 /* --- Infinite Marquee Track --- */
