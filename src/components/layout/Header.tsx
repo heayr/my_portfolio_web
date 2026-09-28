@@ -60,13 +60,13 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       <header
         className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-6 sm:px-10 transition-all duration-400 ${headerBg}`}
       >
-        {/* Left: Minimal Monochrome Social Acronyms (No pill background) */}
-        <div className="flex items-center gap-4 sm:gap-6 font-mono text-xs tracking-widest uppercase font-bold">
+        {/* Left: Minimal Monochrome Social Acronyms with Generous Hitbox & Animated Underline */}
+        <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs tracking-widest uppercase font-bold">
           <a
             href="https://t.me/PotatoChipasu"
             target="_blank"
             rel="noopener noreferrer"
-            className={linkHover}
+            className="nav-link-btn"
           >
             TG
           </a>
@@ -74,7 +74,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href="https://github.com/heayr"
             target="_blank"
             rel="noopener noreferrer"
-            className={linkHover}
+            className="nav-link-btn"
           >
             GH
           </a>
@@ -82,14 +82,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href="https://linkedin.com/in/potatochipasu"
             target="_blank"
             rel="noopener noreferrer"
-            className={linkHover}
+            className="nav-link-btn"
           >
             LI
           </a>
           <button
             type="button"
             onClick={handleCopyEmail}
-            className={`${linkHover} text-left`}
+            className="nav-link-btn text-left"
             title="Copy email: egormyshinsky@gmail.com"
           >
             {copiedEmail ? 'COPIED!' : 'EMAIL'}
@@ -99,45 +99,39 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
         <div className="w-[140px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
-        {/* Right: Controls + Minimalist 2-line Burger Menu (No pill background) */}
-        <div className="flex items-center gap-3.5 sm:gap-5 font-mono text-xs">
+        {/* Right: Controls + Minimalist 2-line Burger Menu with Generous Hitboxes */}
+        <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
           {/* Moscow Clock */}
-          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
+          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 mr-1 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
             <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
             <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
           </div>
 
-          {/* Language Switcher */}
+          {/* Language Switcher with Animated Underline */}
           <button
             type="button"
             onClick={toggleLocale}
-            className={`font-bold text-xs tracking-wider transition-colors ${
-              isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
-            }`}
+            className="nav-link-btn"
             title="Toggle Language"
           >
             {locale === 'ru' ? 'EN' : 'RU'}
           </button>
 
-          {/* Theme Switcher */}
+          {/* Theme Switcher with Generous Hitbox */}
           <button
             type="button"
             onClick={toggleTheme}
-            className={`text-sm transition-colors ${
-              isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
-            }`}
+            className="p-3 text-sm transition-all duration-200 hover:text-[var(--accent-gold)] hover:scale-110 flex items-center justify-center cursor-pointer select-none text-[var(--text-primary)]"
             title="Toggle Dark / Light Theme"
           >
-            {isLight ? '☀' : '☾'}
+            <span>{isLight ? '☀' : '☾'}</span>
           </button>
 
-          {/* Minimal 2-Line Burger Button */}
+          {/* Minimal 2-Line Burger Button with Generous Hitbox */}
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`w-7 h-7 flex flex-col items-end justify-center gap-1.5 transition-colors p-1 ${
-              isLight ? 'text-zinc-900 hover:text-amber-600' : 'text-white hover:text-amber-400'
-            }`}
+            className="p-3 flex flex-col items-end justify-center gap-1.5 transition-colors cursor-pointer text-[var(--text-primary)] hover:text-[var(--accent-gold)]"
             aria-label="Toggle Navigation Drawer"
           >
             <span

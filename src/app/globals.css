@@ -59,6 +59,49 @@
   }
 }
 
+/* --- High-Precision Navbar Interactive Links with Generous Hitbox --- */
+.nav-link-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: color 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.nav-link-btn:hover {
+  color: var(--accent-gold);
+}
+
+.nav-link-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  height: 1.5px;
+  background-color: var(--accent-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link-btn:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 /* Subtle Film Grain Noise */
 .noise-overlay {
   position: fixed;
