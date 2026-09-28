@@ -99,10 +99,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-semibold text-xs transition-colors shadow-md"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs sm:text-sm transition-all shadow-md hover:scale-[1.02]"
                 >
                   <span>{t.works.visitLive}</span>
-                  <span>↗</span>
+                  <span className="font-mono">↗</span>
                 </a>
               )}
               {project.githubUrl && (
@@ -110,10 +110,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--text-primary)] border border-[var(--border-subtle)] font-medium text-xs transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-[var(--text-primary)] border border-[var(--border-subtle)] font-bold text-xs sm:text-sm transition-all hover:scale-[1.02]"
                 >
                   <span>{t.works.viewGithub}</span>
-                  <span>↗</span>
+                  <span className="font-mono">↗</span>
                 </a>
               )}
             </div>
