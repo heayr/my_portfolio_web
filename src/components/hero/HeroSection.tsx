@@ -125,9 +125,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
             />
           </div>
 
-          {/* Cinematic Vignette */}
-          <div className="stage-vignette" aria-hidden="true" />
-
           {/* Interactive Genesis Spark Canvas (Active on Act 1) */}
           <SparkCanvas activeAct={activeAct} />
 
