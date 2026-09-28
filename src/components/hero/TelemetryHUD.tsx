@@ -55,9 +55,9 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
       {/* Top Telemetry Line */}
       <div className="hud-top">
         <div className="flex items-center gap-3">
-          <div className="hud-epoch-badge px-3.5 sm:px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-amber-400 font-bold font-mono text-xs tracking-wider shadow-lg flex items-center gap-2.5">
+          <div className="hud-epoch-badge px-3.5 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-xs tracking-wider shadow-xl flex items-center gap-2.5">
             <span className="hud-pulse" />
-            <span>{current.badge[locale]}</span>
+            <span className="text-white font-extrabold tracking-wider">{current.badge[locale]}</span>
           </div>
 
           {/* Interactive Act Tabs - High Contrast Glassmorphic Pills */}
