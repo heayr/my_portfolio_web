@@ -51,10 +51,6 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       ? 'bg-[#040406]/85 backdrop-blur-xl border-b border-white/15 shadow-xl text-white'
       : 'bg-black/45 backdrop-blur-md border-b border-white/10 text-white';
 
-  const capsuleBg = isLight
-    ? 'bg-white/80 backdrop-blur-md border border-black/15 text-zinc-900 shadow-sm'
-    : 'bg-black/60 backdrop-blur-md border border-white/15 text-zinc-100 shadow-md';
-
   const linkHover = isLight
     ? 'hover:text-amber-600 transition-colors'
     : 'hover:text-amber-400 transition-colors';
@@ -62,10 +58,10 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-5 sm:px-10 transition-all duration-400 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-6 sm:px-10 transition-all duration-400 ${headerBg}`}
       >
-        {/* Left: Minimal Monochrome Social Acronyms with Glass Capsule */}
-        <div className={`flex items-center gap-3.5 sm:gap-5 font-mono text-xs tracking-wider uppercase font-bold px-3.5 py-1.5 rounded-full ${capsuleBg}`}>
+        {/* Left: Minimal Monochrome Social Acronyms (No pill background) */}
+        <div className="flex items-center gap-4 sm:gap-6 font-mono text-xs tracking-widest uppercase font-bold">
           <a
             href="https://t.me/PotatoChipasu"
             target="_blank"
@@ -103,10 +99,10 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
         <div className="w-[140px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
-        {/* Right: Controls + Minimalist 2-line Burger Menu with Glass Capsule */}
-        <div className={`flex items-center gap-2.5 sm:gap-4 font-mono text-xs px-3.5 py-1.5 rounded-full ${capsuleBg}`}>
+        {/* Right: Controls + Minimalist 2-line Burger Menu (No pill background) */}
+        <div className="flex items-center gap-3.5 sm:gap-5 font-mono text-xs">
           {/* Moscow Clock */}
-          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-2 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
+          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
             <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
             <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
           </div>
@@ -115,10 +111,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleLocale}
-            className={`px-2.5 py-0.5 rounded-full border text-xs font-bold transition-colors ${
-              isLight
-                ? 'border-black/20 bg-black/5 text-zinc-900 hover:border-amber-600 hover:text-amber-600'
-                : 'border-white/20 bg-white/10 text-white hover:border-amber-400 hover:text-amber-400'
+            className={`font-bold text-xs tracking-wider transition-colors ${
+              isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
             }`}
             title="Toggle Language"
           >
@@ -129,10 +123,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleTheme}
-            className={`w-7 h-7 rounded-full border flex items-center justify-center text-xs transition-colors ${
-              isLight
-                ? 'border-black/20 bg-black/5 text-amber-600 hover:border-amber-600'
-                : 'border-white/20 bg-white/10 text-amber-400 hover:border-amber-400'
+            className={`text-sm transition-colors ${
+              isLight ? 'text-zinc-800 hover:text-amber-600' : 'text-zinc-200 hover:text-amber-400'
             }`}
             title="Toggle Dark / Light Theme"
           >
