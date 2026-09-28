@@ -1,0 +1,402 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-root: #040406;
+    --bg-surface: #0a0a0f;
+    --bg-surface-elevated: #111118;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+    --accent-gold: #f59e0b;
+    --accent-gold-glow: rgba(245, 158, 11, 0.25);
+    --accent-blue: #3b82f6;
+    --accent-flame: #ff4400;
+  }
+
+  html.light {
+    --bg-root: #f7f6f2;
+    --bg-surface: #ffffff;
+    --bg-surface-elevated: #edebe4;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-hover: rgba(0, 0, 0, 0.16);
+    --text-primary: #0a0a0e;
+    --text-secondary: #52525b;
+    --text-tertiary: #a1a1aa;
+    --accent-gold: #d97706;
+    --accent-gold-glow: rgba(217, 119, 6, 0.25);
+    --accent-blue: #2563eb;
+    --accent-flame: #ea580c;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-root);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--bg-root);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  ::selection {
+    background: rgba(245, 158, 11, 0.3);
+    color: #ffffff;
+  }
+}
+
+/* Subtle Film Grain Noise */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   SCROLLYTELLING COMPONENT: EVOLUTION OF GENIUS (ACTS 1 - 4)
+   ========================================================================== */
+.scrollytelling-container {
+  position: relative;
+  width: 100%;
+  height: 400vh;
+  background-color: #040406;
+}
+
+.scrollytelling-stage {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background Visual Layers (Cross-fade & Zoom) */
+.story-layers-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.story-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.story-layer.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Vignette & Cinematic Dark Overlay */
+.stage-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(4, 4, 6, 0.18) 0%, rgba(4, 4, 6, 0.75) 70%, #040406 100%),
+              linear-gradient(to bottom, rgba(4, 4, 6, 0.85) 0%, transparent 20%, transparent 80%, #040406 100%);
+}
+
+/* Light / Dark Transition Gradients */
+.stage-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--bg-root) 0%, transparent 100%);
+}
+
+.stage-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--bg-root) 0%, transparent 100%);
+}
+
+/* Spark Particle Canvas */
+.stage-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* High-Tech HUD & Telemetry */
+.stage-hud {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  padding: 84px 48px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .stage-hud {
+    padding: 76px 20px 24px;
+  }
+}
+
+.hud-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+}
+
+.hud-epoch-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.hud-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold);
+  animation: pulse-slow 1.6s infinite ease-in-out;
+}
+
+.hud-stat {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.hud-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  width: 100%;
+  pointer-events: none;
+}
+
+.hud-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 220px;
+  max-width: 100%;
+}
+
+.hud-progress-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.hud-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #60a5fa);
+  transition: width 0.1s linear;
+}
+
+/* Floating Narrative Cards - Stacked above Trajectory HUD */
+.story-cards-container {
+  position: absolute;
+  inset: 0;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.story-narrative-block {
+  position: absolute;
+  bottom: 96px;
+  left: 48px;
+  width: 360px;
+  max-width: calc(100vw - 96px);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid var(--accent-gold);
+  padding: 11px 15px;
+  background: rgba(8, 8, 12, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+
+@media (max-width: 640px) {
+  .story-narrative-block {
+    left: 20px;
+    right: 20px;
+    width: auto;
+    max-width: none;
+    bottom: 84px;
+    padding: 10px 14px;
+  }
+}
+
+.story-narrative-block.active {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.story-card-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.story-card-title {
+  font-size: clamp(22px, 3.4vw, 38px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.025em;
+}
+
+.story-card-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.story-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12.5px;
+  color: var(--text-tertiary);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 14px;
+  font-family: var(--font-mono);
+}
+
+/* --- Preloader Bar Animations --- */
+.preloader-bar {
+  transform: translateY(0);
+  transition: transform 0.9s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+.preloader-hidden .preloader-bar:nth-child(odd) {
+  transform: translateY(-100%);
+}
+
+.preloader-hidden .preloader-bar:nth-child(even) {
+  transform: translateY(100%);
+}
+
+/* --- Infinite Marquee Track --- */
+.marquee-track {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 2rem;
+}
+
+.marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 2rem;
+  animation: scroll-marquee 25s linear infinite;
+}
+
+@keyframes scroll-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* --- Keyframes & Reveals --- */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+.animate-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.animate-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
