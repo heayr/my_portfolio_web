@@ -55,22 +55,22 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
       {/* Top Telemetry Line */}
       <div className="hud-top">
         <div className="flex items-center gap-3">
-          <div className="hud-epoch-badge">
+          <div className="hud-epoch-badge px-3.5 sm:px-4 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-amber-400 font-bold font-mono text-xs tracking-wider shadow-lg flex items-center gap-2.5">
             <span className="hud-pulse" />
             <span>{current.badge[locale]}</span>
           </div>
 
-          {/* Interactive Act Tabs */}
-          <div className="hidden sm:flex items-center gap-1.5 pointer-events-auto ml-2">
+          {/* Interactive Act Tabs - High Contrast Glassmorphic Pills */}
+          <div className="hidden sm:flex items-center gap-2 pointer-events-auto ml-2">
             {actsMeta.map((act, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => onSelectAct(idx)}
-                className={`px-2.5 py-1 rounded-full text-[10px] font-mono tracking-wider transition-all duration-300 ${
+                className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all duration-300 shadow-md ${
                   activeAct === idx
-                    ? 'bg-amber-400 text-black font-bold shadow-lg shadow-amber-400/20'
-                    : 'bg-white/10 text-zinc-400 hover:text-white hover:bg-white/20'
+                    ? 'bg-amber-400 text-black font-black shadow-lg shadow-amber-400/30 border border-amber-300 scale-105'
+                    : 'bg-black/75 backdrop-blur-md text-zinc-100 border border-white/20 hover:text-white hover:bg-black/90 hover:border-amber-400/50'
                 }`}
                 title={`Jump to Act ${idx + 1}`}
               >
@@ -80,29 +80,30 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </div>
         </div>
 
-        <div className="hud-stat text-zinc-400 font-mono text-[11px] tracking-widest">
+        {/* Year Badge */}
+        <div className="hud-stat px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-zinc-100 font-mono text-xs font-bold tracking-widest shadow-lg">
           <span>{current.year}</span>
         </div>
       </div>
 
       {/* Bottom Telemetry Line: Trajectory on the Left, Epoch scroll indicator on the Right */}
       <div className="hud-bottom">
-        <div className="hud-progress-wrap pointer-events-auto">
-          <div className="flex justify-between text-[10px] text-zinc-400 font-mono tracking-wider mb-1">
-            <span className="text-zinc-400 font-semibold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
-            <span className="text-amber-400 font-bold">VEL: {current.velocity}</span>
+        <div className="hud-progress-wrap pointer-events-auto p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl w-[240px] sm:w-[280px]">
+          <div className="flex justify-between text-xs text-zinc-200 font-mono font-bold tracking-wider mb-2">
+            <span className="text-zinc-100 font-bold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
+            <span className="text-amber-400 font-black">VEL: {current.velocity}</span>
           </div>
-          <div className="hud-progress-bar">
+          <div className="hud-progress-bar h-1.5 bg-white/20 rounded-full overflow-hidden">
             <div
-              className="hud-progress-fill"
+              className="hud-progress-fill h-full bg-gradient-to-r from-amber-400 to-cyan-400"
               style={{ width: `${Math.min(100, Math.max(0, progress * 100)).toFixed(1)}%` }}
             />
           </div>
         </div>
 
         {/* Right side prompt: scroll indicator */}
-        <div className="hidden sm:flex items-center gap-2 font-mono text-[10px] text-zinc-400 tracking-wider">
-          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+        <div className="hidden sm:flex items-center gap-2.5 font-mono text-xs text-zinc-100 font-bold tracking-wider px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
+          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           <span>{locale === 'ru' ? 'СКРОЛЛ ДЛЯ СМЕНЫ ЭПОХ ↓' : 'SCROLL TO ADVANCE EPOCHS ↓'}</span>
         </div>
       </div>

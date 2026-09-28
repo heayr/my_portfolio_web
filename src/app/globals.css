@@ -92,7 +92,24 @@
   justify-content: center;
 }
 
-/* Background Visual Layers (Cross-fade & Zoom) */
+/* Ambient Blurred Backdrop */
+.story-ambient-layer {
+  position: absolute;
+  inset: -30px;
+  width: calc(100% + 60px);
+  height: calc(100% + 60px);
+  object-fit: cover;
+  filter: blur(54px) brightness(0.35);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  will-change: opacity;
+}
+
+.story-ambient-layer.active {
+  opacity: 0.7;
+}
+
+/* Background Visual Layers (Crisp, Contain, 100% visible, no cut-off text) */
 .story-layers-wrapper {
   position: absolute;
   inset: 0;
@@ -103,12 +120,14 @@
 
 .story-layer {
   position: absolute;
-  inset: 0;
+  max-width: 100%;
+  max-height: 100%;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
   opacity: 0;
-  transform: scale(1.08);
+  transform: scale(1.01);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
@@ -118,6 +137,12 @@
   transform: scale(1);
 }
 
+@media (max-width: 640px) {
+  .story-layer {
+    object-fit: cover;
+    object-position: center center;
+  }
+}
 
 /* Light / Dark Transition Gradients */
 .stage-gradient-top {
@@ -125,10 +150,10 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 70px;
   z-index: 4;
   pointer-events: none;
-  background: linear-gradient(to bottom, var(--bg-root) 0%, transparent 100%);
+  background: linear-gradient(to bottom, rgba(4, 4, 6, 0.6) 0%, transparent 100%);
 }
 
 .stage-gradient-bottom {

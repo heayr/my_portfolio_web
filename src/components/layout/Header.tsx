@@ -44,14 +44,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-6 sm:px-10 transition-all duration-400 ${
+        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-5 sm:px-10 transition-all duration-400 ${
           scrolled
-            ? 'bg-black/80 dark:bg-black/85 light:bg-white/90 backdrop-blur-xl border-b border-white/10 dark:border-white/10 light:border-black/10 shadow-lg'
-            : 'bg-transparent border-b border-transparent'
+            ? 'bg-black/85 dark:bg-black/85 light:bg-white/90 backdrop-blur-xl border-b border-white/15 dark:border-white/15 light:border-black/10 shadow-xl'
+            : 'bg-black/45 backdrop-blur-md border-b border-white/10'
         }`}
       >
-        {/* Left: Minimal Monochrome Social Acronyms (Arpeggio Signature) */}
-        <div className="flex items-center gap-4 sm:gap-6 font-mono text-[11px] tracking-widest uppercase text-zinc-400">
+        {/* Left: Minimal Monochrome Social Acronyms with Glass Capsule */}
+        <div className="flex items-center gap-3.5 sm:gap-5 font-mono text-xs tracking-wider uppercase font-bold text-zinc-100 px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-md">
           <a
             href="https://t.me/PotatoChipasu"
             target="_blank"
@@ -89,19 +89,19 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
         <div className="w-[140px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
-        {/* Right: Controls + Minimalist 2-line Burger Menu */}
-        <div className="flex items-center gap-3 sm:gap-5 font-mono text-xs">
+        {/* Right: Controls + Minimalist 2-line Burger Menu with Glass Capsule */}
+        <div className="flex items-center gap-2.5 sm:gap-4 font-mono text-xs px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/15 shadow-md">
           {/* Moscow Clock */}
-          <div className="hidden md:flex items-center gap-1.5 text-zinc-400 text-[11px] pr-2 border-r border-white/10 dark:border-white/10 light:border-black/10">
-            <span className="text-zinc-500">MSK</span>
-            <span className="text-zinc-200 dark:text-zinc-200 light:text-zinc-800 font-semibold">{clock}</span>
+          <div className="hidden md:flex items-center gap-1.5 text-zinc-200 text-xs pr-2 border-r border-white/15 font-bold">
+            <span className="text-zinc-500 font-bold">MSK</span>
+            <span className="text-white font-bold">{clock}</span>
           </div>
 
           {/* Language Switcher */}
           <button
             type="button"
             onClick={toggleLocale}
-            className="px-2 py-0.5 rounded-full border border-white/15 dark:border-white/15 light:border-black/15 text-[11px] hover:border-amber-400 hover:text-amber-400 transition-colors text-zinc-300 dark:text-zinc-300 light:text-zinc-800"
+            className="px-2.5 py-0.5 rounded-full border border-white/20 bg-white/10 text-xs font-bold hover:border-amber-400 hover:text-amber-400 transition-colors text-white"
             title="Toggle Language"
           >
             {locale === 'ru' ? 'EN' : 'RU'}
@@ -111,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleTheme}
-            className="w-7 h-7 rounded-full border border-white/15 dark:border-white/15 light:border-black/15 flex items-center justify-center text-[12px] hover:border-amber-400 hover:text-amber-400 transition-colors text-zinc-300 dark:text-zinc-300 light:text-zinc-800"
+            className="w-7 h-7 rounded-full border border-white/20 bg-white/10 flex items-center justify-center text-xs hover:border-amber-400 hover:text-amber-400 transition-colors text-white"
             title="Toggle Dark / Light Theme"
           >
             {theme === 'dark' ? '☀' : '☾'}
@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="w-8 h-8 flex flex-col items-end justify-center gap-1.5 text-zinc-200 hover:text-amber-400 transition-colors p-1"
+            className="w-7 h-7 flex flex-col items-end justify-center gap-1.5 text-white hover:text-amber-400 transition-colors p-1"
             aria-label="Toggle Navigation Drawer"
           >
             <span
