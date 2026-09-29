@@ -115,6 +115,17 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </div>
         </div>
 
+        {/* Renaissance / High-Tech Exhibition Cartouche Plaque */}
+        <div className="hidden md:flex items-center justify-center pointer-events-auto mx-4 mb-0.5">
+          <div className="museum-cartouche" title="The Genius of Human Engineering: An Evolution">
+            <span className="museum-cartouche-ornament" aria-hidden="true">❖</span>
+            <span className="museum-cartouche-text">
+              THE GENIUS OF HUMAN ENGINEERING: AN EVOLUTION
+            </span>
+            <span className="museum-cartouche-ornament" aria-hidden="true">❖</span>
+          </div>
+        </div>
+
         {/* Right side prompt: scroll indicator / advance button / skip */}
         <div className="flex items-center gap-2 pointer-events-auto">
           {(stage === 'playing' || stage === 'rewinding') && onSkip && (
