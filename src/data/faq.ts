@@ -33,12 +33,12 @@ export const faqData: FAQItem[] = [
   },
   {
     q: {
-      en: 'Are you available for contract or lead architectural roles?',
-      ru: 'Доступен ли ты для контрактной работы или роли Lead-инженера?',
+      en: 'Are you open to new opportunities and collaboration?',
+      ru: 'Открыт ли ты к новым предложениям и сотрудничеству?',
     },
     a: {
-      en: 'Yes. I am open to Lead Frontend, Fullstack Engineering, and Architecture roles. Reach out directly via Telegram (@PotatoChipasu) or email.',
-      ru: 'Да, открыт для предложений на позиции Lead Frontend, Fullstack Architect и проектной разработки. Связаться можно напрямую в Telegram (@PotatoChipasu) или по почте.',
+      en: 'Yes! I am always open to interesting projects, strong product teams, and engineering collaboration — from building web systems from scratch to scaling key features. Reach out directly via Telegram (@PotatoChipasu) or email.',
+      ru: 'Да! Я всегда открыт к интересным задачам, сильным продуктовым командам и амбициозным проектам — от создания архитектуры и сервисов с нуля до развития ключевых направлений. Связаться можно напрямую в Telegram (@PotatoChipasu) или по почте.',
     },
   },
 ];

@@ -83,8 +83,8 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
           </div>
           <div className="font-mono text-xs text-zinc-400 uppercase tracking-widest">
             {locale === 'ru'
-              ? 'ДОСТУПЕН ДЛЯ АРХИТЕКТУРНЫХ КОНТРАКТОВ И ВЕДУЩИХ РОЛЕЙ'
-              : 'AVAILABLE FOR ARCHITECTURE & LEAD CONTRACTS'}
+              ? 'ОТКРЫТ К СОТРУДНИЧЕСТВУ И НОВЫМ ПРОЕКТАМ'
+              : 'OPEN TO COLLABORATION & NEW PROJECTS'}
           </div>
         </div>
 
@@ -114,7 +114,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
         {/* Lower-Left Signature */}
         <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest pointer-events-auto">
-          © 2026 YEGOR.DEV // LEAD FRONTEND & FULLSTACK ARCHITECT
+          © 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER
         </div>
       </div>
 
@@ -194,7 +194,9 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         >
           <div className="flex items-center justify-between text-[11px]">
             <span className="text-zinc-500 uppercase tracking-wider">MSK // {clock}</span>
-            <span className="text-emerald-400 font-bold uppercase">AVAILABLE</span>
+            <span className="text-emerald-400 font-bold uppercase">
+              {locale === 'ru' ? 'ОТКРЫТ К ПРЕДЛОЖЕНИЯМ' : 'OPEN TO WORK'}
+            </span>
           </div>
           <div className="flex flex-wrap gap-4 pt-1 font-bold text-sm">
             <a href={profileData.telegram} target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 transition-colors">

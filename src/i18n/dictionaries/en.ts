@@ -57,7 +57,7 @@ export const en = {
   },
   footer: {
     giantTitle: "LET'S BUILD SOMETHING EXTRAORDINARY",
-    subtext: 'Available for lead engineering roles, technical architecture consulting, and high-impact commercial projects.',
+    subtext: 'Open to interesting opportunities, product collaboration, and strong engineering teams. Always happy to discuss new ideas and projects.',
     telegram: 'Telegram Message',
     email: 'Copy Email',
     copied: 'Email copied to clipboard!',
