@@ -19,8 +19,8 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
   const currentRenderedFrameRef = useRef<number>(-1);
   const animFrameIdRef = useRef<number | null>(null);
 
-  // Inertia and smooth physics state
-  const targetFloatFrameRef = useRef<number>(0);
+  // Direct frame and inertia state
+  const targetFloatFrameRef = useRef<number>(Math.min(1, Math.max(0, progress)) * (frameCount - 1));
   const currentFloatFrameRef = useRef<number>(0);
 
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -118,39 +118,53 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
 
     let loadedCount = 0;
 
-    // Priority 1: Load First Frame immediately
-    const firstImg = new Image();
-    firstImg.src = getFrameUrl(0);
-    images[0] = firstImg;
+    const initialTargetIdx = Math.round(targetFloatFrameRef.current);
 
-    firstImg.onload = () => {
-      loadedSetRef.current.add(0);
-      setInitialFrameReady(true);
-      updateCanvasSize();
-      drawFrame(0);
-
-      // Priority 2: Preload remaining frames in batches
-      for (let i = 1; i < frameCount; i++) {
-        const img = new Image();
-        img.src = getFrameUrl(i);
-        images[i] = img;
-
-        img.onload = () => {
-          loadedSetRef.current.add(i);
-          loadedCount++;
-          setLoadingProgress(Math.round((loadedCount / (frameCount - 1)) * 100));
-
-          const currentTarget = Math.round(targetFloatFrameRef.current);
-          if (currentTarget === i && currentRenderedFrameRef.current !== i) {
-            drawFrame(i);
-          }
-        };
-
-        img.onerror = () => {
-          console.warn(`[FrameScrubber] Failed to load frame ${i + 1}`);
-        };
-      }
+    // Priority 1: Load First Frame & Target Frame immediately (e.g. last frame for returning visitors)
+    const loadKeyFrame = (idx: number, isInitialTarget: boolean) => {
+      const img = new Image();
+      img.src = getFrameUrl(idx);
+      images[idx] = img;
+      img.onload = () => {
+        loadedSetRef.current.add(idx);
+        setInitialFrameReady(true);
+        updateCanvasSize();
+        if (isInitialTarget || Math.round(targetFloatFrameRef.current) === idx) {
+          drawFrame(idx);
+        }
+      };
+      img.onerror = () => {
+        console.warn(`[FrameScrubber] Failed to load key frame ${idx + 1}`);
+      };
     };
+
+    loadKeyFrame(0, initialTargetIdx === 0);
+    if (initialTargetIdx !== 0) {
+      loadKeyFrame(initialTargetIdx, true);
+    }
+
+    // Priority 2: Preload remaining frames in batches
+    for (let i = 1; i < frameCount; i++) {
+      if (i === initialTargetIdx) continue;
+      const img = new Image();
+      img.src = getFrameUrl(i);
+      images[i] = img;
+
+      img.onload = () => {
+        loadedSetRef.current.add(i);
+        loadedCount++;
+        setLoadingProgress(Math.round((loadedCount / (frameCount - 1)) * 100));
+
+        const currentTarget = Math.round(targetFloatFrameRef.current);
+        if (currentTarget === i && currentRenderedFrameRef.current !== i) {
+          drawFrame(i);
+        }
+      };
+
+      img.onerror = () => {
+        console.warn(`[FrameScrubber] Failed to load frame ${i + 1}`);
+      };
+    }
 
     window.addEventListener('resize', updateCanvasSize);
     updateCanvasSize();

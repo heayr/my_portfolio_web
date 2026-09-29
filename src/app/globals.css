@@ -318,7 +318,7 @@
 
 .story-narrative-block {
   position: absolute;
-  bottom: 96px;
+  bottom: 120px;
   left: 48px;
   width: 360px;
   max-width: calc(100vw - 96px);
@@ -343,7 +343,7 @@
     right: 20px;
     width: auto;
     max-width: none;
-    bottom: 84px;
+    bottom: 110px;
     padding: 10px 14px;
   }
 }

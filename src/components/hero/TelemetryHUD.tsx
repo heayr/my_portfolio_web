@@ -11,6 +11,7 @@ interface TelemetryHUDProps {
   onAdvance?: () => void;
   stage?: 'initial' | 'playing' | 'completed' | 'rewinding';
   onSkip?: () => void;
+  onReplay?: () => void;
 }
 
 export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
@@ -21,6 +22,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
   onAdvance,
   stage = 'initial',
   onSkip,
+  onReplay,
 }) => {
   const { locale } = useApp();
 
@@ -122,6 +124,29 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400" />
               </span>
               <span>{locale === 'ru' ? 'ПРОПУСТИТЬ ▸▸' : 'SKIP INTRO ▸▸'}</span>
+            </button>
+          )}
+
+          {stage === 'completed' && onReplay && (
+            <button
+              type="button"
+              onClick={onReplay}
+              className="hud-replay-btn flex items-center gap-2 font-mono text-xs text-zinc-300 hover:text-amber-300 font-bold tracking-wider px-3.5 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 hover:border-amber-400/60 shadow-xl cursor-pointer transition-all duration-300 hover:scale-105"
+              title={locale === 'ru' ? 'Запустить интро-анимацию еще раз' : 'Replay intro animation'}
+            >
+              <svg
+                className="w-3.5 h-3.5 text-amber-400"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                <path d="M3 3v5h5" />
+              </svg>
+              <span>{locale === 'ru' ? 'ИНТРО ↺' : 'REPLAY ↺'}</span>
             </button>
           )}
 

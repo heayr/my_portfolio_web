@@ -50,13 +50,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
   const [activeAct, setActiveAct] = useState(0);
   const [windowHeight, setWindowHeight] = useState(800);
 
-  // ── INITIAL LOCK ──────────────────────────────────────────
+  // ── INITIAL LOCK & RETURNING VISITOR CHECK ──────────────────
   useEffect(() => {
-    // If user opens page at top: lock immediately
-    if (window.scrollY <= 10) {
-      lockPage();
-    } else {
-      // Opened mid-page (e.g. refresh while scrolled) → skip intro
+    let hasSeenIntro = false;
+    try {
+      hasSeenIntro = localStorage.getItem('portfolio_hero_seen_v1') === 'true';
+    } catch {
+      // localStorage may fail in restricted/private contexts
+    }
+
+    if (hasSeenIntro || window.scrollY > 10) {
+      // Returning visitor OR opened mid-page → start directly in completed state
       setDockProgress(1.0);
       dockProgressRef.current = 1.0;
       setVideoProgress(1.0);
@@ -65,13 +69,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
       setStage('completed');
       stageRef.current = 'completed';
       unlockPage();
+      onScrollProgress?.(1);
+    } else {
+      // First-time visitor at the top of the page → lock and wait for user scroll/action
+      lockPage();
     }
 
     // Always restore on unmount
     return () => {
       unlockPage();
     };
-  }, []);
+  }, [onScrollProgress]);
 
   // ── RESIZE ────────────────────────────────────────────────
   useEffect(() => {
@@ -142,6 +150,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
         setActiveAct(3);
         setStage('completed');
         stageRef.current = 'completed';
+        try {
+          localStorage.setItem('portfolio_hero_seen_v1', 'true');
+        } catch {}
         unlockPage(); // ← THE moment the page unlocks
         onScrollProgress?.(1);
       }
@@ -218,6 +229,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
 
   // ── SKIP ─────────────────────────────────────────────────
   const handleSkip = useCallback(() => {
+    try {
+      localStorage.setItem('portfolio_hero_seen_v1', 'true');
+    } catch {}
+
     if (dockAnimRef.current) cancelAnimationFrame(dockAnimRef.current);
     if (videoAnimRef.current) cancelAnimationFrame(videoAnimRef.current);
 
@@ -232,8 +247,48 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
     onScrollProgress?.(1);
   }, [onScrollProgress]);
 
-  // ── RESET (click logo) ───────────────────────────────────
+  // ── REPLAY INTRO ──────────────────────────────────────────
+  const handleReplay = useCallback(() => {
+    if (dockAnimRef.current) cancelAnimationFrame(dockAnimRef.current);
+    if (videoAnimRef.current) cancelAnimationFrame(videoAnimRef.current);
+
+    // Scroll to top immediately
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0 });
+    }
+
+    setDockProgress(0);
+    dockProgressRef.current = 0;
+    setVideoProgress(0);
+    videoProgressRef.current = 0;
+    setActiveAct(0);
+    setStage('initial');
+    stageRef.current = 'initial';
+    onScrollProgress?.(0);
+
+    // Lock page and launch playback
+    lockPage();
+    requestAnimationFrame(() => {
+      startPlay();
+    });
+  }, [startPlay, onScrollProgress]);
+
+  // ── RESET / LOGO CLICK ───────────────────────────────────
   const handleResetToInitial = useCallback(() => {
+    // If completed, just scroll to top without resetting/locking
+    if (stageRef.current === 'completed') {
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.0 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      return;
+    }
+
     if (dockAnimRef.current) cancelAnimationFrame(dockAnimRef.current);
     if (videoAnimRef.current) cancelAnimationFrame(videoAnimRef.current);
 
@@ -402,15 +457,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
             onSelectAct={handleSelectAct}
             onAdvance={handleAdvance}
             onSkip={handleSkip}
+            onReplay={handleReplay}
           />
 
           <NarrativeCards activeAct={activeAct} visible={isNarrativeVisible} />
         </div>
-
-        <div
-          className="absolute bottom-0 inset-x-0 h-32 z-20 pointer-events-none bg-gradient-to-t from-[var(--bg-root)] to-transparent"
-          aria-hidden="true"
-        />
       </section>
     </>
   );
