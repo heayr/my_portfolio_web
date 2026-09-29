@@ -61,22 +61,22 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
       {/* Dimmed / Frosted Backdrop */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-40 bg-black/75 backdrop-blur-md transition-opacity duration-400 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 z-40 bg-black/75 backdrop-blur-md transition-all duration-400 ${
+          isOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
         }`}
         aria-hidden="true"
       />
 
       {/* ── LEFT / TRANSPARENT ZONE: Massive Upper-Left Typography (Half-Screen) ── */}
       <div
-        className={`fixed inset-y-0 left-0 right-0 md:right-[460px] lg:right-[500px] z-40 p-8 sm:p-12 lg:p-16 hidden md:flex flex-col justify-between pointer-events-none transition-all duration-500 ease-out ${
+        className={`fixed inset-y-0 left-0 right-0 md:right-[460px] lg:right-[500px] z-40 p-8 sm:p-12 lg:p-16 hidden md:flex flex-col justify-between transition-all duration-500 ease-out ${
           isOpen
-            ? 'opacity-100 translate-x-0'
-            : 'opacity-0 -translate-x-12 pointer-events-none'
+            ? 'opacity-100 translate-x-0 pointer-events-auto visible'
+            : 'opacity-0 -translate-x-12 pointer-events-none invisible'
         }`}
       >
         {/* Upper-Left Meta: Timezone, Live Clock & Status */}
-        <div className="flex flex-col gap-2.5 pointer-events-auto">
+        <div className={`flex flex-col gap-2.5 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
           <div className="flex items-center gap-2.5 font-mono text-xs text-amber-400 tracking-widest uppercase font-bold">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>MOSCOW // GMT+3 · {clock}</span>
@@ -89,7 +89,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         </div>
 
         {/* Center / Left Half: MASSIVE Giant Contact Links taking up half the screen */}
-        <div className="flex flex-col gap-3 lg:gap-5 my-auto pointer-events-auto">
+        <div className={`flex flex-col gap-3 lg:gap-5 my-auto ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
           <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest mb-1">
             // {locale === 'ru' ? 'ПРЯМЫЕ КОНТАКТЫ & СЕТИ' : 'DIRECT CHANNELS & SOCIALS'}
           </div>
@@ -113,18 +113,18 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         </div>
 
         {/* Lower-Left Signature */}
-        <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest pointer-events-auto">
+        <div className={`font-mono text-xs text-zinc-500 uppercase tracking-widest ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
           © 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER
         </div>
       </div>
 
       {/* ── RIGHT PANEL: Slide-over Drawer with Page Links ── */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 z-50 w-full md:w-[460px] lg:w-[500px] max-w-full flex flex-col justify-between p-6 sm:p-10 shadow-2xl transition-transform duration-400 ease-out overflow-y-auto border-l ${
+        className={`fixed top-0 right-0 bottom-0 z-50 w-full md:w-[460px] lg:w-[500px] max-w-full flex flex-col justify-between p-6 sm:p-10 shadow-2xl transition-all duration-400 ease-out overflow-y-auto border-l ${
           isLight
             ? 'bg-[#faf9f5]/98 border-black/10 text-zinc-900'
             : 'bg-[#06060a]/98 border-white/10 text-white'
-        } ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        } ${isOpen ? 'translate-x-0 pointer-events-auto visible' : 'translate-x-full pointer-events-none invisible'}`}
         aria-label="Navigation Menu"
       >
         {/* Drawer Header (Always 100% visible, never cut off) */}

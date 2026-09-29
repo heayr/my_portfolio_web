@@ -126,37 +126,37 @@ export const CurtainFooter: React.FC = () => {
           </p>
         </div>
 
-        {/* Massive Monumental Typography with Parallax & Spotlight - fills screen width */}
+        {/* Massive Monumental Typography with Parallax & Spotlight - fits screen width perfectly */}
         <div
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative my-auto py-8 sm:py-12 border-y border-white/10 select-none group/title cursor-default"
+          className="relative my-auto py-8 sm:py-12 border-y border-white/10 select-none group/title cursor-default w-full overflow-hidden"
         >
-          {/* Subtle Ambient Spotlight Glow following cursor */}
+          {/* Subtle Ambient Spotlight Glow following cursor across full width */}
           <div
-            className="pointer-events-none absolute inset-0 transition-opacity duration-500 opacity-0 group-hover/title:opacity-100"
+            className="pointer-events-none absolute inset-0 transition-opacity duration-300 opacity-0 group-hover/title:opacity-100"
             style={{
               background: mousePos.active
-                ? `radial-gradient(600px circle at ${mousePos.px}px ${mousePos.py}px, rgba(245, 158, 11, 0.12), transparent 70%)`
+                ? `radial-gradient(500px circle at ${mousePos.px}px ${mousePos.py}px, rgba(245, 158, 11, 0.14), transparent 70%)`
                 : 'none',
             }}
           />
 
-          <h2 className="relative z-10 text-[clamp(2.8rem,8.4vw,10.5rem)] font-black uppercase leading-[0.88] transition-transform duration-700 ease-out group-hover/title:scale-[1.01]">
+          <h2 className="relative z-10 text-[clamp(2rem,5.2vw,6.4rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal transition-transform duration-500 max-w-full">
             {locale === 'ru' ? (
               <>
                 <span
-                  className="block text-zinc-300 hover:text-white transition-all duration-300 tracking-[0.08em] sm:tracking-[0.14em] lg:tracking-[0.18em]"
+                  className="block text-zinc-300 hover:text-white transition-all duration-300 max-w-full"
                   style={{
-                    transform: `translateX(${mousePos.x * -20}px)`,
+                    transform: `translateX(${mousePos.x * -10}px)`,
                   }}
                 >
                   СОЗДАДИМ НЕЧТО
                 </span>
                 <span
-                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 tracking-[0.1em] sm:tracking-[0.18em] lg:tracking-[0.24em] drop-shadow-[0_0_40px_rgba(245,158,11,0.25)]"
+                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 drop-shadow-[0_0_35px_rgba(245,158,11,0.25)] max-w-full"
                   style={{
-                    transform: `translateX(${mousePos.x * 24}px)`,
+                    transform: `translateX(${mousePos.x * 12}px)`,
                   }}
                 >
                   МОНУМЕНТАЛЬНОЕ
@@ -165,17 +165,17 @@ export const CurtainFooter: React.FC = () => {
             ) : (
               <>
                 <span
-                  className="block text-zinc-300 hover:text-white transition-all duration-300 tracking-[0.06em] sm:tracking-[0.12em] lg:tracking-[0.16em]"
+                  className="block text-zinc-300 hover:text-white transition-all duration-300 max-w-full"
                   style={{
-                    transform: `translateX(${mousePos.x * -20}px)`,
+                    transform: `translateX(${mousePos.x * -10}px)`,
                   }}
                 >
                   LET&apos;S BUILD SOMETHING
                 </span>
                 <span
-                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 tracking-[0.08em] sm:tracking-[0.16em] lg:tracking-[0.22em] drop-shadow-[0_0_40px_rgba(245,158,11,0.25)]"
+                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 drop-shadow-[0_0_35px_rgba(245,158,11,0.25)] max-w-full"
                   style={{
-                    transform: `translateX(${mousePos.x * 24}px)`,
+                    transform: `translateX(${mousePos.x * 12}px)`,
                   }}
                 >
                   EXTRAORDINARY
@@ -186,12 +186,12 @@ export const CurtainFooter: React.FC = () => {
         </div>
 
         {/* Action Controls: Apple-Style Iridescent Hologram Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 my-4 lg:my-6 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 my-4 lg:my-6 items-stretch w-full">
           {contactCards.map((card) => {
             const innerContent = (
               <>
                 {/* Apple Iridescent Aurora Gradient Layer */}
-                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none overflow-hidden">
                   <div
                     className={`absolute -inset-[50%] w-[200%] h-[200%] ${card.auroraBg} opacity-60 filter blur-2xl animate-aurora`}
                   />
@@ -200,7 +200,7 @@ export const CurtainFooter: React.FC = () => {
                 </div>
 
                 {/* Top Glass Specularity Reflection Line */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
 
                 {/* Card Foreground Content */}
                 <div className="relative z-10 flex flex-col justify-between h-full min-h-[140px] sm:min-h-[155px]">
@@ -239,7 +239,7 @@ export const CurtainFooter: React.FC = () => {
             );
 
             const containerClasses =
-              "group relative p-6 sm:p-7 rounded-3xl bg-zinc-950/80 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9)] text-left flex flex-col justify-between";
+              "group relative p-6 sm:p-7 rounded-3xl bg-zinc-950/80 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9)] text-left flex flex-col justify-between cursor-pointer w-full select-none";
 
             if (card.type === 'button') {
               return (
