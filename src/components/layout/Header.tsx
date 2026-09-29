@@ -47,8 +47,8 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
 
   const headerBg = menuOpen
     ? isLight
-      ? 'bg-[#faf9f5]/80 backdrop-blur-2xl border-b border-transparent text-zinc-900'
-      : 'bg-[#040406]/80 backdrop-blur-2xl border-b border-transparent text-white'
+      ? 'bg-transparent border-b border-transparent text-zinc-900'
+      : 'bg-transparent border-b border-transparent text-white'
     : isLight
       ? scrolled
         ? 'bg-white/90 backdrop-blur-xl border-b border-black/10 shadow-md text-zinc-900'
@@ -62,13 +62,13 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     : 'hover:text-amber-400 transition-colors';
 
   const btnText = isLight
-    ? 'text-zinc-800 hover:text-amber-600'
-    : 'text-zinc-300 hover:text-amber-400';
+    ? 'text-zinc-800 hover:text-zinc-950'
+    : 'text-zinc-300 hover:text-white';
 
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 z-[60] h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
       >
         {/* Left: Desktop Socials with Animated Underlines (Hidden on mobile to eliminate clutter) */}
         <div className="hidden sm:flex items-center gap-1 sm:gap-2 font-mono text-xs tracking-widest uppercase font-bold">
@@ -113,12 +113,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         <div className="w-[100px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
         {/* Right: Controls + Minimalist 2-line Burger Menu */}
-        <div className="flex items-center gap-0.5 sm:gap-2 font-mono text-xs">
-          {/* Moscow Clock (Desktop Only) */}
-          <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 mr-1 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
-            <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
-            <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
-          </div>
+        <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
+          {/* Moscow Clock (Desktop Only, hidden when menu is open to avoid duplicate) */}
+          {!menuOpen && (
+            <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 mr-1 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
+              <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
+              <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
+            </div>
+          )}
 
           {/* Language Switcher */}
           <button
@@ -140,30 +142,34 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             <span>{isLight ? '☀' : '☾'}</span>
           </button>
 
-          {/* Minimal 2-Line Burger Button */}
+          {/* Minimal 2-Line Burger / Cross Morphing Button */}
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`w-9 h-9 flex flex-col items-center justify-center gap-1.5 transition-colors cursor-pointer ${
-              isLight ? 'text-zinc-900 hover:text-amber-600' : 'text-white hover:text-amber-400'
+            className={`relative w-10 h-10 flex items-center justify-center transition-colors cursor-pointer select-none ${
+              isLight ? 'text-zinc-900 hover:text-zinc-600' : 'text-white hover:text-zinc-300'
             }`}
-            aria-label="Toggle Navigation Drawer"
+            aria-label={menuOpen ? 'Close Navigation Drawer' : 'Open Navigation Drawer'}
           >
             <span
-              className={`h-[1.5px] bg-current transition-all duration-300 ${
-                menuOpen ? 'w-5 -rotate-45 translate-y-[3.5px]' : 'w-5'
+              className={`absolute h-[2px] bg-current rounded-full transition-all duration-300 ease-out origin-center ${
+                menuOpen
+                  ? 'w-6 rotate-45 translate-y-0'
+                  : 'w-6 -translate-y-[4px]'
               }`}
             />
             <span
-              className={`h-[1.5px] bg-current transition-all duration-300 ${
-                menuOpen ? 'w-5 rotate-45 -translate-y-[4px]' : 'w-3.5'
+              className={`absolute h-[2px] bg-current rounded-full transition-all duration-300 ease-out origin-center ${
+                menuOpen
+                  ? 'w-6 -rotate-45 translate-y-0'
+                  : 'w-4 translate-x-[2px] translate-y-[4px]'
               }`}
             />
           </button>
         </div>
       </header>
 
-      {/* Full-Screen Drawer Menu (Arpeggio Style) */}
+      {/* Slide-over Drawer Menu */}
       <NavigationDrawer
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
