@@ -8,7 +8,6 @@ import { HeroSection } from '../components/hero/HeroSection';
 import { StackingWorks } from '../components/works/StackingWorks';
 import { PhilosophySection } from '../components/sections/PhilosophySection';
 import { MetricsSection } from '../components/sections/MetricsSection';
-import { TechStack } from '../components/sections/TechStack';
 import { FAQSection } from '../components/sections/FAQSection';
 import { CurtainFooter } from '../components/layout/CurtainFooter';
 
@@ -120,9 +119,6 @@ export default function Home() {
 
       {/* Key Architectural & Performance Metrics */}
       <MetricsSection />
-
-      {/* Tech Stack Matrix */}
-      <TechStack />
 
       {/* Spring FAQ Accordion */}
       <FAQSection />

@@ -45,8 +45,9 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   const menuItems = [
     { href: '#works', label: t.nav.work, num: '01' },
     { href: '#philosophy', label: t.nav.philosophy, num: '02' },
-    { href: '#stack', label: t.nav.stack, num: '03' },
-    { href: '#contact', label: t.nav.contact, num: '04' },
+    { href: '#metrics', label: locale === 'ru' ? 'Метрики' : 'Metrics', num: '03' },
+    { href: '#faq', label: 'FAQ', num: '04' },
+    { href: '#contact', label: t.nav.contact, num: '05' },
   ];
 
   const socialLinks = [
