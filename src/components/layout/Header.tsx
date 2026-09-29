@@ -48,14 +48,18 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const headerBg = isLight
     ? scrolled
       ? 'bg-white/90 backdrop-blur-xl border-b border-black/10 shadow-md text-zinc-900'
-      : 'bg-transparent border-b border-transparent text-zinc-900'
+      : 'bg-white/65 backdrop-blur-md border-b border-black/10 text-zinc-900'
     : scrolled
       ? 'bg-[#040406]/85 backdrop-blur-xl border-b border-white/15 shadow-xl text-white'
-      : 'bg-transparent border-b border-transparent text-white';
+      : 'bg-black/45 backdrop-blur-md border-b border-white/10 text-white';
 
   const linkHover = isLight
     ? 'hover:text-amber-600 transition-colors'
     : 'hover:text-amber-400 transition-colors';
+
+  const btnText = isLight
+    ? 'text-zinc-800 hover:text-amber-600'
+    : 'text-zinc-300 hover:text-amber-400';
 
   return (
     <>
@@ -116,7 +120,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleLocale}
-            className="px-2 py-1.5 sm:px-2.5 rounded-md font-mono text-[11px] sm:text-xs font-bold tracking-wider text-zinc-300 hover:text-amber-400 transition-colors"
+            className={`px-2 py-1.5 sm:px-2.5 rounded-md font-mono text-[11px] sm:text-xs font-bold tracking-wider transition-colors ${btnText}`}
             title="Toggle Language"
           >
             {locale === 'ru' ? 'EN' : 'RU'}
@@ -126,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={toggleTheme}
-            className="w-8 h-8 flex items-center justify-center text-xs sm:text-sm text-zinc-300 hover:text-amber-400 transition-all hover:scale-110 cursor-pointer select-none"
+            className={`w-8 h-8 flex items-center justify-center text-xs sm:text-sm transition-all hover:scale-110 cursor-pointer select-none ${btnText}`}
             title="Toggle Dark / Light Theme"
           >
             <span>{isLight ? '☀' : '☾'}</span>
@@ -136,7 +140,9 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
           <button
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            className="w-9 h-9 flex flex-col items-center justify-center gap-1.5 transition-colors cursor-pointer text-[var(--text-primary)] hover:text-amber-400"
+            className={`w-9 h-9 flex flex-col items-center justify-center gap-1.5 transition-colors cursor-pointer ${
+              isLight ? 'text-zinc-900 hover:text-amber-600' : 'text-white hover:text-amber-400'
+            }`}
             aria-label="Toggle Navigation Drawer"
           >
             <span
