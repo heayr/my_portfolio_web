@@ -14,7 +14,7 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-24 px-6 sm:px-12 bg-[var(--bg-root)] border-t border-[var(--border-subtle)]">
+    <section id="faq" className="relative md:sticky md:top-0 z-10 py-24 px-6 sm:px-12 bg-[var(--bg-root)] border-t border-[var(--border-subtle)]">
       <div className="max-w-4xl mx-auto">
         <div className="mb-14">
           <span className="font-mono text-xs tracking-widest text-amber-500 uppercase font-semibold">

@@ -457,6 +457,39 @@
   }
 }
 
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-text-shimmer {
+  background-size: 200% auto;
+  animation: text-shimmer 7s ease-in-out infinite;
+}
+
+@keyframes aurora-shift {
+  0%, 100% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+  }
+  33% {
+    transform: translate(5%, -5%) rotate(10deg) scale(1.15);
+  }
+  66% {
+    transform: translate(-5%, 4%) rotate(-8deg) scale(0.95);
+  }
+}
+
+.animate-aurora {
+  animation: aurora-shift 12s ease-in-out infinite;
+}
+
 .animate-reveal {
   opacity: 0;
   transform: translateY(24px);
