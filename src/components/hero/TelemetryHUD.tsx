@@ -51,6 +51,12 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
       year: 'PROD // 120 FPS',
       velocity: 'UPTIME: 99.99%',
     },
+    {
+      badge: { en: 'PHASE 05 // DESIGN & MOTION CRAFT', ru: 'ЭТАП 05 // ДИЗАЙН И МОУШН-КРАФТ' },
+      short: '05 DESIGN',
+      year: 'CRAFT // MOTION',
+      velocity: '120 FPS CANVAS',
+    },
   ];
 
   const current = actsMeta[activeAct] || actsMeta[0];
@@ -69,18 +75,18 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </div>
 
           {/* Interactive Act Tabs - High Contrast Glassmorphic Pills */}
-          <div className="hidden sm:flex items-center gap-2 pointer-events-auto ml-2">
+          <div className="hidden sm:flex items-center gap-1.5 pointer-events-auto ml-2">
             {actsMeta.map((act, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => onSelectAct(idx)}
-                className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider transition-all duration-300 shadow-md ${
+                className={`px-2.5 sm:px-3 py-1.5 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider transition-all duration-300 shadow-md ${
                   activeAct === idx
                     ? 'bg-amber-400 text-black font-black shadow-lg shadow-amber-400/30 border border-amber-300 scale-105'
                     : 'bg-black/75 backdrop-blur-md text-zinc-100 border border-white/20 hover:text-white hover:bg-black/90 hover:border-amber-400/50'
                 }`}
-                title={`Jump to Act ${idx + 1}`}
+                title={`Jump to Phase ${idx + 1}`}
               >
                 {act.short}
               </button>

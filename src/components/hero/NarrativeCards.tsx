@@ -71,19 +71,38 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = ({ activeAct, visib
     },
     {
       id: '04',
-      year: 'PROD // 120 FPS',
+      year: 'PROD // INFRA',
       tag: { en: 'PHASE 04 // PRODUCTION SCALE', ru: 'ЭТАП 04 // ПРОДАКШЕН И МАСШТАБ' },
       manifesto: {
-        en: '04. 120 FPS FLUIDITY & ORBITAL SCALE',
-        ru: '04. 120 FPS ПЛАВНОСТЬ И ОРБИТАЛЬНЫЙ МАСШТАБ',
+        en: '04. HIGH-VELOCITY INFRASTRUCTURE',
+        ru: '04. ВЫСОКОСКОРОСТНАЯ ИНФРАСТРУКТУРА',
       },
       desc: {
-        en: 'Zero Total Blocking Time, GPU-accelerated canvas scrubbing, and frictionless developer ergonomics ready for high-stakes products.',
-        ru: '0ms Total Blocking Time, GPU-скраббинг на холсте и безупречный UX, готовый к вызовам реального масштабного бизнеса.',
+        en: 'Zero Total Blocking Time, frictionless developer ergonomics, and rock-solid deployment ready for mission-critical scale.',
+        ru: '0ms Total Blocking Time, безупречная эргономика стэка и надежный деплой, готовый к нагрузкам реального бизнеса.',
       },
       meta: {
         en: 'Open for Roles & Core Contracts',
         ru: 'Открыт для сильных проектов и контрактов',
+      },
+      actionLink: '#stack',
+      actionText: { en: 'Stack ↘', ru: 'Стек ↘' },
+    },
+    {
+      id: '05',
+      year: 'CRAFT // MOTION',
+      tag: { en: 'PHASE 05 // DESIGN & MOTION CRAFT', ru: 'ЭТАП 05 // ДИЗАЙН И МОУШН-КРАФТ' },
+      manifesto: {
+        en: '05. CREATIVE DIRECTION & MOTION CRAFT',
+        ru: '05. КРЕАТИВНЫЙ ДИРЕКШЕН И МОУШН-КРАФТ',
+      },
+      desc: {
+        en: 'From AI prompt generation and classical art animation in CapCut to custom GPU Canvas rendering. Design engineered with soul.',
+        ru: 'От нейро-генерации арта и покадровой анимации в CapCut до кастомного GPU Canvas. Дизайн и код как единое искусство.',
+      },
+      meta: {
+        en: 'CapCut · AI Synthesis · UI/UX · Canvas',
+        ru: 'CapCut · AI Synthesis · UI/UX · Canvas',
       },
       actionLink: '#works',
       actionText: { en: 'Launch Works ↘', ru: 'Смотреть кейсы ↘' },

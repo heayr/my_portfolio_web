@@ -65,7 +65,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
       dockProgressRef.current = 1.0;
       setVideoProgress(1.0);
       videoProgressRef.current = 1.0;
-      setActiveAct(3);
+      setActiveAct(4);
       setStage('completed');
       stageRef.current = 'completed';
       unlockPage();
@@ -121,9 +121,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
     };
     dockAnimRef.current = requestAnimationFrame(runDock);
 
-    // 2. Video playback: exactly 4000ms, constant speed, no scroll coupling
+    // 2. Video playback: exactly 5000ms (1.0s per phase)
     const videoStart = videoProgressRef.current;
-    const videoDuration = Math.max(500, 4000 * (1 - videoStart));
+    const videoDuration = Math.max(500, 5000 * (1 - videoStart));
     const videoStartTime = performance.now();
 
     const runVideo = (now: number) => {
@@ -134,9 +134,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
       setVideoProgress(val);
       videoProgressRef.current = val;
 
-      if (val >= 0.75) setActiveAct(3);
-      else if (val >= 0.50) setActiveAct(2);
-      else if (val >= 0.25) setActiveAct(1);
+      if (val >= 0.80) setActiveAct(4);
+      else if (val >= 0.60) setActiveAct(3);
+      else if (val >= 0.40) setActiveAct(2);
+      else if (val >= 0.20) setActiveAct(1);
       else setActiveAct(0);
 
       onScrollProgress?.(val);
@@ -147,7 +148,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
         // ── VIDEO DONE ─────────────────────────────────────
         setVideoProgress(1);
         videoProgressRef.current = 1;
-        setActiveAct(3);
+        setActiveAct(4);
         setStage('completed');
         stageRef.current = 'completed';
         try {
@@ -184,9 +185,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
       setVideoProgress(val);
       videoProgressRef.current = val;
 
-      if (val >= 0.75) setActiveAct(3);
-      else if (val >= 0.50) setActiveAct(2);
-      else if (val >= 0.25) setActiveAct(1);
+      if (val >= 0.80) setActiveAct(4);
+      else if (val >= 0.60) setActiveAct(3);
+      else if (val >= 0.40) setActiveAct(2);
+      else if (val >= 0.20) setActiveAct(1);
       else setActiveAct(0);
 
       onScrollProgress?.(val);
@@ -240,7 +242,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
     dockProgressRef.current = 1;
     setVideoProgress(1);
     videoProgressRef.current = 1;
-    setActiveAct(3);
+    setActiveAct(4);
     setStage('completed');
     stageRef.current = 'completed';
     unlockPage();
@@ -331,12 +333,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
     setDockProgress(1);
     dockProgressRef.current = 1;
 
-    const targetP = actIdx === 0 ? 0.0 : actIdx === 1 ? 0.35 : actIdx === 2 ? 0.60 : 1.0;
+    const targetP = actIdx === 0 ? 0.0 : actIdx === 1 ? 0.25 : actIdx === 2 ? 0.50 : actIdx === 3 ? 0.75 : 1.0;
     setVideoProgress(targetP);
     videoProgressRef.current = targetP;
     setActiveAct(actIdx);
 
-    if (actIdx === 3) {
+    if (actIdx === 4) {
       setStage('completed');
       stageRef.current = 'completed';
       unlockPage();
