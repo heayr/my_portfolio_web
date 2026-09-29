@@ -28,28 +28,28 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
 
   const actsMeta = [
     {
-      badge: { en: 'ACT 01 // GENESIS SPARK', ru: 'АКТ 01 // ИСКРА РАЗУМА' },
-      short: '01 SPARK',
-      year: '1512 → FUTURE',
-      velocity: '0.0 km/s',
+      badge: { en: 'PHASE 01 // ARCHITECTURE & VISION', ru: 'ЭТАП 01 // АРХИТЕКТУРА И СМЫСЛ' },
+      short: '01 ARCH',
+      year: 'CORE // ARCH',
+      velocity: '0.0 → MACH 1',
     },
     {
-      badge: { en: 'ACT 02 // DA VINCI’S BLUEPRINTS', ru: 'АКТ 02 // ЧЕРТЕЖИ ДА ВИНЧИ' },
-      short: '02 DA VINCI',
-      year: '1490 MILAN',
-      velocity: '180 km/h',
+      badge: { en: 'PHASE 02 // ALGORITHMIC RIGOR', ru: 'ЭТАП 02 // АЛГОРИТМЫ И СТРОГОСТЬ' },
+      short: '02 LOGIC',
+      year: 'PERF // 100/100',
+      velocity: 'TTFB: 38ms',
     },
     {
-      badge: { en: 'ACT 03 // PROVING GROUND', ru: 'АКТ 03 // ПОЛИГОН КИТТИ-ХОК' },
-      short: '03 WRIGHT',
-      year: '1903 KITTY HAWK',
-      velocity: '48 km/h',
+      badge: { en: 'PHASE 03 // B2B SYSTEMS & SAAS', ru: 'ЭТАП 03 // B2B-СИСТЕМЫ И SAAS' },
+      short: '03 SAAS',
+      year: 'INFRA // 99.9%',
+      velocity: 'FAULT-TOLERANT',
     },
     {
-      badge: { en: 'ACT 04 // ORBITAL VELOCITY', ru: 'АКТ 04 // ОРБИТАЛЬНАЯ СКОРОСТЬ' },
-      short: '04 ORBIT',
-      year: '2026 LUNAR BOUND',
-      velocity: '11.2 km/s',
+      badge: { en: 'PHASE 04 // PRODUCTION SCALE', ru: 'ЭТАП 04 // ПРОДАКШЕН И МАСШТАБ' },
+      short: '04 SCALE',
+      year: 'PROD // 120 FPS',
+      velocity: 'UPTIME: 99.99%',
     },
   ];
 
