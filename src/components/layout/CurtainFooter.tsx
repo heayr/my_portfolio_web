@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
 
@@ -19,36 +19,37 @@ interface ContactCardData {
   icon: React.ReactNode;
 }
 
-const ContactCardItem: React.FC<{ card: ContactCardData }> = ({ card }) => {
-  const [pos, setPos] = useState({ x: 0, y: 0, isHovered: false });
+const ContactCardItem: React.FC<{ card: ContactCardData }> = React.memo(({ card }) => {
+  const cardSpotlightRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardSpotlightRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    setPos({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-      isHovered: true,
-    });
+    const x = e.clientX - rect.left + 24;
+    const y = e.clientY - rect.top + 24;
+    cardSpotlightRef.current.style.opacity = '1';
+    cardSpotlightRef.current.style.background = `radial-gradient(280px circle at ${x}px ${y}px, ${card.glowColor}, transparent 75%)`;
+  };
+
+  const handleMouseEnter = () => {
+    if (cardSpotlightRef.current) cardSpotlightRef.current.style.opacity = '1';
   };
 
   const handleMouseLeave = () => {
-    setPos((prev) => ({ ...prev, isHovered: false }));
+    if (cardSpotlightRef.current) cardSpotlightRef.current.style.opacity = '0';
   };
 
   const innerContent = (
     <div
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setPos((prev) => ({ ...prev, isHovered: true }))}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="relative z-10 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[160px]"
     >
       {/* Dynamic Cursor Spotlight that follows the mouse - stays bright wherever the mouse moves */}
       <div
-        className="pointer-events-none absolute -inset-6 sm:-inset-7 rounded-3xl transition-opacity duration-200"
-        style={{
-          opacity: pos.isHovered ? 1 : 0,
-          background: `radial-gradient(280px circle at ${pos.x + 24}px ${pos.y + 24}px, ${card.glowColor}, transparent 75%)`,
-        }}
+        ref={cardSpotlightRef}
+        className="pointer-events-none absolute -inset-6 sm:-inset-7 rounded-3xl transition-opacity duration-200 opacity-0"
       />
 
       {/* Vibrant Ambient Gradient Background on hover (Zero dark veil, stays luminous) */}
@@ -126,13 +127,15 @@ const ContactCardItem: React.FC<{ card: ContactCardData }> = ({ card }) => {
       {innerContent}
     </a>
   );
-};
+});
+
+ContactCardItem.displayName = 'ContactCardItem';
 
 export const CurtainFooter: React.FC = () => {
   const { t, locale } = useApp();
   const [copied, setCopied] = useState(false);
   const [clock, setClock] = useState('');
-  const [footerMousePos, setFooterMousePos] = useState({ px: 0, py: 0, active: false });
+  const footerSpotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateTime = () => {
@@ -163,16 +166,18 @@ export const CurtainFooter: React.FC = () => {
   };
 
   const handleFooterMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (!footerSpotlightRef.current) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    setFooterMousePos({
-      px: e.clientX - rect.left,
-      py: e.clientY - rect.top,
-      active: true,
-    });
+    const px = e.clientX - rect.left;
+    const py = e.clientY - rect.top;
+    footerSpotlightRef.current.style.opacity = '1';
+    footerSpotlightRef.current.style.background = `radial-gradient(850px circle at ${px}px ${py}px, rgba(245, 158, 11, 0.14), transparent 70%)`;
   };
 
   const handleFooterMouseLeave = () => {
-    setFooterMousePos((prev) => ({ ...prev, active: false }));
+    if (footerSpotlightRef.current) {
+      footerSpotlightRef.current.style.opacity = '0';
+    }
   };
 
   const handleScrollToTop = () => {
@@ -263,13 +268,8 @@ export const CurtainFooter: React.FC = () => {
     >
       {/* Full-width screen-bleed dynamic ambient cursor spotlight - ZERO CLIPPING, NO BOUNDARIES */}
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0"
-        style={{
-          opacity: footerMousePos.active ? 1 : 0,
-          background: footerMousePos.active
-            ? `radial-gradient(850px circle at ${footerMousePos.px}px ${footerMousePos.py}px, rgba(245, 158, 11, 0.14), transparent 70%)`
-            : 'none',
-        }}
+        ref={footerSpotlightRef}
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0 opacity-0"
       />
 
       <div className="relative z-10 w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-10 sm:gap-12">

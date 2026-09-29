@@ -8,7 +8,7 @@ interface MorphingWordmarkProps {
   onReset?: () => void;
 }
 
-export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
+export const MorphingWordmark: React.FC<MorphingWordmarkProps> = React.memo(({
   dockProgress,
   windowHeight,
   onReset,
@@ -97,5 +97,7 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
       </a>
     </div>
   );
-};
+});
+
+MorphingWordmark.displayName = 'MorphingWordmark';
 

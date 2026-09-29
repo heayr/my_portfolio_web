@@ -14,7 +14,40 @@ interface TelemetryHUDProps {
   onReplay?: () => void;
 }
 
-export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
+const ACTS_META = [
+  {
+    badge: { en: 'PHASE 01 // ARCHITECTURE & VISION', ru: 'ЭТАП 01 // АРХИТЕКТУРА И СМЫСЛ' },
+    short: '01 ARCH',
+    year: 'CORE // ARCH',
+    velocity: '0.0 → MACH 1',
+  },
+  {
+    badge: { en: 'PHASE 02 // ALGORITHMIC RIGOR', ru: 'ЭТАП 02 // АЛГОРИТМЫ И СТРОГОСТЬ' },
+    short: '02 LOGIC',
+    year: 'PERF // 100/100',
+    velocity: 'TTFB: 38ms',
+  },
+  {
+    badge: { en: 'PHASE 03 // B2B SYSTEMS & SAAS', ru: 'ЭТАП 03 // B2B-СИСТЕМЫ И SAAS' },
+    short: '03 SAAS',
+    year: 'INFRA // 99.9%',
+    velocity: 'FAULT-TOLERANT',
+  },
+  {
+    badge: { en: 'PHASE 04 // PRODUCTION SCALE', ru: 'ЭТАП 04 // ПРОДАКШЕН И МАСШТАБ' },
+    short: '04 SCALE',
+    year: 'PROD // 120 FPS',
+    velocity: 'UPTIME: 99.99%',
+  },
+  {
+    badge: { en: 'PHASE 05 // DESIGN & MOTION CRAFT', ru: 'ЭТАП 05 // ДИЗАЙН И МОУШН-КРАФТ' },
+    short: '05 DESIGN',
+    year: 'CRAFT // MOTION',
+    velocity: '120 FPS CANVAS',
+  },
+];
+
+export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
   activeAct,
   progress,
   visible,
@@ -25,41 +58,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
   onReplay,
 }) => {
   const { locale } = useApp();
-
-  const actsMeta = [
-    {
-      badge: { en: 'PHASE 01 // ARCHITECTURE & VISION', ru: 'ЭТАП 01 // АРХИТЕКТУРА И СМЫСЛ' },
-      short: '01 ARCH',
-      year: 'CORE // ARCH',
-      velocity: '0.0 → MACH 1',
-    },
-    {
-      badge: { en: 'PHASE 02 // ALGORITHMIC RIGOR', ru: 'ЭТАП 02 // АЛГОРИТМЫ И СТРОГОСТЬ' },
-      short: '02 LOGIC',
-      year: 'PERF // 100/100',
-      velocity: 'TTFB: 38ms',
-    },
-    {
-      badge: { en: 'PHASE 03 // B2B SYSTEMS & SAAS', ru: 'ЭТАП 03 // B2B-СИСТЕМЫ И SAAS' },
-      short: '03 SAAS',
-      year: 'INFRA // 99.9%',
-      velocity: 'FAULT-TOLERANT',
-    },
-    {
-      badge: { en: 'PHASE 04 // PRODUCTION SCALE', ru: 'ЭТАП 04 // ПРОДАКШЕН И МАСШТАБ' },
-      short: '04 SCALE',
-      year: 'PROD // 120 FPS',
-      velocity: 'UPTIME: 99.99%',
-    },
-    {
-      badge: { en: 'PHASE 05 // DESIGN & MOTION CRAFT', ru: 'ЭТАП 05 // ДИЗАЙН И МОУШН-КРАФТ' },
-      short: '05 DESIGN',
-      year: 'CRAFT // MOTION',
-      velocity: '120 FPS CANVAS',
-    },
-  ];
-
-  const current = actsMeta[activeAct] || actsMeta[0];
+  const current = ACTS_META[activeAct] || ACTS_META[0];
 
   return (
     <div
@@ -77,7 +76,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
 
           {/* Interactive Act Tabs - High Contrast Glassmorphic Pills */}
           <div className="hidden sm:flex items-center gap-1.5 pointer-events-auto ml-2">
-            {actsMeta.map((act, idx) => (
+            {ACTS_META.map((act, idx) => (
               <button
                 key={idx}
                 type="button"
@@ -209,4 +208,6 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
       </div>
     </div>
   );
-};
+});
+
+TelemetryHUD.displayName = 'TelemetryHUD';

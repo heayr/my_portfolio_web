@@ -14,11 +14,11 @@ import { CurtainFooter } from '../components/layout/CurtainFooter';
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
-  // Initialize Luxury Waterfall Inertia Lenis
+  // Initialize Luxury Fluid Inertia Lenis
   useEffect(() => {
     const lenis = new Lenis({
-      lerp: 0.065, // Luxury fluid waterfall inertia
-      wheelMultiplier: 0.9,
+      lerp: 0.09, // Silky, responsive, zero-lag inertia
+      wheelMultiplier: 1.0,
       touchMultiplier: 1.8,
       smoothWheel: true,
       infinite: false,
@@ -36,13 +36,12 @@ export default function Home() {
       lenis.stop();
     }
 
-
+    let rafId: number;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
-
+    rafId = requestAnimationFrame(raf);
 
     // Anchor smooth navigation
     const handleAnchorClick = (e: MouseEvent) => {
@@ -52,22 +51,22 @@ export default function Home() {
         const el = document.querySelector(anchor.hash);
         if (el) {
           e.preventDefault();
-          lenis.scrollTo(el as HTMLElement, { offset: -70, duration: 1.2 });
+          lenis.scrollTo(el as HTMLElement, { offset: -70, duration: 1.1 });
         }
       }
     };
     document.addEventListener('click', handleAnchorClick);
 
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 80);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    // Throttled scroll indicator synchronized with Lenis
+    const unsubscribeScroll = lenis.on('scroll', (e: { scroll: number }) => {
+      setScrolled(e.scroll > 80);
+    });
 
     return () => {
+      cancelAnimationFrame(rafId);
+      unsubscribeScroll();
       lenis.destroy();
       document.removeEventListener('click', handleAnchorClick);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

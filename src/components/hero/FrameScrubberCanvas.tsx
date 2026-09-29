@@ -8,7 +8,7 @@ interface FrameScrubberCanvasProps {
   className?: string;
 }
 
-export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
+export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = React.memo(({
   progress,
   frameCount = 55,
   className = '',
@@ -184,10 +184,10 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
   }, [progress, frameCount]);
 
   // Direct frame render: progress from HeroSection RAF is already smooth.
-  // No extra LERP needed — that only adds lag on top of the cosine-eased animation.
   useEffect(() => {
     if (!initialFrameReady) return;
     const target = targetFloatFrameRef.current;
+    if (Math.abs(currentFloatFrameRef.current - target) < 0.005 && currentRenderedFrameRef.current !== -1) return;
     currentFloatFrameRef.current = target;
     drawFrame(target);
   }, [progress, initialFrameReady, drawFrame]);
@@ -211,4 +211,6 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
       />
     </div>
   );
-};
+});
+
+FrameScrubberCanvas.displayName = 'FrameScrubberCanvas';
