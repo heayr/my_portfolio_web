@@ -69,12 +69,35 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
     const imgW = img1.naturalWidth || img1.width;
     const imgH = img1.naturalHeight || img1.height;
 
-    // Cover calculation
-    const scale = Math.max(w / imgW, h / imgH);
-    const renderW = imgW * scale;
-    const renderH = imgH * scale;
-    const offsetX = (w - renderW) / 2;
-    const offsetY = (h - renderH) / 2;
+    // Determine orientation: portrait (mobile/vertical screen) vs landscape/desktop
+    const isPortrait = w < h;
+
+    let renderW: number;
+    let renderH: number;
+    let offsetX: number;
+    let offsetY: number;
+
+    if (isPortrait) {
+      // In portrait mode, fit by width so the full 16:9 composition is visible.
+      // Both Adam's hand (left) and the cybernetic hand + spark (right) remain 100% visible!
+      const scale = w / imgW;
+      renderW = w;
+      renderH = imgH * scale;
+      offsetX = 0;
+      // Position in the upper-middle visual focal area (~36% down the viewport)
+      offsetY = Math.round(h * 0.36 - renderH / 2);
+    } else {
+      // Desktop / Landscape: Cover entire canvas
+      const scale = Math.max(w / imgW, h / imgH);
+      renderW = imgW * scale;
+      renderH = imgH * scale;
+      offsetX = (w - renderW) / 2;
+      offsetY = (h - renderH) / 2;
+    }
+
+    // Always clear canvas background to seamless deep void
+    ctx.fillStyle = '#040406';
+    ctx.fillRect(0, 0, w, h);
 
     // 1. Draw base frame
     ctx.globalAlpha = 1.0;
@@ -88,6 +111,24 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
         ctx.drawImage(img2, offsetX, offsetY, renderW, renderH);
         ctx.globalAlpha = 1.0;
       }
+    }
+
+    // Subtle edge fades on portrait view so 16:9 frame dissolves seamlessly into #040406
+    if (isPortrait && offsetY > 0) {
+      const edgeH = Math.min(32, renderH * 0.16);
+      // Top fade
+      const topGrad = ctx.createLinearGradient(0, offsetY, 0, offsetY + edgeH);
+      topGrad.addColorStop(0, '#040406');
+      topGrad.addColorStop(1, 'rgba(4, 4, 6, 0)');
+      ctx.fillStyle = topGrad;
+      ctx.fillRect(0, offsetY, w, edgeH);
+
+      // Bottom fade
+      const botGrad = ctx.createLinearGradient(0, offsetY + renderH - edgeH, 0, offsetY + renderH);
+      botGrad.addColorStop(0, 'rgba(4, 4, 6, 0)');
+      botGrad.addColorStop(1, '#040406');
+      ctx.fillStyle = botGrad;
+      ctx.fillRect(0, offsetY + renderH - edgeH, w, edgeH);
     }
 
     // Only mark as rendered if the exact requested base frame was drawn; otherwise keep -1 so ready image redraws

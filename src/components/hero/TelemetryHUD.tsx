@@ -68,10 +68,11 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
     >
       {/* Top Telemetry Line */}
       <div className="hud-top">
-        <div className="flex items-center gap-3">
-          <div className="hud-epoch-badge px-3.5 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-xs tracking-wider shadow-xl flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="hud-epoch-badge px-3 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-xs tracking-wider shadow-xl flex items-center gap-2">
             <span className="hud-pulse" />
-            <span className="text-white font-extrabold tracking-wider">{current.badge[locale]}</span>
+            <span className="text-white font-extrabold tracking-wider hidden sm:inline">{current.badge[locale]}</span>
+            <span className="text-white font-extrabold tracking-wider sm:hidden">{current.short}</span>
           </div>
 
           {/* Interactive Act Tabs - High Contrast Glassmorphic Pills */}
@@ -95,15 +96,15 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
         </div>
 
         {/* Year Badge */}
-        <div className="hud-stat px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-zinc-100 font-mono text-xs font-bold tracking-widest shadow-lg">
+        <div className="hud-stat px-2.5 sm:px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-zinc-100 font-mono text-[11px] sm:text-xs font-bold tracking-wider sm:tracking-widest shadow-lg">
           <span>{current.year}</span>
         </div>
       </div>
 
-      {/* Bottom Telemetry Line: Trajectory on the Left, Epoch scroll indicator on the Right */}
+      {/* Bottom Telemetry Line: Trajectory + Actions */}
       <div className="hud-bottom">
-        <div className="hud-progress-wrap pointer-events-auto p-3 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl w-[240px] sm:w-[280px]">
-          <div className="flex justify-between text-xs text-zinc-200 font-mono font-bold tracking-wider mb-2">
+        <div className="hud-progress-wrap pointer-events-auto p-2.5 sm:p-3 rounded-xl bg-black/85 backdrop-blur-md border border-white/20 shadow-2xl w-full sm:w-[280px]">
+          <div className="flex justify-between text-[11px] sm:text-xs text-zinc-200 font-mono font-bold tracking-wider mb-1.5 sm:mb-2">
             <span className="text-zinc-100 font-bold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
             <span className="text-amber-400 font-black">VEL: {current.velocity}</span>
           </div>
@@ -138,15 +139,14 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
         </div>
 
         {/* Right side prompt: scroll indicator / advance button / skip */}
-        <div className="flex items-center gap-2 pointer-events-auto">
+        <div className="hud-actions-row flex items-center gap-2 pointer-events-auto w-full sm:w-auto">
           {(stage === 'playing' || stage === 'rewinding') && onSkip && (
             <button
               type="button"
               onClick={onSkip}
-              className="hud-skip-btn flex items-center gap-2 font-mono text-xs text-amber-300 font-black tracking-widest px-4 py-2 rounded-full bg-black/85 backdrop-blur-xl border-2 border-amber-400 shadow-xl cursor-pointer transition-colors duration-200 hover:bg-amber-400 hover:text-black hover:border-amber-300"
+              className="hud-skip-btn w-full sm:w-auto flex items-center justify-center gap-2 font-mono text-xs text-amber-300 font-black tracking-widest px-4 py-2.5 sm:py-2 rounded-full bg-black/85 backdrop-blur-xl border-2 border-amber-400 shadow-xl cursor-pointer transition-colors duration-200 hover:bg-amber-400 hover:text-black hover:border-amber-300"
               title="Skip intro animation (Esc)"
             >
-              {/* Radar ping dot */}
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-80" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400" />
@@ -159,7 +159,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
             <button
               type="button"
               onClick={onReplay}
-              className="hud-replay-btn flex items-center gap-2 font-mono text-xs text-zinc-300 hover:text-amber-300 font-bold tracking-wider px-3.5 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 hover:border-amber-400/60 shadow-xl cursor-pointer transition-all duration-300 hover:scale-105"
+              className="hud-replay-btn flex-1 sm:flex-none flex items-center justify-center gap-2 font-mono text-xs text-zinc-300 hover:text-amber-300 font-bold tracking-wider px-3.5 py-2.5 sm:py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 hover:border-amber-400/60 shadow-xl cursor-pointer transition-all duration-300 hover:scale-105"
               title={locale === 'ru' ? 'Запустить интро-анимацию еще раз' : 'Replay intro animation'}
             >
               <svg
@@ -178,41 +178,33 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
             </button>
           )}
 
-          <button
-            type="button"
-            onClick={onAdvance}
-            className={`hidden sm:flex items-center gap-2.5 font-mono text-xs font-bold tracking-wider px-4 py-2 rounded-full backdrop-blur-md border shadow-2xl cursor-pointer transition-all duration-300 ${
-              stage === 'completed'
-                ? 'bg-amber-400 text-black border-amber-300 shadow-amber-400/20 hover:scale-105 hover:bg-amber-300'
-                : stage === 'playing'
-                ? 'bg-black/80 text-amber-300 border-amber-400/40 cursor-default'
-                : 'bg-black/80 text-zinc-100 border-white/20 hover:border-amber-400 hover:text-white hover:bg-black/90'
-            }`}
-            title={stage === 'completed' ? 'Scroll to works' : 'Start sequence'}
-          >
-            <span
-              className={`w-2 h-2 rounded-full ${
-                stage === 'completed' ? 'bg-black' : 'bg-amber-400 animate-pulse'
+          {stage !== 'playing' && stage !== 'rewinding' && (
+            <button
+              type="button"
+              onClick={onAdvance}
+              className={`flex-1 sm:flex-none flex items-center justify-center gap-2.5 font-mono text-xs font-bold tracking-wider px-4 py-2.5 sm:py-2 rounded-full backdrop-blur-md border shadow-2xl cursor-pointer transition-all duration-300 ${
+                stage === 'completed'
+                  ? 'bg-amber-400 text-black border-amber-300 shadow-amber-400/20 hover:scale-105 hover:bg-amber-300'
+                  : 'bg-black/80 text-zinc-100 border-white/20 hover:border-amber-400 hover:text-white hover:bg-black/90'
               }`}
-            />
-            <span>
-              {stage === 'completed'
-                ? locale === 'ru'
-                  ? 'СМОТРЕТЬ КЕЙСЫ ↓'
-                  : 'EXPLORE WORKS ↓'
-                : stage === 'playing'
-                ? locale === 'ru'
-                  ? 'ВОСПРОИЗВЕДЕНИЕ...'
-                  : 'PLAYING...'
-                : stage === 'rewinding'
-                ? locale === 'ru'
-                  ? 'ПЕРЕМОТКА...'
-                  : 'REWINDING...'
-                : locale === 'ru'
-                ? 'СКРОЛЛ ДЛЯ СМЕНЫ ЭПОХ ↓'
-                : 'SCROLL TO ADVANCE EPOCHS ↓'}
-            </span>
-          </button>
+              title={stage === 'completed' ? 'Scroll to works' : 'Start sequence'}
+            >
+              <span
+                className={`w-2 h-2 rounded-full ${
+                  stage === 'completed' ? 'bg-black' : 'bg-amber-400 animate-pulse'
+                }`}
+              />
+              <span>
+                {stage === 'completed'
+                  ? locale === 'ru'
+                    ? 'СМОТРЕТЬ КЕЙСЫ ↓'
+                    : 'EXPLORE WORKS ↓'
+                  : locale === 'ru'
+                  ? 'СКРОЛЛ ДЛЯ СТАРТА ↓'
+                  : 'SCROLL TO START ↓'}
+              </span>
+            </button>
+          )}
         </div>
       </div>
     </div>

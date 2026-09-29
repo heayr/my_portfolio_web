@@ -60,15 +60,15 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-6 sm:px-10 transition-all duration-400 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 z-40 h-[70px] flex items-center justify-between px-3.5 sm:px-10 transition-all duration-400 ${headerBg}`}
       >
         {/* Left: Minimal Monochrome Social Acronyms with Generous Hitbox & Animated Underline */}
-        <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs tracking-widest uppercase font-bold">
+        <div className="flex items-center gap-0.5 sm:gap-2 font-mono text-xs tracking-wider sm:tracking-widest uppercase font-bold">
           <a
             href={profileData.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link-btn"
+            className="nav-link-btn text-[11px] sm:text-xs"
           >
             TG
           </a>
@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href={profileData.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link-btn"
+            className="nav-link-btn text-[11px] sm:text-xs"
           >
             GH
           </a>
@@ -84,14 +84,14 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
             href={profileData.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link-btn"
+            className="nav-link-btn hidden sm:inline-block"
           >
             LI
           </a>
           <button
             type="button"
             onClick={handleCopyEmail}
-            className="nav-link-btn text-left"
+            className="nav-link-btn text-left hidden sm:inline-block"
             title={`Copy email: ${profileData.email}`}
           >
             {copiedEmail ? 'COPIED!' : 'EMAIL'}
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         </div>
 
         {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
-        <div className="w-[140px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
+        <div className="w-[100px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
         {/* Right: Controls + Minimalist 2-line Burger Menu with Generous Hitboxes */}
         <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">

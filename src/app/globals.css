@@ -278,8 +278,9 @@
 .hud-bottom {
   position: relative;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 11px;
   color: rgba(255, 255, 255, 0.6);
@@ -287,11 +288,19 @@
   pointer-events: none;
 }
 
+@media (min-width: 641px) {
+  .hud-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0;
+  }
+}
+
 .hud-progress-wrap {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 220px;
   max-width: 100%;
 }
 
@@ -331,7 +340,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-left: 2px solid var(--accent-gold);
   padding: 11px 15px;
-  background: rgba(8, 8, 12, 0.65);
+  background: rgba(8, 8, 12, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 8px;
@@ -341,12 +350,13 @@
 
 @media (max-width: 640px) {
   .story-narrative-block {
-    left: 20px;
-    right: 20px;
+    left: 16px;
+    right: 16px;
     width: auto;
     max-width: none;
-    bottom: 110px;
+    bottom: 125px;
     padding: 10px 14px;
+    background: rgba(8, 8, 12, 0.9);
   }
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface MorphingWordmarkProps {
   dockProgress: number;
@@ -13,19 +13,43 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
   windowHeight,
   onReset,
 }) => {
-  // Height of the fixed navbar is 70px
-  const headerHeight = 70;
+  const [windowWidth, setWindowWidth] = useState(() =>
+    typeof window !== 'undefined' ? window.innerWidth : 1200
+  );
 
-  // Raised by 50px higher than previous baseline as requested.
-  // startY moves from (windowHeight - 61 - 35) to (windowHeight - 111 - 35).
-  const startY = Math.max(100, windowHeight - 111 - headerHeight / 2);
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const headerHeight = 70;
+  const isMobile = windowWidth < 640;
+
+  // Responsive startY:
+  // On mobile: positioned cleanly in the middle area (~54% down), right below the hands canvas
+  // On desktop: positioned near the bottom baseline
+  const startY = isMobile
+    ? Math.round(windowHeight * 0.54 - headerHeight / 2)
+    : Math.max(100, windowHeight - 111 - headerHeight / 2);
   const targetY = 0; // Exactly inside the 70px header navbar
 
   const clampedProgress = Math.min(1, Math.max(0, dockProgress));
   const currentY = startY - clampedProgress * (startY - targetY);
 
-  // Scaled down from 1.0 (massive 2x initial size) to 0.105 (crisp 22px navbar wordmark)
-  const currentScale = 1 - clampedProgress * 0.895;
+  // Responsive initial font size:
+  // On mobile (390px): ~40px (fits ~240px wide, zero overflow)
+  // On desktop (1440px): ~160px-210px (heroic, massive)
+  const baseFontSize = isMobile
+    ? Math.min(46, Math.max(34, Math.round(windowWidth * 0.10)))
+    : Math.min(210, Math.max(96, Math.round(windowWidth * 0.13)));
+
+  // Target font size in navbar: 18px on mobile, 22px on desktop
+  const targetNavbarFontSize = isMobile ? 18 : 22;
+  const targetScale = targetNavbarFontSize / baseFontSize;
+
+  // Smoothly interpolate scale down to exact navbar size
+  const currentScale = 1 - clampedProgress * (1 - targetScale);
 
   const isDocked = clampedProgress > 0.85;
 
@@ -53,13 +77,14 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
       <a
         href="#hero"
         onClick={handleBackToTop}
-        className={`pointer-events-auto select-none flex items-center justify-center font-black tracking-tighter uppercase transition-colors duration-200 ${isDocked ? 'hover:text-amber-400 cursor-pointer' : 'cursor-default'
-          }`}
+        className={`pointer-events-auto select-none flex items-center justify-center font-black tracking-tighter uppercase transition-colors duration-200 ${
+          isDocked ? 'hover:text-amber-400 cursor-pointer' : 'cursor-default'
+        }`}
         style={{
           transform: `scale(${currentScale})`,
           transformOrigin: 'center center',
           willChange: 'transform',
-          fontSize: 'clamp(96px, 14.5vw, 220px)',
+          fontSize: `${baseFontSize}px`,
           lineHeight: 1,
           whiteSpace: 'nowrap',
           color: isDocked ? 'var(--text-primary)' : '#ffffff',
