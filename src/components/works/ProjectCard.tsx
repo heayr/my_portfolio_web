@@ -44,7 +44,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
           <span className="px-3 py-1 rounded-full bg-black/85 border border-white/25 text-amber-400 font-bold shadow-md">
             0{index + 1} // 0{total}
           </span>
-          <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white drop-shadow-sm">
+          <h3 className="text-lg sm:text-2xl font-black uppercase tracking-tight text-white drop-shadow-sm">
             {project.title}
           </h3>
           <span className="h-4 w-[1px] bg-white/30 hidden sm:inline-block" />
@@ -92,8 +92,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
             ))}
           </div>
 
-          {/* Tech Stack Chips */}
-          <div className="flex flex-wrap gap-1.5 font-mono text-[11px]">
+          {/* Tech Stack Chips — hidden on mobile */}
+          <div className="hidden sm:flex flex-wrap gap-1.5 font-mono text-[11px]">
             {project.stack.map((tech) => (
               <span
                 key={tech}

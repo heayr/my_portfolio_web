@@ -90,8 +90,8 @@ export const PhilosophySection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* 3. Deliverables & Core Competencies Tag Cloud */}
-                <div className="lg:col-span-4 flex flex-col pt-2 lg:pt-0">
+                {/* 3. Deliverables & Core Competencies Tag Cloud — hidden on mobile, shown lg+ */}
+                <div className="hidden lg:flex lg:col-span-4 flex-col pt-2 lg:pt-0">
                   <span
                     className={`font-mono text-[11px] uppercase tracking-widest mb-3.5 block ${
                       isLight ? 'text-zinc-500' : 'text-zinc-400'
@@ -121,9 +121,10 @@ export const PhilosophySection: React.FC = () => {
         </div>
 
         {/* Bottom Navigation Strip (Arpeggio Signature Action Bar) */}
-        <div className="mt-14 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="mt-14 pt-8 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+          {/* Status label — hidden on mobile, shown sm+ */}
           <div
-            className={`flex items-center gap-3 font-mono text-xs sm:text-sm ${
+            className={`hidden sm:flex items-center gap-3 font-mono text-xs sm:text-sm ${
               isLight ? 'text-zinc-600' : 'text-zinc-400'
             }`}
           >
@@ -134,10 +135,10 @@ export const PhilosophySection: React.FC = () => {
                 : 'POLYMATH METHODOLOGY: FULL-SPECTRUM SYSTEMS & MOTION CRAFT'}
             </span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 w-full sm:w-auto">
             <a
               href="#works"
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono font-bold transition-all hover:scale-105 ${
+              className={`flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-full border text-xs font-mono font-bold transition-all hover:scale-105 ${
                 isLight
                   ? 'bg-black/5 hover:bg-black/10 border-black/15 text-zinc-800 hover:text-amber-700'
                   : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-amber-400/50 text-white'
@@ -148,7 +149,7 @@ export const PhilosophySection: React.FC = () => {
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-black text-xs font-mono font-black transition-all hover:scale-105 shadow-md shadow-amber-400/20"
+              className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-black text-xs font-mono font-black transition-all hover:scale-105 shadow-md shadow-amber-400/20"
             >
               <span>[04] {t.nav.contact}</span>
               <span>↗</span>

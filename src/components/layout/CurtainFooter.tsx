@@ -44,7 +44,7 @@ const ContactCardItem: React.FC<{ card: ContactCardData }> = React.memo(({ card 
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative z-10 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[160px]"
+      className="relative z-10 flex flex-col justify-between h-full min-h-[110px] sm:min-h-[145px] sm:min-h-[160px]"
     >
       {/* Dynamic Cursor Spotlight that follows the mouse - stays bright wherever the mouse moves */}
       <div
@@ -112,7 +112,7 @@ const ContactCardItem: React.FC<{ card: ContactCardData }> = React.memo(({ card 
   );
 
   const containerClasses =
-    "group relative p-6 sm:p-7 rounded-3xl bg-zinc-950/85 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.95)] text-left flex flex-col justify-between cursor-pointer w-full select-none";
+    "group relative p-4 sm:p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-zinc-950/85 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.95)] text-left flex flex-col justify-between cursor-pointer w-full select-none";
 
   if (card.type === 'button') {
     return (
@@ -346,7 +346,7 @@ export const CurtainFooter: React.FC = () => {
         </div>
 
         {/* Action Controls: Dynamic Hologram Cards with Persistent Brightness */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 my-2 sm:my-4 items-stretch w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6 my-2 sm:my-4 items-stretch w-full">
           {contactCards.map((card) => (
             <ContactCardItem key={card.id} card={card} />
           ))}
