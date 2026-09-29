@@ -32,7 +32,12 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
   const handleBackToTop = (e: React.MouseEvent) => {
     if (isDocked) {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const lenis = (window as any).lenis;
+      if (lenis) {
+        lenis.scrollTo(0, { duration: 1.8, easing: (t: number) => (1 - Math.cos(t * Math.PI)) / 2 });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 

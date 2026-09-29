@@ -15,14 +15,17 @@ import { CurtainFooter } from '../components/layout/CurtainFooter';
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
 
-  // Initialize Lenis Smooth Scroll
+  // Initialize Luxury Waterfall Inertia Lenis
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.065, // Luxury fluid waterfall inertia
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.8,
       smoothWheel: true,
-      touchMultiplier: 1.5,
+      infinite: false,
     });
+
+    (window as any).lenis = lenis;
 
     function raf(time: number) {
       lenis.raf(time);

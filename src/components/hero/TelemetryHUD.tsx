@@ -8,6 +8,7 @@ interface TelemetryHUDProps {
   progress: number;
   visible: boolean;
   onSelectAct: (index: number) => void;
+  onAdvance?: () => void;
 }
 
 export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
@@ -15,6 +16,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
   progress,
   visible,
   onSelectAct,
+  onAdvance,
 }) => {
   const { locale } = useApp();
 
@@ -101,11 +103,16 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </div>
         </div>
 
-        {/* Right side prompt: scroll indicator */}
-        <div className="hidden sm:flex items-center gap-2.5 font-mono text-xs text-zinc-100 font-bold tracking-wider px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl">
+        {/* Right side prompt: scroll indicator / advance button */}
+        <button
+          type="button"
+          onClick={onAdvance}
+          className="hidden sm:flex items-center gap-2.5 font-mono text-xs text-zinc-100 font-bold tracking-wider px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl pointer-events-auto cursor-pointer transition-all duration-300 hover:border-amber-400 hover:text-white hover:bg-black/90"
+          title="Scroll or click to advance sequence"
+        >
           <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
           <span>{locale === 'ru' ? 'СКРОЛЛ ДЛЯ СМЕНЫ ЭПОХ ↓' : 'SCROLL TO ADVANCE EPOCHS ↓'}</span>
-        </div>
+        </button>
       </div>
     </div>
   );
