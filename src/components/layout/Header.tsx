@@ -45,13 +45,17 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
 
   const isLight = theme === 'light';
 
-  const headerBg = isLight
-    ? scrolled
-      ? 'bg-white/90 backdrop-blur-xl border-b border-black/10 shadow-md text-zinc-900'
-      : 'bg-white/65 backdrop-blur-md border-b border-black/10 text-zinc-900'
-    : scrolled
-      ? 'bg-[#040406]/85 backdrop-blur-xl border-b border-white/15 shadow-xl text-white'
-      : 'bg-black/45 backdrop-blur-md border-b border-white/10 text-white';
+  const headerBg = menuOpen
+    ? isLight
+      ? 'bg-[#faf9f5]/80 backdrop-blur-2xl border-b border-transparent text-zinc-900'
+      : 'bg-[#040406]/80 backdrop-blur-2xl border-b border-transparent text-white'
+    : isLight
+      ? scrolled
+        ? 'bg-white/90 backdrop-blur-xl border-b border-black/10 shadow-md text-zinc-900'
+        : 'bg-white/65 backdrop-blur-md border-b border-black/10 text-zinc-900'
+      : scrolled
+        ? 'bg-[#040406]/85 backdrop-blur-xl border-b border-white/15 shadow-xl text-white'
+        : 'bg-black/45 backdrop-blur-md border-b border-white/10 text-white';
 
   const linkHover = isLight
     ? 'hover:text-amber-600 transition-colors'
@@ -64,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-40 h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 z-50 h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
       >
         {/* Left: Desktop Socials with Animated Underlines (Hidden on mobile to eliminate clutter) */}
         <div className="hidden sm:flex items-center gap-1 sm:gap-2 font-mono text-xs tracking-widest uppercase font-bold">

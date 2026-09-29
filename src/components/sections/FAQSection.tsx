@@ -39,8 +39,22 @@ export const FAQSection: React.FC = () => {
                   className="w-full flex items-center justify-between p-6 sm:p-7 text-left font-bold text-base sm:text-lg text-[var(--text-primary)] hover:text-amber-400 transition-colors"
                   aria-expanded={isOpen}
                 >
-                  <span>{item.q[locale]}</span>
-                  <span className="font-mono text-xl text-amber-500 ml-4">{isOpen ? '−' : '+'}</span>
+                  <span className="pr-4">{item.q[locale]}</span>
+                  <div
+                    className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex flex-col items-center justify-center gap-1.5 transition-colors text-zinc-500 hover:text-amber-500 shrink-0"
+                    aria-hidden="true"
+                  >
+                    <span
+                      className={`h-[1.5px] bg-current transition-all duration-300 ${
+                        isOpen ? 'w-4 -rotate-45 translate-y-[3.5px]' : 'w-4'
+                      }`}
+                    />
+                    <span
+                      className={`h-[1.5px] bg-current transition-all duration-300 ${
+                        isOpen ? 'w-4 rotate-45 -translate-y-[4px]' : 'w-2.5'
+                      }`}
+                    />
+                  </div>
                 </button>
                 {isOpen && (
                   <div className="px-6 pb-6 sm:px-7 sm:pb-7 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed border-t border-[var(--border-subtle)]/50 pt-4">
