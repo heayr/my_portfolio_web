@@ -346,24 +346,25 @@ export const CurtainFooter: React.FC = () => {
           ))}
         </div>
 
-        {/* Bottom Rights Bar with Laconic Animated Back to Top Button */}
-        <div className="pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
-          <span className="order-2 sm:order-1 text-center sm:text-left">
+        {/* Bottom Rights Bar with Borderless Large Back to Top Button */}
+        <div className="pt-8 sm:pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs sm:text-sm text-zinc-500">
+          <span className="order-2 md:order-1 text-center md:text-left">
             © 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER
           </span>
 
-          {/* Laconic Animated Back To Top Button in the center */}
+          {/* Borderless Large Animated Back To Top Button in the center */}
           <button
             type="button"
             onClick={handleScrollToTop}
-            className="order-1 sm:order-2 group relative inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.04] hover:bg-amber-400/10 border border-white/10 hover:border-amber-400/50 text-xs font-mono tracking-wider text-zinc-400 hover:text-amber-300 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] active:scale-95"
+            className="order-1 md:order-2 group inline-flex items-center gap-3.5 text-zinc-400 hover:text-white transition-all duration-300 cursor-pointer select-none py-2 px-3 active:scale-95"
+            aria-label={locale === 'ru' ? 'Вернуться в начало страницы' : 'Scroll back to top'}
           >
-            <span className="font-semibold uppercase tracking-widest text-[11px]">
-              {locale === 'ru' ? 'Наверх' : 'Back to top'}
+            <span className="text-base sm:text-lg lg:text-xl font-black uppercase tracking-widest text-zinc-300 group-hover:text-amber-400 transition-colors">
+              {locale === 'ru' ? 'НАВЕРХ' : 'BACK TO TOP'}
             </span>
-            <span className="w-5 h-5 rounded-full bg-white/5 group-hover:bg-amber-400 group-hover:text-black flex items-center justify-center transition-all duration-300 shadow-sm">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:bg-amber-400/10">
               <svg
-                className="w-3 h-3 transition-transform duration-300 group-hover:-translate-y-0.5"
+                className="w-5 h-5 sm:w-6 sm:h-6 text-zinc-400 group-hover:text-amber-400 transition-all duration-300 group-hover:-translate-y-1.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -374,10 +375,10 @@ export const CurtainFooter: React.FC = () => {
                 <path d="M12 19V5" />
                 <path d="M5 12l7-7 7 7" />
               </svg>
-            </span>
+            </div>
           </button>
 
-          <span className="order-3 text-center sm:text-right">
+          <span className="order-3 text-center md:text-right">
             {t.footer.rights}
           </span>
         </div>
