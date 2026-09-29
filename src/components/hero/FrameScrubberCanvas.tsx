@@ -46,7 +46,9 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
 
     // Find requested base frame or fallback to nearest loaded frame
     let img1 = imagesRef.current[baseIdx];
+    let isExactFrame = true;
     if (!img1 || !img1.complete || img1.naturalWidth === 0) {
+      isExactFrame = false;
       let nearestIdx = -1;
       let minDistance = Infinity;
       loadedSetRef.current.forEach((idx) => {
@@ -89,7 +91,8 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
       }
     }
 
-    currentRenderedFrameRef.current = floatFrame;
+    // Only mark as rendered if the exact requested base frame was drawn; otherwise keep -1 so ready image redraws
+    currentRenderedFrameRef.current = isExactFrame ? floatFrame : -1;
   }, [frameCount]);
 
   // Resize canvas to match display size & device pixel ratio
@@ -117,11 +120,10 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
     imagesRef.current = images;
 
     let loadedCount = 0;
+    const lastFrameIdx = frameCount - 1;
 
-    const initialTargetIdx = Math.round(targetFloatFrameRef.current);
-
-    // Priority 1: Load First Frame & Target Frame immediately (e.g. last frame for returning visitors)
-    const loadKeyFrame = (idx: number, isInitialTarget: boolean) => {
+    // Priority 1: Load First Frame (0) AND Final Frame (54) immediately
+    const loadKeyFrame = (idx: number) => {
       const img = new Image();
       img.src = getFrameUrl(idx);
       images[idx] = img;
@@ -129,8 +131,9 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
         loadedSetRef.current.add(idx);
         setInitialFrameReady(true);
         updateCanvasSize();
-        if (isInitialTarget || Math.round(targetFloatFrameRef.current) === idx) {
-          drawFrame(idx);
+        const currentTarget = Math.round(targetFloatFrameRef.current);
+        if (currentTarget === idx || currentRenderedFrameRef.current === -1) {
+          drawFrame(targetFloatFrameRef.current);
         }
       };
       img.onerror = () => {
@@ -138,14 +141,11 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
       };
     };
 
-    loadKeyFrame(0, initialTargetIdx === 0);
-    if (initialTargetIdx !== 0) {
-      loadKeyFrame(initialTargetIdx, true);
-    }
+    loadKeyFrame(0);
+    loadKeyFrame(lastFrameIdx);
 
     // Priority 2: Preload remaining frames in batches
-    for (let i = 1; i < frameCount; i++) {
-      if (i === initialTargetIdx) continue;
+    for (let i = 1; i < lastFrameIdx; i++) {
       const img = new Image();
       img.src = getFrameUrl(i);
       images[i] = img;
@@ -156,8 +156,8 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
         setLoadingProgress(Math.round((loadedCount / (frameCount - 1)) * 100));
 
         const currentTarget = Math.round(targetFloatFrameRef.current);
-        if (currentTarget === i && currentRenderedFrameRef.current !== i) {
-          drawFrame(i);
+        if (currentTarget === i || currentRenderedFrameRef.current === -1) {
+          drawFrame(targetFloatFrameRef.current);
         }
       };
 

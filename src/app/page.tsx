@@ -27,9 +27,13 @@ export default function Home() {
 
     (window as any).lenis = lenis;
 
-    // HeroSection's lockPage() runs BEFORE this (children effects fire first in React).
-    // So we must stop Lenis here, right after creation, while Hero is in 'initial' stage.
-    if (window.scrollY <= 10) {
+    // Only stop Lenis if user opens page at top AND has NOT seen the intro yet!
+    let hasSeenIntro = false;
+    try {
+      hasSeenIntro = localStorage.getItem('portfolio_hero_seen_v1') === 'true';
+    } catch {}
+
+    if (window.scrollY <= 10 && !hasSeenIntro) {
       lenis.stop();
     }
 
