@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { AppProvider } from '../i18n/context';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yegor.dev';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL(siteUrl),
   title: 'Yegor — Lead Frontend & Fullstack Architect | Portfolio',
   description:
     'Portfolio of Yegor (heayr): Lead Frontend & Fullstack Architect specializing in React 19, Next.js 15, TypeScript, commercial SaaS architecture, and high-performance Awwwards-caliber digital experiences.',
