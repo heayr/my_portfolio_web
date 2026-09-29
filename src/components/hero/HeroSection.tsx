@@ -364,13 +364,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
         }
         return;
       }
-
-      // Completed: free scroll. Only intercept scroll-up at the very top to rewind.
-      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      if (scrollY <= 5 && e.deltaY < -5) {
-        e.preventDefault();
-        startRewind();
-      }
+      // When completed: free natural scroll. Intro video is only replayed via the dedicated "ИНТРО ↺" button.
     };
 
     let touchStartY = 0;
@@ -388,12 +382,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
         }
         return;
       }
-
-      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      if (scrollY <= 5 && delta < -8) {
-        if (e.cancelable) e.preventDefault();
-        startRewind();
-      }
+      // When completed: free touch scroll.
     };
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -408,12 +397,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
         }
         return;
       }
-
-      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-      if (scrollY <= 5 && ['ArrowUp', 'PageUp'].includes(e.key)) {
-        e.preventDefault();
-        startRewind();
-      }
+      // When completed: standard keyboard navigation.
     };
 
     window.addEventListener('wheel', onWheel, { passive: false });
