@@ -116,11 +116,22 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
         </div>
 
         {/* Renaissance / High-Tech Exhibition Cartouche Plaque */}
-        <div className="hidden md:flex items-center justify-center pointer-events-auto mx-4 mb-0.5">
-          <div className="museum-cartouche" title="The Genius of Human Engineering: An Evolution">
+        <div
+          className={`absolute left-1/2 -translate-x-1/2 bottom-1 hidden md:flex items-center justify-center transition-all duration-700 ${
+            stage === 'completed'
+              ? 'opacity-100 translate-y-0 pointer-events-auto'
+              : 'opacity-0 translate-y-3 pointer-events-none'
+          }`}
+        >
+          <div
+            className="museum-cartouche"
+            title={locale === 'ru' ? 'Гений человеческой инженерии: Эволюция' : 'The Genius of Human Engineering: An Evolution'}
+          >
             <span className="museum-cartouche-ornament" aria-hidden="true">❖</span>
             <span className="museum-cartouche-text">
-              THE GENIUS OF HUMAN ENGINEERING: AN EVOLUTION
+              {locale === 'ru'
+                ? 'ГЕНИЙ ЧЕЛОВЕЧЕСКОЙ ИНЖЕНЕРИИ: ЭВОЛЮЦИЯ'
+                : 'THE GENIUS OF HUMAN ENGINEERING: AN EVOLUTION'}
             </span>
             <span className="museum-cartouche-ornament" aria-hidden="true">❖</span>
           </div>
