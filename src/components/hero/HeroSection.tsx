@@ -35,55 +35,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
   const { locale } = useApp();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [stage, setStage] = useState<HeroStage>(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        if (localStorage.getItem('portfolio_hero_seen_v1') === 'true' || window.scrollY > 10) {
-          return 'completed';
-        }
-      } catch {}
-    }
-    return 'initial';
-  });
+  const [stage, setStage] = useState<HeroStage>('initial');
   const stageRef = useRef<HeroStage>(stage);
   stageRef.current = stage;
 
-  const [dockProgress, setDockProgress] = useState(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        if (localStorage.getItem('portfolio_hero_seen_v1') === 'true' || window.scrollY > 10) {
-          return 1.0;
-        }
-      } catch {}
-    }
-    return 0;
-  });
+  const [dockProgress, setDockProgress] = useState(0);
   const dockProgressRef = useRef(dockProgress);
   const dockAnimRef = useRef<number | null>(null);
 
-  const [videoProgress, setVideoProgress] = useState(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        if (localStorage.getItem('portfolio_hero_seen_v1') === 'true' || window.scrollY > 10) {
-          return 1.0;
-        }
-      } catch {}
-    }
-    return 0;
-  });
+  const [videoProgress, setVideoProgress] = useState(0);
   const videoProgressRef = useRef(videoProgress);
   const videoAnimRef = useRef<number | null>(null);
 
-  const [activeAct, setActiveAct] = useState(() => {
-    if (typeof window !== 'undefined') {
-      try {
-        if (localStorage.getItem('portfolio_hero_seen_v1') === 'true' || window.scrollY > 10) {
-          return 4;
-        }
-      } catch {}
-    }
-    return 0;
-  });
+  const [activeAct, setActiveAct] = useState(0);
   const [windowHeight, setWindowHeight] = useState(800);
 
   // ── INITIAL LOCK & RETURNING VISITOR CHECK ──────────────────
