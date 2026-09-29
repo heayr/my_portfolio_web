@@ -23,7 +23,6 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
   const targetFloatFrameRef = useRef<number>(Math.min(1, Math.max(0, progress)) * (frameCount - 1));
   const currentFloatFrameRef = useRef<number>(0);
 
-  const [loadingProgress, setLoadingProgress] = useState(0);
   const [initialFrameReady, setInitialFrameReady] = useState(false);
 
   // Helper to format frame path: /GIF-for%20video/ezgif-frame-001.jpg
@@ -119,7 +118,6 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
     const images: HTMLImageElement[] = new Array(frameCount);
     imagesRef.current = images;
 
-    let loadedCount = 0;
     const lastFrameIdx = frameCount - 1;
 
     // Priority 1: Load First Frame (0) AND Final Frame (54) immediately
@@ -152,8 +150,6 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
 
       img.onload = () => {
         loadedSetRef.current.add(i);
-        loadedCount++;
-        setLoadingProgress(Math.round((loadedCount / (frameCount - 1)) * 100));
 
         const currentTarget = Math.round(targetFloatFrameRef.current);
         if (currentTarget === i || currentRenderedFrameRef.current === -1) {
@@ -207,13 +203,6 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
         className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#040406] via-transparent to-[#040406]/40 opacity-70"
         aria-hidden="true"
       />
-
-      {/* Frame indicator & buffer status */}
-      {loadingProgress < 100 && (
-        <div className="absolute top-20 right-6 z-20 pointer-events-none font-mono text-[10px] text-white/50 bg-black/60 backdrop-blur px-2.5 py-1 rounded-full border border-white/10">
-          BUFFERING 4K FRAMES: {loadingProgress}%
-        </div>
-      )}
     </div>
   );
 };
