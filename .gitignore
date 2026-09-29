@@ -39,3 +39,4 @@ lerna-debug.log*
 
 # Backup files
 *.orig.*
+.vercel

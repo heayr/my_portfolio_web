@@ -67,7 +67,7 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = React.memo(({
 
   return (
     <div
-      className="fixed inset-x-0 top-0 h-[60px] sm:h-[70px] pointer-events-none z-50 flex items-center justify-center px-4"
+      className="fixed inset-x-0 top-0 h-[60px] sm:h-[70px] pointer-events-none z-[60] flex items-center justify-center px-4"
       style={{
         transform: `translate3d(0, ${currentY}px, 0)`,
         willChange: 'transform',

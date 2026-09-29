@@ -63,7 +63,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
       {/* Dimmed Frosted Backdrop */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[80] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
           isOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
         }`}
         aria-hidden="true"
@@ -71,7 +71,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
       {/* ── UNIFIED RIGHT SLIDE-OVER DRAWER (Translucent Frosted Glass) ── */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 z-50 w-full sm:w-[540px] md:w-[600px] lg:w-[660px] max-w-full flex flex-col justify-between px-6 sm:px-10 md:px-12 pb-8 sm:pb-10 pt-[78px] sm:pt-[92px] shadow-2xl transition-transform duration-300 ease-out border-l backdrop-blur-2xl ${
+        className={`fixed top-0 right-0 bottom-0 z-[90] w-full sm:w-[540px] md:w-[600px] lg:w-[660px] max-w-full flex flex-col justify-between px-6 sm:px-10 md:px-12 pb-8 sm:pb-10 pt-[78px] sm:pt-[92px] shadow-2xl transition-transform duration-300 ease-out border-l backdrop-blur-2xl ${
           isLight
             ? 'bg-[#faf9f5]/85 border-black/10 text-zinc-900'
             : 'bg-[#06060a]/80 border-white/10 text-white'

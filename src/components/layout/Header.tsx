@@ -68,7 +68,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-[60] h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
       >
         {/* Left: Desktop Socials with Animated Underlines (Hidden on mobile to eliminate clutter) */}
         <div className="hidden sm:flex items-center gap-1 sm:gap-2 font-mono text-xs tracking-widest uppercase font-bold">
