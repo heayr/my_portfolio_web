@@ -27,10 +27,10 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
   const isMobile = windowWidth < 640;
 
   // Responsive startY:
-  // On mobile: positioned cleanly in the middle area (~54% down), right below the hands canvas
+  // On mobile: positioned in lower-mid area (~62% down), right below the center spark and hands
   // On desktop: positioned near the bottom baseline
   const startY = isMobile
-    ? Math.round(windowHeight * 0.54 - headerHeight / 2)
+    ? Math.round(windowHeight * 0.62 - headerHeight / 2)
     : Math.max(100, windowHeight - 111 - headerHeight / 2);
   const targetY = 0; // Exactly inside the 70px header navbar
 
