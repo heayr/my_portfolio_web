@@ -132,7 +132,7 @@ export const CurtainFooter: React.FC = () => {
   const { t, locale } = useApp();
   const [copied, setCopied] = useState(false);
   const [clock, setClock] = useState('');
-  const [titleMousePos, setTitleMousePos] = useState({ px: 0, py: 0, active: false });
+  const [footerMousePos, setFooterMousePos] = useState({ px: 0, py: 0, active: false });
 
   useEffect(() => {
     const updateTime = () => {
@@ -162,17 +162,17 @@ export const CurtainFooter: React.FC = () => {
     }
   };
 
-  const handleTitleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleFooterMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    setTitleMousePos({
+    setFooterMousePos({
       px: e.clientX - rect.left,
       py: e.clientY - rect.top,
       active: true,
     });
   };
 
-  const handleTitleMouseLeave = () => {
-    setTitleMousePos((prev) => ({ ...prev, active: false }));
+  const handleFooterMouseLeave = () => {
+    setFooterMousePos((prev) => ({ ...prev, active: false }));
   };
 
   const handleScrollToTop = () => {
@@ -257,78 +257,86 @@ export const CurtainFooter: React.FC = () => {
   return (
     <footer
       id="contact"
+      onMouseMove={handleFooterMouseMove}
+      onMouseLeave={handleFooterMouseLeave}
       className="relative z-20 min-h-screen w-full bg-[#050508] text-white overflow-hidden flex flex-col justify-between pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-50px_120px_rgba(0,0,0,0.98)] border-t border-white/15 select-none"
     >
-      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-10 sm:gap-12">
-        {/* Top Meta Bar: Status, Moscow Timezone Clock & Remote Work Phrase */}
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Availability Status Badge */}
-              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-mono tracking-widest text-amber-400 uppercase">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                {t.nav.status}
-              </div>
+      {/* Full-width screen-bleed dynamic ambient cursor spotlight - ZERO CLIPPING, NO BOUNDARIES */}
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0"
+        style={{
+          opacity: footerMousePos.active ? 1 : 0,
+          background: footerMousePos.active
+            ? `radial-gradient(850px circle at ${footerMousePos.px}px ${footerMousePos.py}px, rgba(245, 158, 11, 0.14), transparent 70%)`
+            : 'none',
+        }}
+      />
 
-              {/* Moscow Timezone Live Clock */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-zinc-300">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>MOSCOW // GMT+3 · {clock}</span>
-              </div>
-            </div>
-
-            {/* Location & Remote Phrase */}
-            <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-zinc-400">
-              <svg className="w-4 h-4 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              <span>{t.footer.location}</span>
-            </div>
-          </div>
-
-          <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed max-w-3xl">
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-10 sm:gap-12">
+        {/* Top Header Narrative */}
+        <div className="max-w-3xl">
+          <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed">
             {t.footer.subtext}
           </p>
         </div>
 
-        {/* Completely Borderless Monumental Typography with Pure Gradient Hover Illumination */}
-        <div
-          onMouseMove={handleTitleMouseMove}
-          onMouseLeave={handleTitleMouseLeave}
-          className="relative my-auto py-6 sm:py-10 select-none group/title cursor-default w-full overflow-hidden"
-        >
-          {/* Subtle Ambient Spotlight Glow following cursor across title */}
-          <div
-            className="pointer-events-none absolute inset-0 transition-opacity duration-300 opacity-0 group-hover/title:opacity-100"
-            style={{
-              background: titleMousePos.active
-                ? `radial-gradient(550px circle at ${titleMousePos.px}px ${titleMousePos.py}px, rgba(245, 158, 11, 0.16), transparent 70%)`
-                : 'none',
-            }}
-          />
+        {/* Central Monumental Architecture + Telemetry Widget Column */}
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-8 sm:gap-12 my-auto py-4 sm:py-6 w-full">
+          {/* Completely Borderless Monumental Typography */}
+          <div className="flex-1 select-none group/title cursor-default max-w-full">
+            <h2 className="relative z-10 text-[clamp(2.2rem,5vw,6.2rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal max-w-full">
+              {locale === 'ru' ? (
+                <>
+                  <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
+                    СОЗДАДИМ НЕЧТО
+                  </span>
+                  <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] max-w-full">
+                    МОНУМЕНТАЛЬНОЕ
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
+                    LET&apos;S BUILD SOMETHING
+                  </span>
+                  <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] max-w-full">
+                    EXTRAORDINARY
+                  </span>
+                </>
+              )}
+            </h2>
+          </div>
 
-          <h2 className="relative z-10 text-[clamp(2rem,5.2vw,6.4rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal max-w-full">
-            {locale === 'ru' ? (
-              <>
-                <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
-                  СОЗДАДИМ НЕЧТО
-                </span>
-                <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.3)] max-w-full">
-                  МОНУМЕНТАЛЬНОЕ
-                </span>
-              </>
-            ) : (
-              <>
-                <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
-                  LET&apos;S BUILD SOMETHING
-                </span>
-                <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.3)] max-w-full">
-                  EXTRAORDINARY
-                </span>
-              </>
-            )}
-          </h2>
+          {/* Rectangular Telemetry Column Widget: Big Clock & Moscow Location */}
+          <div className="relative z-10 w-full sm:w-auto xl:w-[380px] shrink-0 p-6 sm:p-7 rounded-3xl bg-zinc-950/80 border border-white/10 hover:border-amber-400/40 backdrop-blur-xl flex flex-col justify-between gap-5 transition-all duration-300 shadow-2xl group/widget hover:shadow-[0_0_40px_rgba(245,158,11,0.16)]">
+            {/* Top Glass Specularity */}
+            <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/30 to-transparent pointer-events-none" />
+
+            {/* Section 1: Moscow Timezone & Big Digital Clock */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-zinc-400 mb-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>{locale === 'ru' ? 'МОСКОВСКОЕ ВРЕМЯ // GMT+3' : 'MOSCOW TIME // GMT+3'}</span>
+              </div>
+              <div className="text-3xl sm:text-4xl lg:text-[44px] font-mono font-black tracking-tight text-white group-hover/widget:text-amber-400 transition-colors duration-300">
+                {clock || '--:--:--'}
+              </div>
+            </div>
+
+            {/* Subtle Divider Line */}
+            <div className="w-full h-[1px] bg-white/10" />
+
+            {/* Section 2: Moscow Location & Remote Worldwide (Clean glowing dot, no map pin) */}
+            <div className="flex flex-col gap-1 font-mono">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-200">
+                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.6)]" />
+                <span>{locale === 'ru' ? 'МОСКВА, РОССИЯ' : 'MOSCOW, RUSSIA'}</span>
+              </div>
+              <div className="text-xs text-zinc-400 tracking-wide pl-4">
+                {locale === 'ru' ? 'Работаю удаленно по всему миру' : 'Remote Worldwide'}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Action Controls: Dynamic Hologram Cards with Persistent Brightness */}
@@ -338,55 +346,40 @@ export const CurtainFooter: React.FC = () => {
           ))}
         </div>
 
-        {/* Big "Back to Top" Action Button */}
-        <div className="w-full pt-2">
+        {/* Bottom Rights Bar with Laconic Animated Back to Top Button */}
+        <div className="pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
+          <span className="order-2 sm:order-1 text-center sm:text-left">
+            © 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER
+          </span>
+
+          {/* Laconic Animated Back To Top Button in the center */}
           <button
             type="button"
             onClick={handleScrollToTop}
-            className="group relative w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl sm:rounded-3xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-amber-400/50 transition-all duration-300 flex items-center justify-between overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_0_35px_rgba(245,158,11,0.22)] active:scale-[0.99]"
+            className="order-1 sm:order-2 group relative inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white/[0.04] hover:bg-amber-400/10 border border-white/10 hover:border-amber-400/50 text-xs font-mono tracking-wider text-zinc-400 hover:text-amber-300 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] active:scale-95"
           >
-            {/* Amber Ambient Glow on Hover */}
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-            <div className="relative z-10 flex items-center gap-4 sm:gap-6">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300 shadow-md group-hover:-translate-y-1">
-                <svg
-                  className="w-6 h-6 sm:w-7 sm:h-7"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 19V5" />
-                  <path d="M5 12l7-7 7 7" />
-                </svg>
-              </div>
-
-              <div className="flex flex-col text-left">
-                <span className="text-base sm:text-xl font-black text-white tracking-widest uppercase group-hover:text-amber-400 transition-colors">
-                  {t.footer.backToTop}
-                </span>
-                <span className="text-xs sm:text-sm font-mono text-zinc-400 group-hover:text-zinc-200 transition-colors mt-0.5">
-                  {t.footer.backToTopSub}
-                </span>
-              </div>
-            </div>
-
-            <div className="relative z-10 flex items-center gap-3 font-mono text-xs sm:text-sm text-zinc-400 group-hover:text-amber-400 transition-colors">
-              <span className="hidden sm:inline">[ 00 // HERO ]</span>
-              <span className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-base font-bold group-hover:border-amber-400/40 group-hover:scale-110 transition-all">
-                ↑
-              </span>
-            </div>
+            <span className="font-semibold uppercase tracking-widest text-[11px]">
+              {locale === 'ru' ? 'Наверх' : 'Back to top'}
+            </span>
+            <span className="w-5 h-5 rounded-full bg-white/5 group-hover:bg-amber-400 group-hover:text-black flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg
+                className="w-3 h-3 transition-transform duration-300 group-hover:-translate-y-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 19V5" />
+                <path d="M5 12l7-7 7 7" />
+              </svg>
+            </span>
           </button>
-        </div>
 
-        {/* Bottom Rights Bar */}
-        <div className="pt-6 sm:pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-zinc-500">
-          <span>© 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER</span>
-          <span>{t.footer.rights}</span>
+          <span className="order-3 text-center sm:text-right">
+            {t.footer.rights}
+          </span>
         </div>
       </div>
     </footer>
