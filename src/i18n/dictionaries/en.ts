@@ -29,24 +29,44 @@ export const en = {
     role: 'Role'
   },
   philosophy: {
-    tag: 'THE DIGITAL POLYMATH MANIFESTO',
-    title: 'From Da Vinci’s Blueprints to Orbit-Scale Systems',
-    description: 'Human invention has always evolved on a continuum: from the initial theoretical sketch, through rigorous mathematical modeling, to real-world flight.',
+    tag: 'CAPABILITIES & ENGINEERING STANDARDS',
+    title: '5 Pillars of Full-Cycle Engineering: From Kernel to Interface',
+    description: 'A comprehensive methodology tested across commercial SaaS, B2B platforms, and luxury interactive applications. Where backend resilience meets creative craft.',
     pillars: [
       {
         num: '01',
-        title: 'Architectural Rigor',
-        text: 'Like Da Vinci’s anatomical and aerodynamic drawings, modern software demands strict mathematical foundations: clean abstractions, zero-leak state machines, and modular types.'
+        title: 'Architectural Rigor & Backend',
+        subtitle: 'FastAPI, PostgreSQL & Clean Data Layers',
+        text: 'Like Da Vinci’s architectural blueprints, large-scale systems demand mathematical clarity: modular architecture, strict typing, relational schema design, and asynchronous high-throughput APIs without technical debt.',
+        tags: ['FastAPI & Python 3.12', 'PostgreSQL & Redis', 'Docker Architecture', 'Strict Type Hinting', 'Async Architecture', 'System Design']
       },
       {
         num: '02',
-        title: 'Real-World Lift',
-        text: 'Like the Wright Flyer at Kitty Hawk in 1903, engineering only matters when it lifts into the air. Tested against real users, payment webhooks, and production traffic.'
+        title: 'Infrastructure & Privacy',
+        subtitle: 'WireGuard, Zero-Logs & Network Security',
+        text: 'Deep systems engineering at the Linux kernel and network namespace level. Total traffic isolation, uncompromising zero-logs architecture, and bulletproof uptime under hostile conditions.',
+        tags: ['WireGuard Kernel Ops', 'Network Namespaces', 'Zero-Logs Architecture', 'Debian / Ubuntu Server', 'SSL/TLS Hardening', 'IPTables Routing']
       },
       {
         num: '03',
-        title: 'Orbital Velocity',
-        text: 'Zero compromises on speed. 100/100 PageSpeed scores, sub-second TTFB, edge deployments, and fluid animations running at a locked 120 FPS.'
+        title: 'Fintech & Automated Billing',
+        subtitle: 'YooKassa Webhooks & Idempotent Transactions',
+        text: 'Rock-solid monetization engines powering live revenue. Real-time payment webhook processing, automated service provisioning, recurring subscription lifecycles, and transactional integrity.',
+        tags: ['YooKassa Webhook Engine', 'Idempotent Operations', 'Subscription Cycles', 'Automated Provisioning', 'Financial Auditing', 'Fail-Safe Fallbacks']
+      },
+      {
+        num: '04',
+        title: 'B2B Platforms & Product Scaling',
+        subtitle: 'Multi-Tenant Systems & 99.9% Production SLA',
+        text: 'Like the Wright Flyer taking flight, engineering only proves its worth when battle-tested by real users. Engineering multi-tenant corporate portals, analytics dashboards, and external media integrations.',
+        tags: ['Enterprise B2B Portals', 'Multi-Tenant Architecture', 'RBAC Security', 'High-Load Caching', 'Media Processing Pipelines', 'Production SLA']
+      },
+      {
+        num: '05',
+        title: 'Creative Frontend & 120 FPS Motion',
+        subtitle: 'Next.js 15, React 19 & Awwwards Craft',
+        text: 'Orbital velocity meets tactile luxury. 100/100 Core Web Vitals, 0ms Total Blocking Time, fluid waterfall inertia, cinematic micro-interactions, and visual execution that commands immediate respect.',
+        tags: ['Next.js 15 App Router', 'React 19 Primitives', 'Tailwind CSS V4', 'Lenis Fluid Inertia', '100/100 Web Vitals', 'Bespoke Micro-Interactions']
       }
     ]
   },
