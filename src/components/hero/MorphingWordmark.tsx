@@ -23,8 +23,8 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const headerHeight = 70;
   const isMobile = windowWidth < 640;
+  const headerHeight = isMobile ? 60 : 70;
 
   // Responsive startY:
   // On mobile: positioned in lower-mid area (~62% down), right below the center spark and hands
@@ -32,7 +32,7 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
   const startY = isMobile
     ? Math.round(windowHeight * 0.62 - headerHeight / 2)
     : Math.max(100, windowHeight - 111 - headerHeight / 2);
-  const targetY = 0; // Exactly inside the 70px header navbar
+  const targetY = 0; // Exactly inside the header navbar
 
   const clampedProgress = Math.min(1, Math.max(0, dockProgress));
   const currentY = startY - clampedProgress * (startY - targetY);
@@ -68,7 +68,7 @@ export const MorphingWordmark: React.FC<MorphingWordmarkProps> = ({
 
   return (
     <div
-      className="fixed inset-x-0 top-0 h-[70px] pointer-events-none z-50 flex items-center justify-center px-4"
+      className="fixed inset-x-0 top-0 h-[60px] sm:h-[70px] pointer-events-none z-50 flex items-center justify-center px-4"
       style={{
         transform: `translate3d(0, ${currentY}px, 0)`,
         willChange: 'transform',
