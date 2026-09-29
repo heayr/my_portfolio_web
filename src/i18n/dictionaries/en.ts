@@ -78,11 +78,14 @@ export const en = {
   footer: {
     giantTitle: "LET'S BUILD SOMETHING EXTRAORDINARY",
     subtext: 'Open to interesting opportunities, product collaboration, and strong engineering teams. Always happy to discuss new ideas and projects.',
+    location: 'Currently based in Moscow, working remotely worldwide',
     telegram: 'Telegram Message',
     email: 'Copy Email',
     copied: 'Email copied to clipboard!',
     github: 'GitHub Profile',
     linkedin: 'LinkedIn',
+    backToTop: 'Back to Top',
+    backToTopSub: 'Smooth scroll to top',
     rights: 'All rights reserved. Designed & Engineered with Next.js 15 & React 19.'
   }
 };

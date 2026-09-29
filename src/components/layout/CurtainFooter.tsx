@@ -1,13 +1,156 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
+
+interface ContactCardData {
+  id: string;
+  type: 'link' | 'button';
+  href?: string;
+  onClick?: () => void;
+  label: string;
+  value: string;
+  subtext: string;
+  isCopied?: boolean;
+  glowColor: string;
+  ambientGlow: string;
+  iconBorder: string;
+  icon: React.ReactNode;
+}
+
+const ContactCardItem: React.FC<{ card: ContactCardData }> = ({ card }) => {
+  const [pos, setPos] = useState({ x: 0, y: 0, isHovered: false });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      isHovered: true,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setPos((prev) => ({ ...prev, isHovered: false }));
+  };
+
+  const innerContent = (
+    <div
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setPos((prev) => ({ ...prev, isHovered: true }))}
+      onMouseLeave={handleMouseLeave}
+      className="relative z-10 flex flex-col justify-between h-full min-h-[145px] sm:min-h-[160px]"
+    >
+      {/* Dynamic Cursor Spotlight that follows the mouse - stays bright wherever the mouse moves */}
+      <div
+        className="pointer-events-none absolute -inset-6 sm:-inset-7 rounded-3xl transition-opacity duration-200"
+        style={{
+          opacity: pos.isHovered ? 1 : 0,
+          background: `radial-gradient(280px circle at ${pos.x + 24}px ${pos.y + 24}px, ${card.glowColor}, transparent 75%)`,
+        }}
+      />
+
+      {/* Vibrant Ambient Gradient Background on hover (Zero dark veil, stays luminous) */}
+      <div
+        className={`pointer-events-none absolute -inset-6 sm:-inset-7 rounded-3xl transition-opacity duration-300 opacity-0 group-hover:opacity-100 ${card.ambientGlow}`}
+      />
+
+      {/* Top Glass Specularity Reflection Line */}
+      <div className="pointer-events-none absolute -top-6 sm:-top-7 -left-6 sm:-left-7 -right-6 sm:-right-7 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      {/* Top Row: Icon Badge & Action Symbol */}
+      <div className="relative z-20 flex items-center justify-between">
+        <div
+          className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 shadow-md ${card.iconBorder}`}
+        >
+          {card.icon}
+        </div>
+
+        {card.id === 'email' ? (
+          <div
+            className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+              card.isCopied
+                ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-400/50 scale-110 font-bold shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+                : 'text-zinc-400 group-hover:text-amber-300 group-hover:scale-110'
+            }`}
+          >
+            {card.isCopied ? '✓' : '⧉'}
+          </div>
+        ) : (
+          <div className="w-9 h-9 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-white transition-all duration-300">
+            <svg
+              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </div>
+        )}
+      </div>
+
+      {/* Bottom Row: Meta Info */}
+      <div className="relative z-20 flex flex-col pt-4">
+        <span className="text-xs font-mono tracking-wider text-zinc-400 group-hover:text-amber-300 transition-colors uppercase font-medium">
+          {card.label}
+        </span>
+        <span className="text-lg sm:text-xl font-bold text-white tracking-tight mt-1 truncate drop-shadow-sm group-hover:text-white">
+          {card.value}
+        </span>
+        <span className="text-[11px] font-mono text-zinc-500 group-hover:text-zinc-300 mt-1 transition-colors">
+          {card.subtext}
+        </span>
+      </div>
+    </div>
+  );
+
+  const containerClasses =
+    "group relative p-6 sm:p-7 rounded-3xl bg-zinc-950/85 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.95)] text-left flex flex-col justify-between cursor-pointer w-full select-none";
+
+  if (card.type === 'button') {
+    return (
+      <button key={card.id} type="button" onClick={card.onClick} className={containerClasses}>
+        {innerContent}
+      </button>
+    );
+  }
+
+  return (
+    <a key={card.id} href={card.href} target="_blank" rel="noopener noreferrer" className={containerClasses}>
+      {innerContent}
+    </a>
+  );
+};
 
 export const CurtainFooter: React.FC = () => {
   const { t, locale } = useApp();
   const [copied, setCopied] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0, px: 0, py: 0, active: false });
+  const [clock, setClock] = useState('');
+  const [titleMousePos, setTitleMousePos] = useState({ px: 0, py: 0, active: false });
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setClock(
+        new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Europe/Moscow',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        }).format(now)
+      );
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleCopyEmail = async () => {
     try {
@@ -19,24 +162,30 @@ export const CurtainFooter: React.FC = () => {
     }
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleTitleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2; // -1 to 1
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    setMousePos({
-      x,
-      y,
+    setTitleMousePos({
       px: e.clientX - rect.left,
       py: e.clientY - rect.top,
       active: true,
     });
   };
 
-  const handleMouseLeave = () => {
-    setMousePos((prev) => ({ ...prev, x: 0, y: 0, active: false }));
+  const handleTitleMouseLeave = () => {
+    setTitleMousePos((prev) => ({ ...prev, active: false }));
   };
 
-  const contactCards = [
+  const handleScrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(0, { duration: 1.4, immediate: false });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const contactCards: ContactCardData[] = [
     {
       id: 'telegram',
       type: 'link',
@@ -44,9 +193,8 @@ export const CurtainFooter: React.FC = () => {
       label: 'Telegram',
       value: profileData.telegramHandle,
       subtext: locale === 'ru' ? 'Быстрый отклик & чат' : 'Direct & fast response',
-      arrow: '↗',
-      // Apple Electric Cyan & Cyber Violet Aurora
-      auroraBg: 'bg-[radial-gradient(circle_at_50%_50%,#0088cc_0%,#00c6ff_35%,#9d4edd_75%,transparent_100%)]',
+      glowColor: 'rgba(0, 198, 255, 0.38)',
+      ambientGlow: 'bg-[radial-gradient(ellipse_at_top,#0088cc_0%,rgba(0,198,255,0.22)_45%,transparent_80%)]',
       iconBorder: 'group-hover:border-[#2AABEE]/50 group-hover:bg-[#2AABEE]/15',
       icon: (
         <svg className="w-6 h-6 text-[#2AABEE] shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -61,10 +209,9 @@ export const CurtainFooter: React.FC = () => {
       label: copied ? t.footer.copied : 'Email',
       value: profileData.email,
       subtext: locale === 'ru' ? 'Нажмите, чтобы скопировать' : 'Click to copy address',
-      arrow: copied ? '✓' : '⧉',
       isCopied: copied,
-      // Apple Sunset Gold & Neon Orchid Aurora
-      auroraBg: 'bg-[radial-gradient(circle_at_50%_50%,#f59e0b_0%,#ec4899_40%,#8b5cf6_75%,transparent_100%)]',
+      glowColor: 'rgba(245, 158, 11, 0.42)',
+      ambientGlow: 'bg-[radial-gradient(ellipse_at_top,#f59e0b_0%,rgba(236,72,153,0.22)_45%,transparent_80%)]',
       iconBorder: 'group-hover:border-amber-400/50 group-hover:bg-amber-400/15',
       icon: (
         <svg className="w-6 h-6 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -80,9 +227,8 @@ export const CurtainFooter: React.FC = () => {
       label: 'GitHub',
       value: profileData.githubHandle,
       subtext: locale === 'ru' ? 'Исходный код & коммиты' : 'Source code & commits',
-      arrow: '↗',
-      // Apple Titanium Aurora Borealis (Indigo & Emerald)
-      auroraBg: 'bg-[radial-gradient(circle_at_50%_50%,#6366f1_0%,#3b82f6_40%,#10b981_75%,transparent_100%)]',
+      glowColor: 'rgba(99, 102, 241, 0.42)',
+      ambientGlow: 'bg-[radial-gradient(ellipse_at_top,#6366f1_0%,rgba(59,130,246,0.22)_45%,transparent_80%)]',
       iconBorder: 'group-hover:border-white/50 group-hover:bg-white/15',
       icon: (
         <svg className="w-6 h-6 text-zinc-100 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -97,9 +243,8 @@ export const CurtainFooter: React.FC = () => {
       label: 'LinkedIn',
       value: 'Profile',
       subtext: locale === 'ru' ? 'Карьера & рекомендации' : 'Career & recommendations',
-      arrow: '↗',
-      // Apple Deep Sapphire & Cobalt Aurora
-      auroraBg: 'bg-[radial-gradient(circle_at_50%_50%,#0A66C2_0%,#38bdf8_40%,#6366f1_75%,transparent_100%)]',
+      glowColor: 'rgba(10, 102, 194, 0.45)',
+      ambientGlow: 'bg-[radial-gradient(ellipse_at_top,#0A66C2_0%,rgba(56,189,248,0.22)_45%,transparent_80%)]',
       iconBorder: 'group-hover:border-[#0A66C2]/50 group-hover:bg-[#0A66C2]/15',
       icon: (
         <svg className="w-6 h-6 text-[#0A66C2] shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -115,69 +260,70 @@ export const CurtainFooter: React.FC = () => {
       className="relative z-20 min-h-screen w-full bg-[#050508] text-white overflow-hidden flex flex-col justify-between pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-50px_120px_rgba(0,0,0,0.98)] border-t border-white/15 select-none"
     >
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-10 sm:gap-12">
-        {/* Top Tag & Description - Scaled up for large 16:9 displays */}
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-mono tracking-widest text-amber-400 uppercase mb-4">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            {t.nav.status}
+        {/* Top Meta Bar: Status, Moscow Timezone Clock & Remote Work Phrase */}
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+            <div className="flex flex-wrap items-center gap-3">
+              {/* Availability Status Badge */}
+              <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs sm:text-sm font-mono tracking-widest text-amber-400 uppercase">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                {t.nav.status}
+              </div>
+
+              {/* Moscow Timezone Live Clock */}
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-zinc-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>MOSCOW // GMT+3 · {clock}</span>
+              </div>
+            </div>
+
+            {/* Location & Remote Phrase */}
+            <div className="flex items-center gap-2 font-mono text-xs sm:text-sm text-zinc-400">
+              <svg className="w-4 h-4 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span>{t.footer.location}</span>
+            </div>
           </div>
-          <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed">
+
+          <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed max-w-3xl">
             {t.footer.subtext}
           </p>
         </div>
 
-        {/* Massive Monumental Typography with Parallax & Spotlight - fits screen width perfectly */}
+        {/* Completely Borderless Monumental Typography with Pure Gradient Hover Illumination */}
         <div
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-          className="relative my-auto py-8 sm:py-12 border-y border-white/10 select-none group/title cursor-default w-full overflow-hidden"
+          onMouseMove={handleTitleMouseMove}
+          onMouseLeave={handleTitleMouseLeave}
+          className="relative my-auto py-6 sm:py-10 select-none group/title cursor-default w-full overflow-hidden"
         >
-          {/* Subtle Ambient Spotlight Glow following cursor across full width */}
+          {/* Subtle Ambient Spotlight Glow following cursor across title */}
           <div
             className="pointer-events-none absolute inset-0 transition-opacity duration-300 opacity-0 group-hover/title:opacity-100"
             style={{
-              background: mousePos.active
-                ? `radial-gradient(500px circle at ${mousePos.px}px ${mousePos.py}px, rgba(245, 158, 11, 0.14), transparent 70%)`
+              background: titleMousePos.active
+                ? `radial-gradient(550px circle at ${titleMousePos.px}px ${titleMousePos.py}px, rgba(245, 158, 11, 0.16), transparent 70%)`
                 : 'none',
             }}
           />
 
-          <h2 className="relative z-10 text-[clamp(2rem,5.2vw,6.4rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal transition-transform duration-500 max-w-full">
+          <h2 className="relative z-10 text-[clamp(2rem,5.2vw,6.4rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal max-w-full">
             {locale === 'ru' ? (
               <>
-                <span
-                  className="block text-zinc-300 hover:text-white transition-all duration-300 max-w-full"
-                  style={{
-                    transform: `translateX(${mousePos.x * -10}px)`,
-                  }}
-                >
+                <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
                   СОЗДАДИМ НЕЧТО
                 </span>
-                <span
-                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 drop-shadow-[0_0_35px_rgba(245,158,11,0.25)] max-w-full"
-                  style={{
-                    transform: `translateX(${mousePos.x * 12}px)`,
-                  }}
-                >
+                <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.3)] max-w-full">
                   МОНУМЕНТАЛЬНОЕ
                 </span>
               </>
             ) : (
               <>
-                <span
-                  className="block text-zinc-300 hover:text-white transition-all duration-300 max-w-full"
-                  style={{
-                    transform: `translateX(${mousePos.x * -10}px)`,
-                  }}
-                >
+                <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
                   LET&apos;S BUILD SOMETHING
                 </span>
-                <span
-                  className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent animate-text-shimmer transition-all duration-300 drop-shadow-[0_0_35px_rgba(245,158,11,0.25)] max-w-full"
-                  style={{
-                    transform: `translateX(${mousePos.x * 12}px)`,
-                  }}
-                >
+                <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.3)] max-w-full">
                   EXTRAORDINARY
                 </span>
               </>
@@ -185,87 +331,56 @@ export const CurtainFooter: React.FC = () => {
           </h2>
         </div>
 
-        {/* Action Controls: Apple-Style Iridescent Hologram Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 my-4 lg:my-6 items-stretch w-full">
-          {contactCards.map((card) => {
-            const innerContent = (
-              <>
-                {/* Apple Iridescent Aurora Gradient Layer */}
-                <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out pointer-events-none overflow-hidden">
-                  <div
-                    className={`absolute -inset-[50%] w-[200%] h-[200%] ${card.auroraBg} opacity-60 filter blur-2xl animate-aurora`}
-                  />
-                  {/* Dark contrast veil to ensure 100% white text legibility */}
-                  <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]" />
-                </div>
+        {/* Action Controls: Dynamic Hologram Cards with Persistent Brightness */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 my-2 sm:my-4 items-stretch w-full">
+          {contactCards.map((card) => (
+            <ContactCardItem key={card.id} card={card} />
+          ))}
+        </div>
 
-                {/* Top Glass Specularity Reflection Line */}
-                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+        {/* Big "Back to Top" Action Button */}
+        <div className="w-full pt-2">
+          <button
+            type="button"
+            onClick={handleScrollToTop}
+            className="group relative w-full py-5 sm:py-6 px-6 sm:px-10 rounded-2xl sm:rounded-3xl bg-white/[0.03] hover:bg-white/[0.07] border border-white/10 hover:border-amber-400/50 transition-all duration-300 flex items-center justify-between overflow-hidden cursor-pointer shadow-xl hover:shadow-[0_0_35px_rgba(245,158,11,0.22)] active:scale-[0.99]"
+          >
+            {/* Amber Ambient Glow on Hover */}
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-amber-400/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                {/* Card Foreground Content */}
-                <div className="relative z-10 flex flex-col justify-between h-full min-h-[140px] sm:min-h-[155px]">
-                  {/* Top: Icon Badge & Arrow */}
-                  <div className="flex items-center justify-between">
-                    <div
-                      className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 shadow-md ${card.iconBorder}`}
-                    >
-                      {card.icon}
-                    </div>
-                    <div
-                      className={`w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
-                        card.isCopied
-                          ? 'bg-emerald-500/20 text-emerald-400 border-emerald-400/40 scale-110 font-bold'
-                          : 'text-zinc-400 group-hover:text-white group-hover:border-white/30 group-hover:translate-x-1 group-hover:-translate-y-1'
-                      }`}
-                    >
-                      {card.arrow}
-                    </div>
-                  </div>
-
-                  {/* Bottom: Meta Info */}
-                  <div className="flex flex-col pt-4">
-                    <span className="text-xs font-mono tracking-wider text-zinc-400 group-hover:text-amber-300 transition-colors uppercase font-medium">
-                      {card.label}
-                    </span>
-                    <span className="text-lg sm:text-xl font-bold text-white tracking-tight mt-1 truncate drop-shadow-sm group-hover:text-white">
-                      {card.value}
-                    </span>
-                    <span className="text-[11px] font-mono text-zinc-500 group-hover:text-zinc-300 mt-1 transition-colors">
-                      {card.subtext}
-                    </span>
-                  </div>
-                </div>
-              </>
-            );
-
-            const containerClasses =
-              "group relative p-6 sm:p-7 rounded-3xl bg-zinc-950/80 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.9)] text-left flex flex-col justify-between cursor-pointer w-full select-none";
-
-            if (card.type === 'button') {
-              return (
-                <button
-                  key={card.id}
-                  type="button"
-                  onClick={card.onClick}
-                  className={containerClasses}
+            <div className="relative z-10 flex items-center gap-4 sm:gap-6">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-black transition-all duration-300 shadow-md group-hover:-translate-y-1">
+                <svg
+                  className="w-6 h-6 sm:w-7 sm:h-7"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  {innerContent}
-                </button>
-              );
-            }
+                  <path d="M12 19V5" />
+                  <path d="M5 12l7-7 7 7" />
+                </svg>
+              </div>
 
-            return (
-              <a
-                key={card.id}
-                href={card.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={containerClasses}
-              >
-                {innerContent}
-              </a>
-            );
-          })}
+              <div className="flex flex-col text-left">
+                <span className="text-base sm:text-xl font-black text-white tracking-widest uppercase group-hover:text-amber-400 transition-colors">
+                  {t.footer.backToTop}
+                </span>
+                <span className="text-xs sm:text-sm font-mono text-zinc-400 group-hover:text-zinc-200 transition-colors mt-0.5">
+                  {t.footer.backToTopSub}
+                </span>
+              </div>
+            </div>
+
+            <div className="relative z-10 flex items-center gap-3 font-mono text-xs sm:text-sm text-zinc-400 group-hover:text-amber-400 transition-colors">
+              <span className="hidden sm:inline">[ 00 // HERO ]</span>
+              <span className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-base font-bold group-hover:border-amber-400/40 group-hover:scale-110 transition-all">
+                ↑
+              </span>
+            </div>
+          </button>
         </div>
 
         {/* Bottom Rights Bar */}
@@ -277,5 +392,3 @@ export const CurtainFooter: React.FC = () => {
     </footer>
   );
 };
-
-
