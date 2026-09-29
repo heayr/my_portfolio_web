@@ -97,7 +97,7 @@ export const PhilosophySection: React.FC = () => {
                       isLight ? 'text-zinc-500' : 'text-zinc-400'
                     }`}
                   >
-                    // {locale === 'ru' ? 'АРТЕФАКТЫ & КОМПЕТЕНЦИИ' : 'DELIVERABLES & COMPETENCIES'}
+                    // {locale === 'ru' ? 'ТЕХНОЛОГИИ & РЕШЕНИЯ' : 'TECHNOLOGY & SOLUTIONS'}
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {pillar.tags.map((tag, tagIdx) => (
@@ -129,7 +129,9 @@ export const PhilosophySection: React.FC = () => {
           >
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="uppercase tracking-wider">
-              {locale === 'ru' ? '5 НАПРАВЛЕНИЙ СИНХРОНИЗИРОВАНЫ С ИНТРО-СКРАББЕРОМ' : '5 DISCIPLINES SYNCHRONIZED WITH INTRO SCRUBBER'}
+              {locale === 'ru'
+                ? 'МЕТОДОЛОГИЯ ПОЛИМАТА: СИНТЕЗ СИСТЕМНОГО ЯДРА И МОУШН-ДИЗАЙНА'
+                : 'POLYMATH METHODOLOGY: FULL-SPECTRUM SYSTEMS & MOTION CRAFT'}
             </span>
           </div>
           <div className="flex items-center gap-3">

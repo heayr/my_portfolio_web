@@ -29,7 +29,7 @@ export const en = {
     role: 'Role'
   },
   philosophy: {
-    tag: 'CAPABILITIES & ENGINEERING STANDARDS',
+    tag: 'THE DIGITAL POLYMATH MANIFESTO',
     title: '5 Pillars of Full-Cycle Engineering: From Kernel to Interface',
     description: 'A comprehensive methodology tested across commercial SaaS, B2B platforms, and luxury interactive applications. Where backend resilience meets creative craft.',
     pillars: [

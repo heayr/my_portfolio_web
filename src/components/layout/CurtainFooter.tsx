@@ -284,10 +284,16 @@ export const CurtainFooter: React.FC = () => {
         <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-8 sm:gap-12 my-auto py-4 sm:py-6 w-full">
           {/* Completely Borderless Monumental Typography */}
           <div className="flex-1 select-none group/title cursor-default max-w-full">
-            <h2 className="relative z-10 text-[clamp(2.2rem,5vw,6.2rem)] font-black uppercase leading-[0.92] tracking-tight sm:tracking-normal max-w-full">
+            <h2
+              className={`relative z-10 text-[clamp(2.2rem,5vw,6.2rem)] font-black uppercase max-w-full ${
+                locale === 'ru'
+                  ? 'leading-[1.08] sm:leading-[1.12] tracking-[0.03em] sm:tracking-[0.05em]'
+                  : 'leading-[0.92] tracking-tight sm:tracking-normal'
+              }`}
+            >
               {locale === 'ru' ? (
                 <>
-                  <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full">
+                  <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full mb-2 sm:mb-4">
                     СОЗДАДИМ НЕЧТО
                   </span>
                   <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] max-w-full">

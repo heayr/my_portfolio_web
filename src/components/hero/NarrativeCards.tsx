@@ -22,8 +22,8 @@ const CARDS_DATA = [
       ru: 'Проектирую цифровые продукты на стыке математической точности, выразительного интерактива и современной графики.',
     },
     meta: {
-      en: '⚡ YEGOR // SENIOR FULL-STACK & ARCHITECT',
-      ru: '⚡ ЕГОР // SENIOR FULL-STACK & АРХИТЕКТОР',
+      en: '⚡ DIGITAL POLYMATH // LEAD ARCHITECT',
+      ru: '⚡ DIGITAL POLYMATH // LEAD АРХИТЕКТОР',
     },
     actionLink: '#works',
     actionText: { en: 'Works ↘', ru: 'Кейсы ↘' },
@@ -139,12 +139,12 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
 
             {/* Footer Meta & Action Link */}
             <div className="flex items-center justify-between pt-1.5 border-t border-white/10 text-[10px] font-mono text-zinc-400">
-              <span className="truncate max-w-[190px] text-zinc-400 text-[10px]">
+              <span className="truncate flex-1 min-w-0 pr-2 text-zinc-400 text-[10px]">
                 {card.meta[locale]}
               </span>
               <a
                 href={card.actionLink}
-                className="text-amber-400 hover:text-amber-300 transition-colors shrink-0 ml-2 font-medium text-[10px]"
+                className="text-amber-400 hover:text-amber-300 transition-colors shrink-0 font-medium text-[10px]"
               >
                 {card.actionText[locale]}
               </a>

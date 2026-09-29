@@ -338,15 +338,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
     videoProgressRef.current = targetP;
     setActiveAct(actIdx);
 
-    if (actIdx === 4) {
-      setStage('completed');
-      stageRef.current = 'completed';
-      unlockPage();
-    } else {
-      setStage('playing');
-      stageRef.current = 'playing';
-      lockPage();
-    }
+    // Act jump is interactive exploration — page must always remain unlocked so user can scroll freely
+    setStage('completed');
+    stageRef.current = 'completed';
+    try {
+      localStorage.setItem('portfolio_hero_seen_v1', 'true');
+    } catch {}
+    unlockPage();
+    onScrollProgress?.(targetP);
   };
 
   // ── GESTURE INTERCEPTOR ───────────────────────────────────
