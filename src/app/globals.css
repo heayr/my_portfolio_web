@@ -120,13 +120,12 @@
 .scrollytelling-container {
   position: relative;
   width: 100%;
-  height: 250vh;
+  height: 100vh;
   background-color: #040406;
 }
 
 .scrollytelling-stage {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -246,6 +245,26 @@
   background: var(--accent-gold);
   box-shadow: 0 0 10px var(--accent-gold);
   animation: pulse-slow 1.6s infinite ease-in-out;
+}
+
+@keyframes hud-bounce-playful {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 12px 28px rgba(245, 158, 11, 0.65), 0 0 15px rgba(251, 191, 36, 0.5);
+  }
+}
+
+.hud-skip-btn {
+  animation: hud-bounce-playful 0.85s cubic-bezier(0.25, 0.8, 0.3, 1) infinite;
+}
+
+.hud-skip-btn:hover {
+  animation-play-state: paused;
+  transform: translateY(-2px) scale(1.06);
 }
 
 .hud-stat {
@@ -405,6 +424,7 @@
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(-100%);
   }
@@ -412,10 +432,13 @@
 
 /* --- Keyframes & Reveals --- */
 @keyframes pulse-slow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.4;
     transform: scale(0.85);

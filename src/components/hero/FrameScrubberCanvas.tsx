@@ -161,47 +161,20 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = ({
     };
   }, [frameCount, getFrameUrl, updateCanvasSize, drawFrame]);
 
-  // Calculate target float frame directly from master hero progress:
-  // Phase 1 (0 to 0.08): hold on first frame while wordmark docks into header
-  // Phase 2 (0.08 to 0.95): scrub smoothly through frames 0 to 54 in lockstep
+  // Target float frame directly mapped to input progress (0.0 to 1.0)
   useEffect(() => {
-    if (progress <= 0.08) {
-      targetFloatFrameRef.current = 0;
-    } else {
-      const animProgress = Math.min(1, Math.max(0, (progress - 0.08) / 0.87));
-      targetFloatFrameRef.current = animProgress * (frameCount - 1);
-    }
+    const clamped = Math.min(1, Math.max(0, progress));
+    targetFloatFrameRef.current = clamped * (frameCount - 1);
   }, [progress, frameCount]);
 
-  // Continuous Fluid Inertia Physics Loop (Smooth, cinematic LERP tracking)
+  // Direct frame render: progress from HeroSection RAF is already smooth.
+  // No extra LERP needed — that only adds lag on top of the cosine-eased animation.
   useEffect(() => {
     if (!initialFrameReady) return;
-
-    let active = true;
-
-    const renderLoop = () => {
-      if (!active) return;
-
-      const target = targetFloatFrameRef.current;
-      const current = currentFloatFrameRef.current;
-      const diff = target - current;
-
-      if (Math.abs(diff) > 0.002) {
-        // Silky smooth interpolation (factor 0.14)
-        currentFloatFrameRef.current += diff * 0.14;
-        drawFrame(currentFloatFrameRef.current);
-      }
-
-      animFrameIdRef.current = requestAnimationFrame(renderLoop);
-    };
-
-    animFrameIdRef.current = requestAnimationFrame(renderLoop);
-
-    return () => {
-      active = false;
-      if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
-    };
-  }, [initialFrameReady, frameCount, drawFrame]);
+    const target = targetFloatFrameRef.current;
+    currentFloatFrameRef.current = target;
+    drawFrame(target);
+  }, [progress, initialFrameReady, drawFrame]);
 
   return (
     <div className={`video-scrubber-wrapper absolute inset-0 w-full h-full overflow-hidden ${className}`}>

@@ -9,6 +9,8 @@ interface TelemetryHUDProps {
   visible: boolean;
   onSelectAct: (index: number) => void;
   onAdvance?: () => void;
+  stage?: 'initial' | 'playing' | 'completed' | 'rewinding';
+  onSkip?: () => void;
 }
 
 export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
@@ -17,6 +19,8 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
   visible,
   onSelectAct,
   onAdvance,
+  stage = 'initial',
+  onSkip,
 }) => {
   const { locale } = useApp();
 
@@ -103,16 +107,60 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
           </div>
         </div>
 
-        {/* Right side prompt: scroll indicator / advance button */}
-        <button
-          type="button"
-          onClick={onAdvance}
-          className="hidden sm:flex items-center gap-2.5 font-mono text-xs text-zinc-100 font-bold tracking-wider px-4 py-2 rounded-full bg-black/80 backdrop-blur-md border border-white/20 shadow-2xl pointer-events-auto cursor-pointer transition-all duration-300 hover:border-amber-400 hover:text-white hover:bg-black/90"
-          title="Scroll or click to advance sequence"
-        >
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span>{locale === 'ru' ? 'СКРОЛЛ ДЛЯ СМЕНЫ ЭПОХ ↓' : 'SCROLL TO ADVANCE EPOCHS ↓'}</span>
-        </button>
+        {/* Right side prompt: scroll indicator / advance button / skip */}
+        <div className="flex items-center gap-2 pointer-events-auto">
+          {(stage === 'playing' || stage === 'rewinding') && onSkip && (
+            <button
+              type="button"
+              onClick={onSkip}
+              className="hud-skip-btn flex items-center gap-2 font-mono text-xs text-amber-300 font-black tracking-widest px-4 py-2 rounded-full bg-black/85 backdrop-blur-xl border-2 border-amber-400 shadow-xl cursor-pointer transition-colors duration-200 hover:bg-amber-400 hover:text-black hover:border-amber-300"
+              title="Skip intro animation (Esc)"
+            >
+              {/* Radar ping dot */}
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-80" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400" />
+              </span>
+              <span>{locale === 'ru' ? 'ПРОПУСТИТЬ ▸▸' : 'SKIP INTRO ▸▸'}</span>
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={onAdvance}
+            className={`hidden sm:flex items-center gap-2.5 font-mono text-xs font-bold tracking-wider px-4 py-2 rounded-full backdrop-blur-md border shadow-2xl cursor-pointer transition-all duration-300 ${
+              stage === 'completed'
+                ? 'bg-amber-400 text-black border-amber-300 shadow-amber-400/20 hover:scale-105 hover:bg-amber-300'
+                : stage === 'playing'
+                ? 'bg-black/80 text-amber-300 border-amber-400/40 cursor-default'
+                : 'bg-black/80 text-zinc-100 border-white/20 hover:border-amber-400 hover:text-white hover:bg-black/90'
+            }`}
+            title={stage === 'completed' ? 'Scroll to works' : 'Start sequence'}
+          >
+            <span
+              className={`w-2 h-2 rounded-full ${
+                stage === 'completed' ? 'bg-black' : 'bg-amber-400 animate-pulse'
+              }`}
+            />
+            <span>
+              {stage === 'completed'
+                ? locale === 'ru'
+                  ? 'СМОТРЕТЬ КЕЙСЫ ↓'
+                  : 'EXPLORE WORKS ↓'
+                : stage === 'playing'
+                ? locale === 'ru'
+                  ? 'ВОСПРОИЗВЕДЕНИЕ...'
+                  : 'PLAYING...'
+                : stage === 'rewinding'
+                ? locale === 'ru'
+                  ? 'ПЕРЕМОТКА...'
+                  : 'REWINDING...'
+                : locale === 'ru'
+                ? 'СКРОЛЛ ДЛЯ СМЕНЫ ЭПОХ ↓'
+                : 'SCROLL TO ADVANCE EPOCHS ↓'}
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   );

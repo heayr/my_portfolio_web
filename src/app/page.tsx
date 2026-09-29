@@ -27,11 +27,19 @@ export default function Home() {
 
     (window as any).lenis = lenis;
 
+    // HeroSection's lockPage() runs BEFORE this (children effects fire first in React).
+    // So we must stop Lenis here, right after creation, while Hero is in 'initial' stage.
+    if (window.scrollY <= 10) {
+      lenis.stop();
+    }
+
+
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
+
 
     // Anchor smooth navigation
     const handleAnchorClick = (e: MouseEvent) => {
