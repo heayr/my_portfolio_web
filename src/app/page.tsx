@@ -1,15 +1,32 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
 import { Preloader } from '../components/layout/Preloader';
 import { Header } from '../components/layout/Header';
 import { HeroSection } from '../components/hero/HeroSection';
-import { StackingWorks } from '../components/works/StackingWorks';
-import { PhilosophySection } from '../components/sections/PhilosophySection';
-import { MetricsSection } from '../components/sections/MetricsSection';
-import { FAQSection } from '../components/sections/FAQSection';
-import { CurtainFooter } from '../components/layout/CurtainFooter';
+
+const StackingWorks = dynamic(
+  () => import('../components/works/StackingWorks').then((m) => m.StackingWorks),
+  { ssr: true }
+);
+const PhilosophySection = dynamic(
+  () => import('../components/sections/PhilosophySection').then((m) => m.PhilosophySection),
+  { ssr: true }
+);
+const MetricsSection = dynamic(
+  () => import('../components/sections/MetricsSection').then((m) => m.MetricsSection),
+  { ssr: true }
+);
+const FAQSection = dynamic(
+  () => import('../components/sections/FAQSection').then((m) => m.FAQSection),
+  { ssr: true }
+);
+const CurtainFooter = dynamic(
+  () => import('../components/layout/CurtainFooter').then((m) => m.CurtainFooter),
+  { ssr: true }
+);
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);

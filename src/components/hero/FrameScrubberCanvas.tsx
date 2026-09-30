@@ -126,8 +126,9 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = React.mem
 
     const lastFrameIdx = frameCount - 1;
 
-    // Priority 1: Load First Frame (0) AND Final Frame (54) immediately
+    // Priority 1: Load First Frame (0) ONLY on initial render for instant LCP
     const loadKeyFrame = (idx: number) => {
+      if (images[idx]) return;
       const img = new Image();
       img.src = getFrameUrl(idx);
       images[idx] = img;
@@ -146,32 +147,68 @@ export const FrameScrubberCanvas: React.FC<FrameScrubberCanvasProps> = React.mem
     };
 
     loadKeyFrame(0);
-    loadKeyFrame(lastFrameIdx);
 
-    // Priority 2: Preload remaining frames in batches
-    for (let i = 1; i < lastFrameIdx; i++) {
-      const img = new Image();
-      img.src = getFrameUrl(i);
-      images[i] = img;
+    // Priority 2: Defer remaining frames (1 to 54) to idle periods
+    // to keep initial mobile network 100% free for instant LCP
+    let isCancelled = false;
+    let nextIdx = 1;
 
-      img.onload = () => {
-        loadedSetRef.current.add(i);
+    const loadNextBatch = () => {
+      if (isCancelled || nextIdx >= frameCount) return;
 
-        const currentTarget = Math.round(targetFloatFrameRef.current);
-        if (currentTarget === i || currentRenderedFrameRef.current === -1) {
-          drawFrame(targetFloatFrameRef.current);
+      const batchSize = 3;
+      const end = Math.min(frameCount, nextIdx + batchSize);
+
+      for (let i = nextIdx; i < end; i++) {
+        if (!images[i]) {
+          const img = new Image();
+          img.src = getFrameUrl(i);
+          images[i] = img;
+          img.onload = () => {
+            loadedSetRef.current.add(i);
+            const currentTarget = Math.round(targetFloatFrameRef.current);
+            if (currentTarget === i || currentRenderedFrameRef.current === -1) {
+              drawFrame(targetFloatFrameRef.current);
+            }
+          };
+          img.onerror = () => {
+            console.warn(`[FrameScrubber] Failed to load frame ${i + 1}`);
+          };
         }
-      };
+      }
 
-      img.onerror = () => {
-        console.warn(`[FrameScrubber] Failed to load frame ${i + 1}`);
-      };
+      nextIdx = end;
+      if (nextIdx < frameCount && !isCancelled) {
+        if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(loadNextBatch, { timeout: 1000 });
+        } else {
+          setTimeout(loadNextBatch, 80);
+        }
+      }
+    };
+
+    // Trigger idle batch loader after initial frame
+    let idleTimer: any = null;
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        idleTimer = (window as any).requestIdleCallback(loadNextBatch, { timeout: 1200 });
+      } else {
+        idleTimer = setTimeout(loadNextBatch, 200);
+      }
     }
 
     window.addEventListener('resize', updateCanvasSize);
     updateCanvasSize();
 
     return () => {
+      isCancelled = true;
+      if (idleTimer) {
+        if (typeof window !== 'undefined' && 'cancelIdleCallback' in window) {
+          (window as any).cancelIdleCallback(idleTimer);
+        } else {
+          clearTimeout(idleTimer);
+        }
+      }
       window.removeEventListener('resize', updateCanvasSize);
       if (animFrameIdRef.current) cancelAnimationFrame(animFrameIdRef.current);
     };
