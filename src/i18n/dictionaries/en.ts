@@ -9,14 +9,14 @@ export const en = {
     timezone: 'MSK (GMT+3)'
   },
   hero: {
-    brandSubtitle: 'LEAD FRONTEND & FULLSTACK ARCHITECT',
+    brandSubtitle: 'FRONTEND & FULLSTACK ENGINEER',
     titleMain: 'ENGINEERING AT THE APEX OF ART & ARCHITECTURE.',
     description: 'Bridging the audacity of Renaissance inventors with hypersonic modern web architecture. Crafting zero-leak commercial SaaS platforms, distributed edge backends, and cinematic Awwwards-caliber digital experiences with React 19 & Next.js 15.',
     scrollDown: 'Scroll to explore works',
     metrics: {
       speed: '100/100 Core Web Vitals',
       blocking: '0ms Total Blocking Time',
-      uptime: '99.99% Production Reliability'
+      uptime: 'High-Uptime Linux VDS Topology'
     }
   },
   works: {
@@ -57,9 +57,9 @@ export const en = {
       {
         num: '04',
         title: 'B2B Platforms & Product Scaling',
-        subtitle: 'Multi-Tenant Systems & 99.9% Production SLA',
-        text: 'Like the Wright Flyer taking flight, engineering only proves its worth when battle-tested by real users. Engineering multi-tenant corporate portals, analytics dashboards, and external media integrations.',
-        tags: ['Enterprise B2B Portals', 'Multi-Tenant Architecture', 'RBAC Security', 'High-Load Caching', 'Media Processing Pipelines', 'Production SLA']
+        subtitle: 'B2B Platforms & Product Reliability',
+        text: 'Like the Wright Flyer taking flight, engineering only proves its worth when battle-tested by real users. Engineering reliable corporate portals, analytics dashboards, and external media integrations.',
+        tags: ['Enterprise B2B Portals', 'Business Interfaces', 'RBAC Security', 'High-Load Caching', 'Media Processing Pipelines', 'Production Reliability']
       },
       {
         num: '05',

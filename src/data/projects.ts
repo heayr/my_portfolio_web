@@ -9,8 +9,8 @@ export const projectsData: ProjectItem[] = [
       ru: 'Коммерческая privacy-инфраструктура и биллинг подписок'
     },
     role: {
-      en: 'Lead Frontend & Fullstack Architect',
-      ru: 'Lead Frontend & Fullstack Архитектор'
+      en: 'Creator & Fullstack Engineer',
+      ru: 'Создатель & Fullstack Инженер'
     },
     period: '2024 — 2026',
     stack: ['Next.js 15', 'TypeScript', 'FastAPI', 'PostgreSQL', 'YooKassa Webhooks', 'Docker', 'WireGuard'],
@@ -37,8 +37,8 @@ export const projectsData: ProjectItem[] = [
       ru: 'B2B-платформа и CMS рекламного агентства полного цикла'
     },
     role: {
-      en: 'Lead Frontend Engineer',
-      ru: 'Ведущий Frontend Инженер'
+      en: 'Frontend & UI Engineer',
+      ru: 'Frontend & UI Инженер'
     },
     period: '2024 — 2025',
     stack: ['React 19', 'Next.js 15', 'Tailwind CSS', 'Fluid Typography', 'Admin CMS'],

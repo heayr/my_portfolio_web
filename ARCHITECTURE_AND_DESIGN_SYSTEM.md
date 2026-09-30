@@ -1,6 +1,6 @@
 # 🏛️ Architecture, Performance & Design System Specification
 > **Project:** Yegor (heayr) — Digital Portfolio & Interactive Experience  
-> **Role Target:** Lead Frontend & Fullstack Architect  
+> **Role Target:** Frontend & Fullstack Engineer  
 > **Tech Stack:** Next.js 15 (App Router), React 19, TypeScript, Vanilla Tailwind CSS v4, HTML5 Canvas, Lenis Scroll.
 
 ---

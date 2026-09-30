@@ -9,14 +9,14 @@ export const ru = {
     timezone: 'МСК (GMT+3)'
   },
   hero: {
-    brandSubtitle: 'LEAD FRONTEND & FULLSTACK АРХИТЕКТОР',
+    brandSubtitle: 'FRONTEND & FULLSTACK ИНЖЕНЕР',
     titleMain: 'ИНЖЕНЕРИЯ НА СТЫКЕ ИСКУССТВА И АРХИТЕКТУРЫ.',
     description: 'Соединяю дерзость инженеров эпохи Возрождения со сверхзвуковой современной веб-архитектурой. Разрабатываю zero-leak коммерческие SaaS-платформы, распределенные edge-бэкенды и кинематографичные Awwwards-интерфейсы на React 19 и Next.js 15.',
     scrollDown: 'Крутите вниз для перехода к кейсам',
     metrics: {
       speed: '100/100 Core Web Vitals',
       blocking: '0ms Total Blocking Time',
-      uptime: '99.99% Production Надежность'
+      uptime: 'Высокая стабильность Linux VDS'
     }
   },
   works: {
@@ -57,9 +57,9 @@ export const ru = {
       {
         num: '04',
         title: 'B2B-системы & Продуктовое масштабирование',
-        subtitle: 'Многопользовательские платформы & SLA 99.9%',
+        subtitle: 'B2B-платформы & Продуктовая надежность',
         text: 'Как первый полет братьев Райт, инженерная идея имеет вес, только когда поднимается в воздух. Разработка корпоративных порталов, аналитических дэшбордов, ролевого доступа (RBAC) и интеграций с внешними медиа-сервисами.',
-        tags: ['Enterprise B2B Portals', 'Multi-Tenant Architecture', 'RBAC Security', 'High-Load Caching', 'Media Processing Pipelines', 'Production SLA']
+        tags: ['Enterprise B2B Portals', 'Бизнес-интерфейсы', 'RBAC Security', 'High-Load Caching', 'Media Processing Pipelines', 'Production Reliability']
       },
       {
         num: '05',

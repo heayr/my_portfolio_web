@@ -22,8 +22,8 @@ const CARDS_DATA = [
       ru: 'Проектирую цифровые продукты на стыке математической точности, выразительного интерактива и современной графики.',
     },
     meta: {
-      en: '⚡ DIGITAL POLYMATH // LEAD ARCHITECT',
-      ru: '⚡ DIGITAL POLYMATH // LEAD АРХИТЕКТОР',
+      en: '⚡ DIGITAL POLYMATH // FULLSTACK & PRODUCT',
+      ru: '⚡ DIGITAL POLYMATH // FULLSTACK & PRODUCT',
     },
     actionLink: '#works',
     actionText: { en: 'Works ↘', ru: 'Кейсы ↘' },
@@ -49,15 +49,15 @@ const CARDS_DATA = [
   },
   {
     id: '03',
-    year: 'INFRA // 99.9%',
+    year: 'INFRA // VDS PROD',
     tag: { en: 'PHASE 03 // B2B SYSTEMS & SAAS', ru: 'ЭТАП 03 // B2B-СИСТЕМЫ И SAAS' },
     manifesto: {
       en: '03. COMMERCIAL B2B & PRIVACY SAAS',
       ru: '03. МАСШТАБНЫЙ B2B & PRIVACY SAAS',
     },
     desc: {
-      en: 'Battle-tested in production: automated billing pipelines, telemetry HUDs, NoLogs privacy infrastructure, and 99.9% uptime.',
-      ru: 'Боевой продакшен: автоматический биллинг, телеметрия в реальном времени, NoLogs SaaS и отказоустойчивость 99.9%.',
+      en: 'Battle-tested in production: automated billing pipelines, telemetry HUDs, NoLogs privacy infrastructure, and independent Linux VDS topology.',
+      ru: 'Боевой продакшен: автоматический биллинг, телеметрия в реальном времени, NoLogs SaaS и стабильные Linux VDS.',
     },
     meta: {
       en: 'NoLogs · Radiotochka · Jubilee',

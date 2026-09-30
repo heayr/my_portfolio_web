@@ -6,12 +6,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yegor.dev';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Yegor — Lead Frontend & Fullstack Architect | Portfolio',
+  title: 'Yegor — Frontend & Fullstack Engineer | Portfolio',
   description:
-    'Portfolio of Yegor (heayr): Lead Frontend & Fullstack Architect specializing in React 19, Next.js 15, TypeScript, commercial SaaS architecture, and high-performance Awwwards-caliber digital experiences.',
+    'Portfolio of Yegor (heayr): Frontend & Fullstack Engineer specializing in React 19, Next.js 15, TypeScript, commercial SaaS, and high-performance Awwwards-caliber digital experiences.',
   keywords: [
-    'Frontend Architect',
+    'Frontend Engineer',
     'Fullstack Engineer',
+    'Product Engineer',
     'React 19',
     'Next.js 15',
     'TypeScript',
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'Yegor (heayr)' }],
   openGraph: {
-    title: 'Yegor — Lead Frontend & Fullstack Architect',
+    title: 'Yegor — Frontend & Fullstack Engineer',
     description:
       'Engineering high-performance commercial SaaS, B2B platforms, and bespoke Awwwards-caliber digital experiences. 100/100 PageSpeed obsessed.',
     images: ['/projects/nologs.webp'],

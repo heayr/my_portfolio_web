@@ -27,8 +27,8 @@ export const faqData: FAQItem[] = [
       ru: 'Какой коммерческий опыт подтверждает эти навыки?',
     },
     a: {
-      en: 'Lead Architect for NoLogs SaaS—a live commercial privacy platform with active paying subscribers, automated YooKassa webhook billing, and real-time Wireguard configurations. Also engineered the Радиоточка advertising platform and bespoke luxury invitation web applications.',
-      ru: 'Ведущий архитектор NoLogs SaaS — действующего сервиса с активными платными подписками, автоматическим приемом платежей через YooKassa и инфраструктурой туннелей. Также создал B2B-платформу агентства Радиоточка и эксклюзивные интерактивные веб-приложения.',
+      en: 'Creator & Software Engineer for NoLogs SaaS—a live commercial privacy platform with active paying subscribers, automated YooKassa webhook billing, and production Wireguard configurations. Also engineered the Радиоточка advertising platform and bespoke luxury invitation web applications.',
+      ru: 'Создатель и разработчик NoLogs SaaS — действующего сервиса с активными платными подписками, автоматическим приемом платежей через YooKassa и инфраструктурой туннелей. Также создал B2B-платформу агентства Радиоточка и эксклюзивные интерактивные веб-приложения.',
     },
   },
   {

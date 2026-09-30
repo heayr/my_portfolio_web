@@ -14,7 +14,7 @@ export const profileData = {
     ru: 'Москва, Россия (Удаленно по всему миру)',
   },
   roles: {
-    en: 'Lead Frontend & Fullstack Architect',
-    ru: 'Lead Frontend & Fullstack Архитектор',
+    en: 'Frontend & Fullstack Engineer',
+    ru: 'Frontend & Fullstack Инженер',
   },
 };

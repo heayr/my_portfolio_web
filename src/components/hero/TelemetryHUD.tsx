@@ -30,14 +30,14 @@ const ACTS_META = [
   {
     badge: { en: 'PHASE 03 // B2B SYSTEMS & SAAS', ru: 'ЭТАП 03 // B2B-СИСТЕМЫ И SAAS' },
     short: '03 SAAS',
-    year: 'INFRA // 99.9%',
+    year: 'INFRA // VDS PROD',
     velocity: 'FAULT-TOLERANT',
   },
   {
     badge: { en: 'PHASE 04 // PRODUCTION SCALE', ru: 'ЭТАП 04 // ПРОДАКШЕН И МАСШТАБ' },
     short: '04 SCALE',
     year: 'PROD // 120 FPS',
-    velocity: 'UPTIME: 99.99%',
+    velocity: 'PROD-READY',
   },
   {
     badge: { en: 'PHASE 05 // DESIGN & MOTION CRAFT', ru: 'ЭТАП 05 // ДИЗАЙН И МОУШН-КРАФТ' },
