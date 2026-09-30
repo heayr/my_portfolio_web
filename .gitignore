@@ -1,18 +1,27 @@
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
 
-# Next.js
+# Next.js & Build outputs
 /.next/
 /out/
 /build
 dist
+.turbo
+.swc
 
-# Environment & local files
+# Environment & Secrets (NEVER push secrets or keys)
+.env
 .env*.local
+.env.development
+.env.test
+.env.production
 *.local
+*.pem
+*.key
+*.cert
 
 # Logs
 logs
@@ -23,20 +32,43 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor directories and files
+# Testing & Coverage
+coverage/
+.nyc_output
+.lighthouseci/
+
+# Editor & IDE directories
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
+!.vscode/settings.json
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.swo
+*.sublime-project
+*.sublime-workspace
+.eslintcache
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 
 # TypeScript
 *.tsbuildinfo
+next-env.d.ts.bak
 
-# Backup files
-*.orig.*
+# Vercel & Deployment
 .vercel
+
+# Agent / Scratch files & Backups
+*.orig.*
+*.bak
+.agents/scratch/

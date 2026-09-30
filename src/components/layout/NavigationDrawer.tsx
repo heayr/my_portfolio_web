@@ -3,12 +3,26 @@
 import React, { useEffect } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
+import { useMoscowClock } from '../../hooks/useMoscowClock';
 
 interface NavigationDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  clock: string;
+  clock?: string;
 }
+
+const DrawerMoscowClock: React.FC<{ isLight: boolean; fallback?: string }> = React.memo(({ isLight, fallback }) => {
+  const currentClock = useMoscowClock(fallback || '--:--:--');
+  return (
+    <div className="flex items-center gap-2.5 font-mono text-sm sm:text-base font-bold tracking-widest uppercase">
+      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+      <span className={isLight ? 'text-zinc-900' : 'text-white'}>
+        MOSCOW // GMT+3 · {currentClock}
+      </span>
+    </div>
+  );
+});
+DrawerMoscowClock.displayName = 'DrawerMoscowClock';
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   isOpen,
@@ -84,12 +98,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
             isLight ? 'border-black/10' : 'border-white/10'
           }`}
         >
-          <div className="flex items-center gap-2.5 font-mono text-sm sm:text-base font-bold tracking-widest uppercase">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-            <span className={isLight ? 'text-zinc-900' : 'text-white'}>
-              MOSCOW // GMT+3 · {clock}
-            </span>
-          </div>
+          <DrawerMoscowClock isLight={isLight} fallback={clock} />
           <span
             className={`font-mono text-xs sm:text-sm uppercase tracking-wider ${
               isLight ? 'text-zinc-600' : 'text-zinc-400'

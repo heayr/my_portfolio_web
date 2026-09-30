@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
+import { useMoscowClock } from '../../hooks/useMoscowClock';
 
 interface ContactCardData {
   id: string;
@@ -131,29 +132,21 @@ const ContactCardItem: React.FC<{ card: ContactCardData }> = React.memo(({ card 
 
 ContactCardItem.displayName = 'ContactCardItem';
 
+
+const FooterMoscowClock: React.FC = React.memo(() => {
+  const clock = useMoscowClock();
+  return (
+    <div className="text-3xl sm:text-4xl lg:text-[44px] font-mono font-black tracking-tight text-white group-hover/widget:text-amber-400 transition-colors duration-300">
+      {clock}
+    </div>
+  );
+});
+FooterMoscowClock.displayName = 'FooterMoscowClock';
+
 export const CurtainFooter: React.FC = () => {
   const { t, locale } = useApp();
   const [copied, setCopied] = useState(false);
-  const [clock, setClock] = useState('');
   const footerSpotlightRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setClock(
-        new Intl.DateTimeFormat('en-US', {
-          timeZone: 'Europe/Moscow',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }).format(now)
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = async () => {
     try {
@@ -324,9 +317,7 @@ export const CurtainFooter: React.FC = () => {
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>{locale === 'ru' ? 'МОСКОВСКОЕ ВРЕМЯ // GMT+3' : 'MOSCOW TIME // GMT+3'}</span>
               </div>
-              <div className="text-3xl sm:text-4xl lg:text-[44px] font-mono font-black tracking-tight text-white group-hover/widget:text-amber-400 transition-colors duration-300">
-                {clock || '--:--:--'}
-              </div>
+              <FooterMoscowClock />
             </div>
 
             {/* Subtle Divider Line */}

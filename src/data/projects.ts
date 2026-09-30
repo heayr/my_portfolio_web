@@ -26,7 +26,7 @@ export const projectsData: ProjectItem[] = [
     },
     image: '/projects/nologs_art.webp',
     githubUrl: 'https://github.com/heayr/nologs-bot-docs',
-    liveUrl: undefined,
+    liveUrl: 'https://nologs.website/',
     featuredColor: '#3b82f6'
   },
   {
@@ -53,7 +53,7 @@ export const projectsData: ProjectItem[] = [
       ru: 'Комплексный веб-портал и административная панель управления контентом для рекламного медиа-агентства полного цикла. Включает fluid-типографику, расписание эфиров и панель модерации.'
     },
     image: '/projects/radiotochka_art.webp',
-    githubUrl: 'https://github.com/heayr/pet-b-fm',
+    githubUrl: 'https://github.com/heayr/radiotochka',
     liveUrl: 'https://radiotochka.nologs.website/',
     featuredColor: '#10b981'
   },

@@ -1,37 +1,30 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
 import { NavigationDrawer } from './NavigationDrawer';
+import { useMoscowClock } from '../../hooks/useMoscowClock';
 
 interface HeaderProps {
   scrolled: boolean;
 }
 
+const HeaderMoscowClock: React.FC<{ isLight: boolean }> = React.memo(({ isLight }) => {
+  const clock = useMoscowClock();
+  return (
+    <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 mr-1 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
+      <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
+      <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
+    </div>
+  );
+});
+HeaderMoscowClock.displayName = 'HeaderMoscowClock';
+
 export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
   const { t, locale, toggleLocale, theme, toggleTheme } = useApp();
-  const [clock, setClock] = useState('--:--:--');
   const [menuOpen, setMenuOpen] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setClock(
-        new Intl.DateTimeFormat('en-US', {
-          timeZone: 'Europe/Moscow',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-          hour12: false,
-        }).format(now)
-      );
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleCopyEmail = async () => {
     try {
@@ -115,12 +108,7 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
         {/* Right: Controls + Minimalist 2-line Burger Menu */}
         <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
           {/* Moscow Clock (Desktop Only, hidden when menu is open to avoid duplicate) */}
-          {!menuOpen && (
-            <div className={`hidden md:flex items-center gap-1.5 text-xs pr-3 mr-1 border-r font-bold ${isLight ? 'border-black/15 text-zinc-700' : 'border-white/15 text-zinc-200'}`}>
-              <span className={isLight ? 'text-zinc-500 font-bold' : 'text-zinc-400 font-bold'}>MSK</span>
-              <span className={isLight ? 'text-zinc-900 font-bold' : 'text-white font-bold'}>{clock}</span>
-            </div>
-          )}
+          {!menuOpen && <HeaderMoscowClock isLight={isLight} />}
 
           {/* Language Switcher */}
           <button
@@ -173,7 +161,6 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
       <NavigationDrawer
         isOpen={menuOpen}
         onClose={() => setMenuOpen(false)}
-        clock={clock}
       />
     </>
   );

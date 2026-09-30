@@ -61,7 +61,7 @@ const CARDS_DATA = [
     },
     meta: {
       en: 'NoLogs · Radiotochka · Jubilee',
-      ru: 'NoLogs · Радиоточка · Юбилей 30 лет',
+      ru: 'NoLogs · Радиоточка · Jubilee',
     },
     actionLink: '#works',
     actionText: { en: 'Cases ↘', ru: 'Проекты ↘' },
