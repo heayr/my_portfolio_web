@@ -3,6 +3,7 @@
 import React from 'react';
 import { ProjectItem, Locale } from '../../types';
 import { en } from '../../i18n/dictionaries/en';
+import { Button } from '../ui/Button';
 
 interface ProjectCardProps {
   project: ProjectItem;
@@ -108,26 +109,30 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
         {/* Right: Actions with 42px touch target */}
         <div className="flex items-center gap-3 shrink-0">
           {project.liveUrl && (
-            <a
+            <Button
+              as="a"
               href={project.liveUrl}
               target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-bold text-xs sm:text-sm transition-all shadow-xl hover:scale-[1.03]"
+              variant="primary"
+              size="sm"
+              iconRight={<span className="font-mono">↗</span>}
+              className="shadow-xl"
             >
-              <span>{t.works.visitLive}</span>
-              <span className="font-mono">↗</span>
-            </a>
+              {t.works.visitLive}
+            </Button>
           )}
           {project.githubUrl && (
-            <a
+            <Button
+              as="a"
               href={project.githubUrl}
               target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/80 hover:bg-black/95 text-white font-mono text-xs sm:text-sm border border-white/25 hover:border-white/50 transition-all shadow-xl"
+              variant="secondary"
+              size="sm"
+              iconRight={<span className="font-mono">↗</span>}
+              className="shadow-xl font-mono"
             >
-              <span>{t.works.viewGithub}</span>
-              <span className="font-mono">↗</span>
-            </a>
+              {t.works.viewGithub}
+            </Button>
           )}
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useApp } from '../../i18n/context';
+import { SectionHeader } from '../ui/SectionHeader';
 
 export const PhilosophySection: React.FC = () => {
   const { t, locale, theme } = useApp();
@@ -10,19 +11,13 @@ export const PhilosophySection: React.FC = () => {
   return (
     <section id="philosophy" className="py-24 sm:py-32 border-t border-[var(--border-subtle)] bg-[var(--bg-root)] transition-colors duration-300">
       <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24">
-        {/* Section Header (Arpeggio Signature) */}
-        <div className="max-w-4xl mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 font-mono text-xs sm:text-sm tracking-widest text-amber-500 uppercase font-bold mb-3">
-            <span>//</span>
-            <span>{t.philosophy.tag}</span>
-          </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--text-primary)] leading-[1.05]">
-            {t.philosophy.title}
-          </h2>
-          <p className="mt-5 text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed max-w-3xl">
-            {t.philosophy.description}
-          </p>
-        </div>
+        {/* Section Header (Unified Universal Component) */}
+        <SectionHeader
+          eyebrow={t.philosophy.tag}
+          title={t.philosophy.title}
+          description={t.philosophy.description}
+          className="mb-16 sm:mb-20"
+        />
 
         {/* 5 Stacked Full-Width Service / Principle Rows (The Arpeggio Layout) */}
         <div className="border-t border-[var(--border-subtle)] flex flex-col">

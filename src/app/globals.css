@@ -62,7 +62,8 @@
 }
 
 /* --- Official Lenis Smooth Scroll Optimization Classes --- */
-html.lenis, html.lenis body {
+html.lenis,
+html.lenis body {
   height: auto;
 }
 
@@ -271,10 +272,13 @@ html.lenis, html.lenis body {
 }
 
 @keyframes hud-bounce-playful {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) scale(1);
     box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
   }
+
   50% {
     transform: translateY(-8px) scale(1.04);
     box-shadow: 0 12px 28px rgba(245, 158, 11, 0.65), 0 0 15px rgba(251, 191, 36, 0.5);
@@ -349,25 +353,109 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
+/* ==========================================================================
+   Apple Optical Glassmorphism System (macOS Sequoia / visionOS)
+   Reusable Zero-Cost GPU Glass with Fresnel Reflection & Prismatic Dispersion
+   ========================================================================== */
+
+.apple-glass {
+  position: relative;
+  /* Optical Fresnel Lens: Ultra-clear center, curved reflective perimeter */
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.08) 100%),
+    rgba(10, 10, 14, 0.45);
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  
+  /* Apple Continuous Squircle Curves & Precision Rim */
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 28px 56px -12px rgba(0, 0, 0, 0.65),
+    0 8px 24px -4px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.45),
+    inset -1.5px 0 2px 0 rgba(96, 165, 250, 0.2),
+    inset 1.5px 0 2px 0 rgba(251, 146, 60, 0.2),
+    inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+/* Intensity Variants */
+.apple-glass--frosted {
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.1) 100%),
+    rgba(14, 14, 18, 0.68);
+  backdrop-filter: blur(34px) saturate(190%);
+  -webkit-backdrop-filter: blur(34px) saturate(190%);
+}
+
+.apple-glass--subtle {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.4);
+}
+
+/* Apple Top Specular Sheen (Reflective Light Sweep) */
+.apple-glass-sheen::before,
+.apple-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(96, 165, 250, 0.4) 25%, rgba(255, 255, 255, 0.9) 50%, rgba(251, 146, 60, 0.4) 75%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Light Theme Apple Optical Prism Glass */
+html.light .apple-glass {
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.06) 55%, rgba(255, 255, 255, 0.18) 100%),
+    rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px) saturate(260%) contrast(98%);
+  -webkit-backdrop-filter: blur(24px) saturate(260%) contrast(98%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 24px 48px -12px rgba(15, 23, 42, 0.14),
+    0 8px 24px -4px rgba(15, 23, 42, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
+    inset -1.5px 0 2.5px 0 rgba(59, 130, 246, 0.28),
+    inset 1.5px 0 2.5px 0 rgba(245, 158, 11, 0.28),
+    inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.06);
+}
+
+html.light .apple-glass--frosted {
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.2) 55%, rgba(255, 255, 255, 0.35) 100%),
+    rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(32px) saturate(220%);
+  -webkit-backdrop-filter: blur(32px) saturate(220%);
+}
+
+html.light .apple-glass-sheen::before,
+html.light .apple-glass::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.4) 25%, rgba(255, 255, 255, 0.95) 50%, rgba(251, 146, 60, 0.4) 75%, transparent 100%);
+}
+
+/* Floating Narrative Card Scrollytelling Component */
 .story-narrative-block {
   position: absolute;
-  bottom: 120px;
+  bottom: 124px;
   left: 48px;
-  width: 360px;
-  max-width: calc(100vw - 96px);
+  width: 400px;
+  max-width: calc(100vw - 64px);
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid var(--accent-gold);
-  padding: 11px 15px;
-  background: rgba(8, 8, 12, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 8px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  z-index: 20;
+  padding: 16px 20px 15px 20px;
+  z-index: 25;
 }
 
 @media (max-width: 640px) {
@@ -376,15 +464,15 @@ html.lenis, html.lenis body {
     right: 16px;
     width: auto;
     max-width: none;
-    bottom: 175px;
-    padding: 10px 14px;
-    background: rgba(8, 8, 12, 0.9);
+    bottom: 180px;
+    padding: 14px 16px;
+    border-radius: 18px;
   }
 }
 
 .story-narrative-block.active {
   opacity: 1 !important;
-  transform: translateY(0) !important;
+  transform: translateY(0) scale(1) !important;
   pointer-events: auto !important;
 }
 
@@ -483,9 +571,11 @@ html.lenis, html.lenis body {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -497,12 +587,16 @@ html.lenis, html.lenis body {
 }
 
 @keyframes aurora-shift {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0%, 0%) rotate(0deg) scale(1);
   }
+
   33% {
     transform: translate(5%, -5%) rotate(10deg) scale(1.15);
   }
+
   66% {
     transform: translate(-5%, 4%) rotate(-8deg) scale(0.95);
   }
@@ -533,7 +627,7 @@ html.lenis, html.lenis body {
   background: radial-gradient(ellipse at center, rgba(26, 20, 16, 0.96) 0%, rgba(8, 7, 10, 0.98) 100%);
   border: 1.5px solid rgba(245, 158, 11, 0.65);
   border-radius: 9999px;
-  box-shadow: 
+  box-shadow:
     0 12px 36px rgba(0, 0, 0, 0.95),
     0 0 24px rgba(245, 158, 11, 0.22),
     inset 0 1px 0 rgba(251, 191, 36, 0.5),

@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Lenis from 'lenis';
+import { useApp } from '../i18n/context';
 import { Preloader } from '../components/layout/Preloader';
 import { Header } from '../components/layout/Header';
 import { HeroSection } from '../components/hero/HeroSection';
+import { Marquee } from '../components/ui/Marquee';
 
 const StackingWorks = dynamic(
   () => import('../components/works/StackingWorks').then((m) => m.StackingWorks),
@@ -28,7 +30,19 @@ const CurtainFooter = dynamic(
   { ssr: true }
 );
 
+const MARQUEE_TECH_STACK = [
+  '✦ NEXT.JS 15 APP ROUTER',
+  '✦ REACT 19 PRIMITIVES',
+  '✦ STRICT TYPESCRIPT',
+  '✦ TAILWIND CSS V4',
+  '✦ 100/100 CORE WEB VITALS',
+  '✦ FASTAPI & POSTGRESQL',
+  '✦ ZERO-LEAK SECURITY',
+  '✦ AWWWARDS FLUID MOTION',
+];
+
 export default function Home() {
+  const { locale } = useApp();
   const [scrolled, setScrolled] = useState(false);
 
   // Initialize Luxury Fluid Inertia Lenis
@@ -88,59 +102,47 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-[var(--bg-root)] text-[var(--text-primary)] transition-colors duration-400">
+    <div className="relative min-h-screen bg-[var(--bg-root)] text-[var(--text-primary)] transition-colors duration-400">
+      {/* Keyboard Accessible Skip Link */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2.5 focus:bg-amber-400 focus:text-black focus:font-mono focus:font-bold focus:rounded-lg focus:shadow-2xl focus:outline-none"
+      >
+        {locale === 'ru' ? 'Перейти к основному контенту' : 'Skip to main content'}
+      </a>
+
       {/* Background Film Grain Texture */}
       <div className="noise-overlay" aria-hidden="true" />
 
       {/* Arpeggio Staggered Rectangular Bars Preloader */}
       <Preloader />
 
-      {/* Arpeggio Top Navigation Bar */}
+      {/* Landmark: Banner / Site Header */}
       <Header scrolled={scrolled} />
 
-      {/* Arpeggio Hero Section with Morphing Wordmark Docking into Header */}
-      <HeroSection />
+      {/* Landmark: Unique Main Page Content */}
+      <main id="main-content" tabIndex={-1} className="relative outline-none">
+        {/* Arpeggio Hero Section with Morphing Wordmark Docking into Header */}
+        <HeroSection />
 
-      {/* Infinite Marquee Strip */}
-      <div className="py-4 border-y border-[var(--border-subtle)] bg-[var(--bg-surface)] overflow-hidden font-mono text-xs tracking-widest text-[var(--text-secondary)]">
-        <div className="marquee-track" aria-hidden="true">
-          <div className="marquee-content">
-            <span>✦ NEXT.JS 15 APP ROUTER</span>
-            <span>✦ REACT 19 PRIMITIVES</span>
-            <span>✦ STRICT TYPESCRIPT</span>
-            <span>✦ TAILWIND CSS V4</span>
-            <span>✦ 100/100 CORE WEB VITALS</span>
-            <span>✦ FASTAPI &amp; POSTGRESQL</span>
-            <span>✦ ZERO-LEAK SECURITY</span>
-            <span>✦ AWWWARDS FLUID MOTION</span>
-          </div>
-          <div className="marquee-content" aria-hidden="true">
-            <span>✦ NEXT.JS 15 APP ROUTER</span>
-            <span>✦ REACT 19 PRIMITIVES</span>
-            <span>✦ STRICT TYPESCRIPT</span>
-            <span>✦ TAILWIND CSS V4</span>
-            <span>✦ 100/100 CORE WEB VITALS</span>
-            <span>✦ FASTAPI &amp; POSTGRESQL</span>
-            <span>✦ ZERO-LEAK SECURITY</span>
-            <span>✦ AWWWARDS FLUID MOTION</span>
-          </div>
-        </div>
-      </div>
+        {/* Infinite Marquee Strip */}
+        <Marquee items={MARQUEE_TECH_STACK} />
 
-      {/* Stacking Project Promo Cards */}
-      <StackingWorks />
+        {/* Stacking Project Promo Cards */}
+        <StackingWorks />
 
-      {/* The Digital Polymath Philosophy (Da Vinci -> Wright -> Orbit) */}
-      <PhilosophySection />
+        {/* The Digital Polymath Philosophy (Da Vinci -> Wright -> Orbit) */}
+        <PhilosophySection />
 
-      {/* Key Architectural & Performance Metrics */}
-      <MetricsSection />
+        {/* Key Architectural & Performance Metrics */}
+        <MetricsSection />
 
-      {/* Spring FAQ Accordion */}
-      <FAQSection />
+        {/* Spring FAQ Accordion */}
+        <FAQSection />
+      </main>
 
-      {/* Curtain Footer with Massive Typography */}
+      {/* Landmark: Contentinfo / Site Footer */}
       <CurtainFooter />
-    </main>
+    </div>
   );
 }

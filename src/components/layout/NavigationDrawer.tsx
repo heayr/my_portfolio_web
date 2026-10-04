@@ -3,26 +3,14 @@
 import React, { useEffect } from 'react';
 import { useApp } from '../../i18n/context';
 import { profileData } from '../../data/profile';
-import { useMoscowClock } from '../../hooks/useMoscowClock';
+import { MoscowClock } from '../ui/MoscowClock';
+import { useScrollLock } from '../../hooks/useScrollLock';
 
 interface NavigationDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   clock?: string;
 }
-
-const DrawerMoscowClock: React.FC<{ isLight: boolean; fallback?: string }> = React.memo(({ isLight, fallback }) => {
-  const currentClock = useMoscowClock(fallback || '--:--:--');
-  return (
-    <div className="flex items-center gap-2.5 font-mono text-sm sm:text-base font-bold tracking-widest uppercase">
-      <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-      <span className={isLight ? 'text-zinc-900' : 'text-white'}>
-        MOSCOW // GMT+3 · {currentClock}
-      </span>
-    </div>
-  );
-});
-DrawerMoscowClock.displayName = 'DrawerMoscowClock';
 
 export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
   isOpen,
@@ -31,15 +19,12 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 }) => {
   const { t, locale, theme } = useApp();
 
-  // Handle escape key and body scroll lock
+  // Handle escape key and body scroll lock via hook
+  const { lock, unlock } = useScrollLock();
+
   useEffect(() => {
     if (!isOpen) return;
-
-    const prevOverflow = document.body.style.overflow;
-    const prevHtmlOverflow = document.documentElement.style.overflow;
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-    (window as any).lenis?.stop();
+    lock();
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -48,12 +33,10 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      document.body.style.overflow = prevOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
-      (window as any).lenis?.start();
+      unlock();
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, lock, unlock]);
 
   const isLight = theme === 'light';
 
@@ -69,6 +52,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
     { name: 'TELEGRAM', href: profileData.telegram },
     { name: 'GITHUB', href: profileData.github },
     { name: 'LINKEDIN', href: profileData.linkedin },
+    { name: 'EASYSTAFF', href: profileData.easystaff },
     { name: 'EMAIL', href: `mailto:${profileData.email}` },
   ];
 
@@ -92,13 +76,13 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         } ${isOpen ? 'translate-x-0 pointer-events-auto visible' : 'translate-x-full pointer-events-none invisible'}`}
         aria-label="Navigation Menu"
       >
-        {/* Drawer Meta: Moscow Timezone, Live Clock & Status - 100% Crisp, Large & Visible */}
+        {/* Drawer Meta: Moscow Timezone, Live Clock & Status */}
         <div
           className={`flex flex-col gap-2 pb-6 border-b shrink-0 ${
             isLight ? 'border-black/10' : 'border-white/10'
           }`}
         >
-          <DrawerMoscowClock isLight={isLight} fallback={clock} />
+          <MoscowClock variant="drawer" isLight={isLight} fallback={clock} />
           <span
             className={`font-mono text-xs sm:text-sm uppercase tracking-wider ${
               isLight ? 'text-zinc-600' : 'text-zinc-400'
@@ -124,7 +108,6 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
               }`}
             >
               <div className="flex items-baseline gap-4 sm:gap-6">
-                {/* Large clean monospace number - NO YELLOW, high contrast */}
                 <span
                   className={`font-mono text-lg sm:text-2xl font-bold tracking-wider transition-colors ${
                     isLight

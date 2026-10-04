@@ -8,6 +8,7 @@ export const profileData = {
   github: 'https://github.com/heayr',
   githubHandle: '@heayr',
   linkedin: 'https://linkedin.com/in/potatochipasu',
+  easystaff: 'https://connect.easystaff.io/easylancer/egor?ref=mju2ndm',
   timezone: 'MSK (GMT+3)',
   location: {
     en: 'Moscow, Russia (Remote Worldwide)',

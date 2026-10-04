@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import { useApp } from '../../i18n/context';
-
 import { faqData } from '../../data/faq';
+import { SectionHeader } from '../ui/SectionHeader';
+import { MorphingToggleIcon } from '../ui/MorphingToggleIcon';
 
 export const FAQSection: React.FC = () => {
   const { locale } = useApp();
@@ -16,14 +17,11 @@ export const FAQSection: React.FC = () => {
   return (
     <section id="faq" className="relative md:sticky md:top-0 z-10 py-24 px-6 sm:px-12 bg-[var(--bg-root)] border-t border-[var(--border-subtle)]">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-14">
-          <span className="font-mono text-xs tracking-widest text-amber-500 uppercase font-semibold">
-            // {locale === 'ru' ? 'ВОПРОСЫ И ОТВЕТЫ' : 'FREQUENTLY ASKED QUESTIONS'}
-          </span>
-          <h2 className="mt-3 text-3xl sm:text-5xl font-black tracking-tight text-[var(--text-primary)]">
-            {locale === 'ru' ? 'Принципы и детали работы.' : 'Engineering Principles & Details.'}
-          </h2>
-        </div>
+        <SectionHeader
+          eyebrow={locale === 'ru' ? 'ВОПРОСЫ И ОТВЕТЫ' : 'FREQUENTLY ASKED QUESTIONS'}
+          title={locale === 'ru' ? 'Принципы и детали работы.' : 'Engineering Principles & Details.'}
+          className="mb-14"
+        />
 
         <div className="flex flex-col gap-4">
           {faqData.map((item, idx) => {
@@ -41,19 +39,10 @@ export const FAQSection: React.FC = () => {
                 >
                   <span className="pr-4">{item.q[locale]}</span>
                   <div
-                    className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex flex-col items-center justify-center gap-1.5 transition-colors text-zinc-500 hover:text-amber-500 shrink-0"
+                    className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center transition-colors text-zinc-500 hover:text-amber-500 shrink-0"
                     aria-hidden="true"
                   >
-                    <span
-                      className={`h-[1.5px] bg-current transition-all duration-300 ${
-                        isOpen ? 'w-4 -rotate-45 translate-y-[3.5px]' : 'w-4'
-                      }`}
-                    />
-                    <span
-                      className={`h-[1.5px] bg-current transition-all duration-300 ${
-                        isOpen ? 'w-4 rotate-45 -translate-y-[4px]' : 'w-2.5'
-                      }`}
-                    />
+                    <MorphingToggleIcon open={isOpen} size="sm" />
                   </div>
                 </button>
                 {isOpen && (
