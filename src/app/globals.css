@@ -429,89 +429,86 @@ html.lenis body {
   z-index: 1;
 }
 
-/* Light Theme Apple Optical Prism Glass */
+/* Light Theme Apple Optical Prism Glass - VisionOS Liquid Glass */
 html.light .apple-glass {
-  background:
-    radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 60%, rgba(246, 246, 248, 0.92) 100%);
-  backdrop-filter: blur(28px) saturate(190%);
-  -webkit-backdrop-filter: blur(28px) saturate(190%);
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: radial-gradient(135% 135% at 50% 0%, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.38) 55%, rgba(246, 246, 248, 0.48) 100%);
+  backdrop-filter: blur(28px) saturate(210%) contrast(104%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%) contrast(104%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
   box-shadow:
-    0 20px 48px -12px rgba(15, 23, 42, 0.1),
-    0 6px 18px -4px rgba(15, 23, 42, 0.05),
-    inset 0 1.5px 2px 0 rgba(255, 255, 255, 1),
-    inset -1px 0 2px 0 rgba(59, 130, 246, 0.15),
-    inset 1px 0 2px 0 rgba(245, 158, 11, 0.15),
-    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.05);
+    0 24px 48px -12px rgba(15, 23, 42, 0.12),
+    0 8px 24px -4px rgba(15, 23, 42, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.98),
+    inset -1.5px 0 2.5px 0 rgba(59, 130, 246, 0.2),
+    inset 1.5px 0 2.5px 0 rgba(245, 158, 11, 0.2),
+    inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.05);
   color: #09090b;
 }
 
 html.light .apple-glass--frosted {
-  background:
-    radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.93) 60%, rgba(248, 248, 250, 0.96) 100%);
-  backdrop-filter: blur(36px) saturate(190%);
-  -webkit-backdrop-filter: blur(36px) saturate(190%);
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: radial-gradient(135% 135% at 50% 0%, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.44) 55%, rgba(248, 248, 250, 0.54) 100%);
+  backdrop-filter: blur(32px) saturate(220%) contrast(104%);
+  -webkit-backdrop-filter: blur(32px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 24px 56px -12px rgba(15, 23, 42, 0.12),
+    0 28px 56px -12px rgba(15, 23, 42, 0.14),
     0 8px 24px -4px rgba(15, 23, 42, 0.06),
+    0 0 0 1px rgba(0, 0, 0, 0.06),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
   color: #09090b;
 }
 
 html.light .apple-glass--subtle {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.06);
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.05);
   color: #09090b;
 }
 
 html.light .apple-glass-sheen::before,
 html.light .apple-glass::before {
-  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.4) 25%, rgba(255, 255, 255, 0.95) 50%, rgba(251, 146, 60, 0.4) 75%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(59, 130, 246, 0.45) 25%, rgba(255, 255, 255, 0.98) 50%, rgba(245, 158, 11, 0.45) 75%, transparent 100%);
+}
+
+/* ==========================================================================
+   Curtain Footer is ALWAYS Cinematic Dark Mode
+   Regardless of whether the rest of the site is in light mode, the footer
+   is a pitch-black curtain (#050508) and its glass widgets remain dark.
+   ========================================================================== */
+footer .apple-glass,
+#contact .apple-glass,
+html.light footer .apple-glass,
+html.light #contact .apple-glass {
+  background:
+    radial-gradient(120% 120% at 50% 10%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(255, 255, 255, 0.08) 100%),
+    rgba(10, 10, 14, 0.55) !important;
+  backdrop-filter: blur(28px) saturate(210%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(210%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow:
+    0 28px 56px -12px rgba(0, 0, 0, 0.65),
+    0 8px 24px -4px rgba(0, 0, 0, 0.35),
+    inset 0 1.5px 1.5px 0 rgba(255, 255, 255, 0.45),
+    inset -1.5px 0 2px 0 rgba(96, 165, 250, 0.2),
+    inset 1.5px 0 2px 0 rgba(251, 146, 60, 0.2),
+    inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.35) !important;
+  color: #ffffff !important;
+}
+
+footer .apple-glass::before,
+#contact .apple-glass::before,
+html.light footer .apple-glass::before,
+html.light #contact .apple-glass::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(96, 165, 250, 0.4) 25%, rgba(255, 255, 255, 0.9) 50%, rgba(251, 146, 60, 0.4) 75%, transparent 100%) !important;
 }
 
 /* Floating Narrative Card Scrollytelling Component */
-.story-narrative-block {
-  position: absolute;
-  bottom: 124px;
-  left: max(24px, calc((100vw - 1800px) / 2 + 32px));
-  width: 400px;
-  max-width: calc(100vw - 64px);
-  opacity: 0;
-  transform: translateY(16px) scale(0.97);
-  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  padding: 16px 20px 15px 20px;
-  z-index: 25;
-}
-
-@media (min-width: 1920px) {
-  .story-narrative-block {
-    width: 440px;
-    bottom: 140px;
-    padding: 20px 24px 18px 24px;
-  }
-}
-
-@media (max-width: 640px) {
-  .story-narrative-block {
-    left: 16px;
-    right: 16px;
-    width: auto;
-    max-width: none;
-    bottom: 180px;
-    padding: 14px 16px;
-    border-radius: 18px;
-  }
-}
-
-.story-narrative-block.active {
-  opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
-  pointer-events: auto !important;
+.story-narrative-card {
+  position: relative;
+  width: 100%;
 }
 
 .story-card-tag {

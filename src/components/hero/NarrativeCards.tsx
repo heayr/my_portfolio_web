@@ -113,8 +113,10 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
 
   return (
     <div
-      className={`story-cards-container pointer-events-none transition-opacity duration-500 ${
-        visible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      className={`story-cards-container w-full grid grid-cols-1 grid-rows-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        visible
+          ? 'opacity-100 max-h-[500px] mb-0 pointer-events-auto'
+          : 'opacity-0 max-h-0 mb-[-12px] overflow-hidden pointer-events-none'
       }`}
     >
       {CARDS_DATA.map((card, idx) => {
@@ -122,8 +124,12 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
         return (
           <GlassCard
             key={idx}
-            className={`story-narrative-block ${isActive ? 'active' : ''} ${
-              isLight ? 'shadow-[0_20px_50px_rgba(0,0,0,0.14)] !text-zinc-950' : ''
+            className={`story-narrative-card col-start-1 row-start-1 w-full p-4 sm:p-5 2xl:p-6 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isActive
+                ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto z-10'
+                : 'opacity-0 translate-y-3 scale-[0.98] pointer-events-none z-0'
+            } ${
+              isLight ? 'shadow-[0_20px_50px_rgba(0,0,0,0.12)] !text-zinc-950' : ''
             }`}
             sheen={true}
             intensity="frosted"
@@ -133,18 +139,18 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
               <div
                 className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-mono tracking-wider backdrop-blur-md ${
                   isLight
-                    ? 'bg-black/5 border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-zinc-900 font-bold'
+                    ? 'bg-black/[0.06] border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-zinc-950 font-extrabold'
                     : 'bg-white/[0.08] border-white/[0.14] text-zinc-200'
                 }`}
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.85)]" />
-                <span className="font-semibold uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.85)]" />
+                <span className="font-bold uppercase tracking-wider">
                   {card.tag[locale].replace(/\s*\/\/\s*/g, ' · ')}
                 </span>
               </div>
               <span
                 className={`font-mono text-[10px] tracking-widest shrink-0 ${
-                  isLight ? 'text-zinc-700 font-bold' : 'text-zinc-400/80 font-medium'
+                  isLight ? 'text-zinc-800 font-extrabold' : 'text-zinc-400/80 font-medium'
                 }`}
               >
                 {card.id} / 05
@@ -184,9 +190,9 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
               </span>
               <a
                 href={card.actionLink}
-                className={`group/btn shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10.5px] 2xl:text-[11.5px] font-medium transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
+                className={`group/btn shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10.5px] 2xl:text-[11.5px] font-bold transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
                   isLight
-                    ? 'bg-amber-400 hover:bg-amber-300 text-zinc-950 font-bold border-amber-400 shadow-[0_1px_4px_rgba(245,158,11,0.25)]'
+                    ? 'bg-amber-400 hover:bg-amber-300 text-zinc-950 border-amber-400 shadow-[0_1px_4px_rgba(245,158,11,0.25)]'
                     : 'bg-white/[0.08] hover:bg-white/[0.16] text-white border-white/[0.14] hover:border-white/[0.28]'
                 }`}
               >

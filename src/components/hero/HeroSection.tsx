@@ -58,9 +58,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onScrollProgress }) =>
             onAdvance={handleAdvance}
             onSkip={handleSkip}
             onReplay={handleReplay}
-          />
-
-          <NarrativeCards activeAct={activeAct} visible={isNarrativeVisible} />
+          >
+            <NarrativeCards activeAct={activeAct} visible={isNarrativeVisible} />
+          </TelemetryHUD>
         </div>
       </section>
     </>

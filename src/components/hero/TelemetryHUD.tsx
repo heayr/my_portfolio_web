@@ -14,6 +14,7 @@ interface TelemetryHUDProps {
   stage?: 'initial' | 'playing' | 'completed' | 'rewinding';
   onSkip?: () => void;
   onReplay?: () => void;
+  children?: React.ReactNode;
 }
 
 const ACTS_META = [
@@ -58,6 +59,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
   stage = 'initial',
   onSkip,
   onReplay,
+  children,
 }) => {
   const { locale } = useApp();
   const current = ACTS_META[activeAct] || ACTS_META[0];
@@ -106,18 +108,22 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
 
       {/* Bottom Telemetry Line: Trajectory + Actions */}
       <div className="hud-bottom">
-        <GlassCard intensity="crystal" sheen={true} className="hud-progress-wrap pointer-events-auto p-3 sm:p-3.5 w-full sm:w-[290px]">
-          <div className="flex justify-between text-[11px] sm:text-xs text-zinc-200 font-mono font-bold tracking-wider mb-1.5 sm:mb-2">
-            <span className="text-zinc-100 font-bold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
-            <span className="text-amber-400 font-black tracking-widest drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">VEL: {current.velocity}</span>
-          </div>
-          <div className="hud-progress-bar h-1.5 bg-white/[0.08] shadow-inner rounded-full overflow-hidden border border-white/15">
-            <div
-              className="hud-progress-fill h-full bg-gradient-to-r from-amber-400 via-amber-300 to-cyan-400 shadow-[0_0_10px_rgba(245,158,11,0.8)]"
-              style={{ width: `${Math.min(100, Math.max(0, progress * 100)).toFixed(1)}%` }}
-            />
-          </div>
-        </GlassCard>
+        {/* Left Column: Narrative Card + Trajectory Progress (Strictly Unified Left Alignment) */}
+        <div className="flex flex-col items-start gap-2.5 sm:gap-3 w-full sm:w-[380px] 2xl:w-[440px] max-w-[calc(100vw-32px)] pointer-events-none relative">
+          {children}
+          <GlassCard intensity="crystal" sheen={true} className="hud-progress-wrap pointer-events-auto p-3 sm:p-3.5 w-full">
+            <div className="flex justify-between text-[11px] sm:text-xs font-mono font-bold tracking-wider mb-1.5 sm:mb-2">
+              <span className="text-zinc-100 [html.light_&]:text-zinc-950 font-bold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
+              <span className="text-amber-400 [html.light_&]:text-amber-600 font-black tracking-widest drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">VEL: {current.velocity}</span>
+            </div>
+            <div className="hud-progress-bar h-1.5 bg-white/[0.08] [html.light_&]:bg-black/10 shadow-inner rounded-full overflow-hidden border border-white/15 [html.light_&]:border-black/10">
+              <div
+                className="hud-progress-fill h-full bg-gradient-to-r from-amber-400 via-amber-300 to-cyan-400 shadow-[0_0_10px_rgba(245,158,11,0.8)]"
+                style={{ width: `${Math.min(100, Math.max(0, progress * 100)).toFixed(1)}%` }}
+              />
+            </div>
+          </GlassCard>
+        </div>
 
         {/* Renaissance / High-Tech Exhibition Cartouche Plaque */}
         <div
