@@ -39,54 +39,56 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     <>
       <header
         role="banner"
-        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center justify-between px-4 sm:px-10 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center px-4 sm:px-10 xl:px-16 2xl:px-24 transition-all duration-300 ${headerBg}`}
       >
-        {/* Left: Semantic Navbar rendered via data-driven array and universal Button */}
-        <Navbar copiedEmail={isCopied} onCopyEmail={handleCopyEmail} />
+        <div className="w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto flex items-center justify-between">
+          {/* Left: Semantic Navbar rendered via data-driven array and universal Button */}
+          <Navbar copiedEmail={isCopied} onCopyEmail={handleCopyEmail} />
 
-        {/* Mobile Left: Optical balance spacer so center wordmark stays centered */}
-        <div className="sm:hidden w-8" aria-hidden="true" />
+          {/* Mobile Left: Optical balance spacer so center wordmark stays centered */}
+          <div className="sm:hidden w-8" aria-hidden="true" />
 
-        {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
-        <div className="w-[100px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
+          {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
+          <div className="w-[100px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
-        {/* Right: Controls + Minimalist 2-line Burger Menu */}
-        <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
-          {/* Moscow Clock (Desktop Only, hidden when menu is open to avoid duplicate) */}
-          {!menuOpen && <MoscowClock variant="header" isLight={isLight} />}
+          {/* Right: Controls + Minimalist 2-line Burger Menu */}
+          <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">
+            {/* Moscow Clock (Desktop Only, hidden when menu is open to avoid duplicate) */}
+            {!menuOpen && <MoscowClock variant="header" isLight={isLight} />}
 
-          {/* Language Switcher Button */}
-          <Button
-            variant="icon"
-            size="sm"
-            onClick={toggleLocale}
-            className={`font-bold tracking-wider ${isLight ? 'text-zinc-800 hover:text-zinc-950' : 'text-zinc-300 hover:text-white'}`}
-            title="Toggle Language"
-          >
-            {locale === 'ru' ? 'EN' : 'RU'}
-          </Button>
+            {/* Language Switcher Button */}
+            <Button
+              variant="icon"
+              size="sm"
+              onClick={toggleLocale}
+              className={`font-bold tracking-wider ${isLight ? 'text-zinc-800 hover:text-zinc-950' : 'text-zinc-300 hover:text-white'}`}
+              title="Toggle Language"
+            >
+              {locale === 'ru' ? 'EN' : 'RU'}
+            </Button>
 
-          {/* Theme Switcher Button */}
-          <Button
-            variant="icon"
-            size="sm"
-            onClick={toggleTheme}
-            className={isLight ? 'text-zinc-800 hover:text-zinc-950' : 'text-zinc-300 hover:text-white'}
-            title="Toggle Dark / Light Theme"
-          >
-            <span>{isLight ? '☀' : '☾'}</span>
-          </Button>
+            {/* Theme Switcher Button */}
+            <Button
+              variant="icon"
+              size="sm"
+              onClick={toggleTheme}
+              className={isLight ? 'text-zinc-800 hover:text-zinc-950' : 'text-zinc-300 hover:text-white'}
+              title="Toggle Dark / Light Theme"
+            >
+              <span>{isLight ? '☀' : '☾'}</span>
+            </Button>
 
-          {/* Minimal 2-Line Burger / Cross Morphing Button */}
-          <Button
-            variant="icon"
-            size="md"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close Navigation Drawer' : 'Open Navigation Drawer'}
-            className={isLight ? 'text-zinc-900 hover:text-zinc-600' : 'text-white hover:text-zinc-300'}
-          >
-            <MorphingToggleIcon open={menuOpen} size="md" />
-          </Button>
+            {/* Minimal 2-Line Burger / Cross Morphing Button */}
+            <Button
+              variant="icon"
+              size="md"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Close Navigation Drawer' : 'Open Navigation Drawer'}
+              className={isLight ? 'text-zinc-900 hover:text-zinc-600' : 'text-white hover:text-zinc-300'}
+            >
+              <MorphingToggleIcon open={menuOpen} size="md" />
+            </Button>
+          </div>
         </div>
       </header>
 

@@ -40,7 +40,7 @@ const VARIANT_STYLES: Record<ButtonVariant, string> = {
   secondary:
     'bg-white/10 dark:bg-zinc-800/80 text-zinc-100 hover:bg-white/20 border border-white/10 hover:border-white/25 backdrop-blur-md active:scale-95',
   glass:
-    'apple-glass text-white border border-white/15 hover:border-white/35 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] active:scale-95',
+    'apple-glass text-white [html.light_&]:text-zinc-950 border border-white/15 [html.light_&]:border-black/10 hover:border-white/35 [html.light_&]:hover:border-black/25 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)] active:scale-95',
   ghost:
     'text-zinc-400 hover:text-white hover:bg-white/5 active:scale-95',
   nav:

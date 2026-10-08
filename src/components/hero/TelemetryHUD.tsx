@@ -67,8 +67,9 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
       className="stage-hud pointer-events-none"
       aria-hidden="true"
     >
-      {/* Top Telemetry Line */}
-      <div className="hud-top">
+      <div className="stage-hud-inner">
+        {/* Top Telemetry Line */}
+        <div className="hud-top">
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="hud-epoch-badge px-3 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-xs tracking-wider shadow-xl flex items-center gap-2">
             <span className="hud-pulse shrink-0" />
@@ -213,6 +214,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
         </div>
       </div>
     </div>
+  </div>
   );
 });
 
