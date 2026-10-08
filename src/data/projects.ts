@@ -5,8 +5,8 @@ export const projectsData: ProjectItem[] = [
     id: 'nologs',
     title: 'NoLogs SaaS',
     tagline: {
-      en: 'Complete Privacy Ecosystem, VPN Infrastructure & Subscription Billing',
-      ru: 'Комплексная privacy-экосистема: веб-сайт, бот, VPN-сервера и биллинг'
+      en: 'Commercial Privacy Infrastructure & Subscription Billing',
+      ru: 'Коммерческая privacy-инфраструктура и биллинг подписок'
     },
     role: {
       en: 'Creator & Fullstack Engineer',
@@ -18,11 +18,11 @@ export const projectsData: ProjectItem[] = [
       { en: '100/100 Core Web Vitals (0ms TBT)', ru: '100/100 Core Web Vitals (0ms TBT)' },
       { en: 'Sub-second real-time telemetry updates', ru: 'Субсекундный отклик сетевой телеметрии' },
       { en: 'Zero data retention architecture', ru: 'Архитектура с нулевым сохранением логов' },
-      { en: 'Automated recurring payment pipelines', ru: 'Автоматизированный биллинг и подписки' }
+      { en: 'Automated recurring payment pipelines', ru: 'Автоматизированный биллинг и вебхуки' }
     ],
     description: {
-      en: 'Full-cycle privacy ecosystem featuring an interactive marketing portal, Telegram management bot, automated recurring YooKassa billing, and multi-node WireGuard/Hysteria2 tunneling server topology providing secure internet access.',
-      ru: 'Комплексная экосистема защищенного интернета: веб-сайт, Telegram-бот, автоматический рекуррентный биллинг подписок и серверная сеть защищенных туннелей WireGuard/Hysteria2.'
+      en: 'High-throughput privacy platform with live recurring subscriptions, asynchronous FastAPI billing webhooks, and production Wireguard/Hysteria2 tunneling topology with automated SSL.',
+      ru: 'Действующий коммерческий privacy-сервис с платными подписками, асинхронными вебхуками YooKassa на FastAPI и production-топологией защищенных туннелей Wireguard/Hysteria2.'
     },
     image: '/projects/nologs_art.webp',
     githubUrl: 'https://github.com/heayr/nologs-bot-docs',
