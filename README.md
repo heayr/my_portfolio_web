@@ -16,7 +16,7 @@
   Engineered with sub-pixel LERP Canvas scrubbing, zero-reconciliation DOM mutation, leaf-node clock state isolation, mobile battery preservation, and true polymorphic UI primitives.
 </p>
 
-[Explore Live Experience ↗](https://yegor-dev.vercel.app/) · [Architecture Specs](./ARCHITECTURE_AND_DESIGN_SYSTEM.md) · [Русская версия 🇷🇺](#-русская-версия-спецификации-1-к-1-с-английской)
+[Explore Live Experience ↗](https://yegor-dev.vercel.app/) · [Architecture Specs](./ARCHITECTURE_AND_DESIGN_SYSTEM.md) · [Best Practices Playbook 📖](./BEST_PRACTICES_PLAYBOOK.md) · [Русская версия 🇷🇺](#-русская-версия-спецификации-1-к-1-с-английской)
 
 </div>
 
@@ -255,6 +255,8 @@ Open [http://localhost:3000](http://localhost:3000) to inspect the local build.
 ### 🏛️ Архитектурный манифест проекта YEGOR.DEV
 
 Этот проект спроектирован не как типовой сайт-визитка, а как **высокоскоростной инженерный шоукейс** уровня Awwwards / Site of the Day. Он доказывает, что сложная интерактивная графика и кинематографический интерфейс могут работать со стабильными **120 FPS**, иметь начальный бандл JavaScript всего **~100 kB (gzipped)** и выбивать **100/100 Core Web Vitals**.
+
+> 📖 **Инженерная настольная книга:** Полный пошаговый справочник лучших практик (от адаптивной геометрии 2K/UltraWide и мобильной верстки до защиты `.env` и оптимизации батареи) доступен в документе **[BEST_PRACTICES_PLAYBOOK.md](./BEST_PRACTICES_PLAYBOOK.md)**.
 
 ---
 
