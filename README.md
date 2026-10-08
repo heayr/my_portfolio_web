@@ -16,7 +16,7 @@
   Engineered with sub-pixel LERP Canvas scrubbing, zero-reconciliation DOM mutation, leaf-node clock state isolation, mobile battery preservation, and true polymorphic UI primitives.
 </p>
 
-[Explore Live Experience ↗](https://yegor-dev.vercel.app/) · [Architecture Specs](./ARCHITECTURE_AND_DESIGN_SYSTEM.md) · [Best Practices Playbook 📖](./BEST_PRACTICES_PLAYBOOK.md) · [Русская версия 🇷🇺](#-русская-версия-спецификации-1-к-1-с-английской)
+[Explore Live Experience ↗](https://yegor-dev.vercel.app/) · [Architecture Specs](./ARCHITECTURE_AND_DESIGN_SYSTEM.md) · [Best Practices Playbook 📖](./BEST_PRACTICES_PLAYBOOK.md) · [Русская версия 🇷🇺](#-русская-версия-спецификации)
 
 </div>
 
@@ -250,7 +250,7 @@ Open [http://localhost:3000](http://localhost:3000) to inspect the local build.
 ---
 
 <details>
-<summary><h2>🇷🇺 Русская версия спецификации (1-к-1 с английской)</h2></summary>
+<summary><h2>🇷🇺 Русская версия спецификации</h2></summary>
 
 ### 🏛️ Архитектурный манифест проекта YEGOR.DEV
 

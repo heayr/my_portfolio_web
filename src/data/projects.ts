@@ -54,7 +54,7 @@ export const projectsData: ProjectItem[] = [
     },
     image: '/projects/radiotochka_art.webp',
     githubUrl: 'https://github.com/heayr/radiotochka',
-    liveUrl: 'https://radiotochka.nologs.website/',
+    liveUrl: 'https://radiotochka.vercel.app/',
     featuredColor: '#10b981'
   },
   {
