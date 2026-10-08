@@ -211,9 +211,9 @@ Tested and verified on live production edge infrastructure:
 
 ## 💼 6. Commercial Projects Featured
 
-* **NoLogs Privacy SaaS**: High-velocity privacy infrastructure, automated billing pipelines, telemetry HUDs, and independent Linux VDS topology.
-* **Radiotochka**: Minimalist audio streaming client, low-latency audio pipelines, and edge streaming architecture.
-* **Jubilee**: High-end jewelry and luxury goods digital catalog with bespoke interactive layouts.
+* **NoLogs Privacy SaaS**: End-to-end privacy ecosystem: marketing web portal, Telegram bot, high-speed multi-node VPN/VDS server network, and automated recurring subscription billing for secure internet access.
+* **Radiotochka**: Awwwards-caliber digital platform and content management suite (CMS) for a full-cycle creative advertising agency featuring mathematical fluid typography (320px to 4K) and high-conversion interactive showcases.
+* **The 50th Jubilee**: Bespoke luxury interactive invitation web app with liquid-gold aesthetics, guest RSVP registration flow, and cross-platform one-click calendar sync (Apple iOS Calendar, Google Calendar, Android, `.ics`).
 
 ---
 
@@ -397,9 +397,9 @@ export type ButtonProps<E extends React.ElementType = 'button'> = BaseButtonProp
 ---
 
 ### 💼 5. Коммерческие кейсы
-* **NoLogs Privacy SaaS**: B2B приватная инфраструктура, биллинг, телеметрия в реальном времени, VDS-топология.
-* **Radiotochka**: Аудиостриминг с ультра-низкой задержкой и минималистичным интерфейсом.
-* **Jubilee**: Цифровой каталог ювелирных изделий класса люкс с интерактивными раскладками.
+* **NoLogs Privacy SaaS**: Полноценная экосистема защищенного интернета: веб-сайт, Telegram-бот, высокоскоростная VPN-инфраструктура, распределенная сеть серверов и автоматический рекуррентный биллинг подписок.
+* **Radiotochka**: Цифровая платформа и CMS рекламного агентства полного цикла уровня Awwwards со сквозной fluid-типографикой (от 320px до 4K) и интерактивной витриной проектов.
+* **The 50th Jubilee**: Эксклюзивный интерактивный сайт-приглашение на юбилей с темной liquid-gold эстетикой, регистрацией гостей (RSVP) и нативным добавлением события в календари любых смартфонов (Apple iOS Calendar, Google Calendar, Android, `.ics`).
 
 </details>
 
