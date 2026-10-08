@@ -39,9 +39,9 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     <>
       <header
         role="banner"
-        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center px-4 sm:px-10 xl:px-16 2xl:px-24 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center px-4 sm:px-12 2xl:px-16 transition-all duration-300 ${headerBg}`}
       >
-        <div className="w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto flex items-center justify-between">
+        <div className="w-full max-w-[clamp(1200px,92vw,1800px)] mx-auto flex items-center justify-between">
           {/* Left: Semantic Navbar rendered via data-driven array and universal Button */}
           <Navbar copiedEmail={isCopied} onCopyEmail={handleCopyEmail} />
 
