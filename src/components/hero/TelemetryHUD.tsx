@@ -108,8 +108,8 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
 
       {/* Bottom Telemetry Line: Trajectory + Actions */}
       <div className="hud-bottom">
-        {/* Left Column: Narrative Card + Trajectory Progress (Strictly Unified Left Alignment) */}
-        <div className="flex flex-col items-start gap-2.5 sm:gap-3 w-full sm:w-[380px] 2xl:w-[440px] max-w-[calc(100vw-32px)] pointer-events-none relative">
+        {/* Left Column: Narrative Card (Anchored Above) + Trajectory Progress (Strictly Unified Left Alignment) */}
+        <div className="relative w-full sm:w-[380px] 2xl:w-[440px] max-w-[calc(100vw-32px)] pointer-events-auto">
           {children}
           <GlassCard intensity="crystal" sheen={true} className="hud-progress-wrap pointer-events-auto p-3 sm:p-3.5 w-full">
             <div className="flex justify-between text-[11px] sm:text-xs font-mono font-bold tracking-wider mb-1.5 sm:mb-2">

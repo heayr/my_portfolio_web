@@ -362,14 +362,6 @@ html.lenis body {
   transition: width 0.1s linear;
 }
 
-/* Floating Narrative Cards - Stacked above Trajectory HUD */
-.story-cards-container {
-  position: absolute;
-  inset: 0;
-  z-index: 15;
-  pointer-events: none;
-}
-
 /* ==========================================================================
    Apple Optical Glassmorphism System (macOS Sequoia / visionOS)
    Reusable Zero-Cost GPU Glass with Fresnel Reflection & Prismatic Dispersion

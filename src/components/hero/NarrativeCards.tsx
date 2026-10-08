@@ -110,107 +110,100 @@ const CARDS_DATA = [
 export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activeAct, visible }) => {
   const { locale, theme } = useApp();
   const isLight = theme === 'light';
+  const card = CARDS_DATA[activeAct] || CARDS_DATA[0];
 
   return (
     <div
-      className={`story-cards-container w-full grid grid-cols-1 grid-rows-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`absolute bottom-[calc(100%+10px)] sm:bottom-[calc(100%+12px)] left-0 w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         visible
-          ? 'opacity-100 max-h-[500px] mb-0 pointer-events-auto'
-          : 'opacity-0 max-h-0 mb-[-12px] overflow-hidden pointer-events-none'
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-3 pointer-events-none'
       }`}
     >
-      {CARDS_DATA.map((card, idx) => {
-        const isActive = activeAct === idx && visible;
-        return (
-          <GlassCard
-            key={idx}
-            className={`story-narrative-card col-start-1 row-start-1 w-full p-4 sm:p-5 2xl:p-6 rounded-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              isActive
-                ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto z-10'
-                : 'opacity-0 translate-y-3 scale-[0.98] pointer-events-none z-0'
-            } ${
-              isLight ? 'shadow-[0_20px_50px_rgba(0,0,0,0.12)] !text-zinc-950' : ''
-            }`}
-            sheen={true}
-            intensity="frosted"
-          >
-            {/* Apple Frosted Pill & Phase Indicator */}
-            <div className="flex items-center justify-between gap-2 mb-2.5">
-              <div
-                className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-mono tracking-wider backdrop-blur-md ${
-                  isLight
-                    ? 'bg-black/[0.06] border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-zinc-950 font-extrabold'
-                    : 'bg-white/[0.08] border-white/[0.14] text-zinc-200'
-                }`}
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.85)]" />
-                <span className="font-bold uppercase tracking-wider">
-                  {card.tag[locale].replace(/\s*\/\/\s*/g, ' · ')}
-                </span>
-              </div>
-              <span
-                className={`font-mono text-[10px] tracking-widest shrink-0 ${
-                  isLight ? 'text-zinc-800 font-extrabold' : 'text-zinc-400/80 font-medium'
-                }`}
-              >
-                {card.id} / 05
-              </span>
-            </div>
-
-            {/* Apple-style Refined Manifesto Headline */}
-            <h3
-              className={`text-[13.5px] sm:text-[14.5px] 2xl:text-[16px] tracking-tight leading-snug mb-1.5 ${
-                isLight ? 'text-zinc-950 font-black' : 'text-white font-semibold'
-              }`}
-            >
-              {card.manifesto[locale].replace(/^\d+\.\s*/, '')}
-            </h3>
-
-            {/* Crisp Human Body Narrative */}
-            <p
-              className={`text-[11.5px] sm:text-[12px] 2xl:text-[13px] leading-relaxed mb-3.5 ${
-                isLight ? 'text-zinc-800 font-medium' : 'text-zinc-300/90 font-normal'
-              }`}
-            >
-              {card.desc[locale]}
-            </p>
-
-            {/* Apple Frosted Footer Meta & Action Pill */}
+      <GlassCard
+        className={`w-full p-3.5 sm:p-4.5 2xl:p-5 rounded-2xl transition-all duration-300 ${
+          isLight ? 'shadow-[0_20px_50px_rgba(0,0,0,0.12)] !text-zinc-950' : ''
+        }`}
+        sheen={true}
+        intensity="frosted"
+      >
+        <div key={activeAct} className="transition-opacity duration-300">
+          {/* Apple Frosted Pill & Phase Indicator */}
+          <div className="flex items-center justify-between gap-2 mb-2 sm:mb-2.5">
             <div
-              className={`flex items-center justify-between pt-2.5 border-t text-[10.5px] ${
-                isLight ? 'border-black/10' : 'border-white/[0.08]'
+              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-mono tracking-wider backdrop-blur-md ${
+                isLight
+                  ? 'bg-black/[0.06] border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-zinc-950 font-extrabold'
+                  : 'bg-white/[0.08] border-white/[0.14] text-zinc-200'
               }`}
             >
-              <span
-                className={`truncate flex-1 min-w-0 pr-2.5 font-mono tracking-tight text-[10px] sm:text-[10.5px] 2xl:text-[11.5px] ${
-                  isLight ? 'text-zinc-700 font-bold' : 'text-zinc-400'
-                }`}
-              >
-                {card.meta[locale].replace(/\s*\/\/\s*/g, ' · ')}
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.85)]" />
+              <span className="font-bold uppercase tracking-wider">
+                {card.tag[locale].replace(/\s*\/\/\s*/g, ' · ')}
               </span>
-              <a
-                href={card.actionLink}
-                className={`group/btn shrink-0 inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10.5px] 2xl:text-[11.5px] font-bold transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
-                  isLight
-                    ? 'bg-amber-400 hover:bg-amber-300 text-zinc-950 border-amber-400 shadow-[0_1px_4px_rgba(245,158,11,0.25)]'
-                    : 'bg-white/[0.08] hover:bg-white/[0.16] text-white border-white/[0.14] hover:border-white/[0.28]'
-                }`}
-              >
-                <span>{card.actionText[locale].replace(/[\s↘↗→]+$/, '')}</span>
-                <svg
-                  className="w-2.5 h-2.5 text-zinc-950 dark:text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H9M17 7V15" />
-                </svg>
-              </a>
             </div>
-          </GlassCard>
-        );
-      })}
+            <span
+              className={`font-mono text-[10px] tracking-widest shrink-0 ${
+                isLight ? 'text-zinc-800 font-extrabold' : 'text-zinc-400/80 font-medium'
+              }`}
+            >
+              {card.id} / 05
+            </span>
+          </div>
+
+          {/* Apple-style Refined Manifesto Headline */}
+          <h3
+            className={`text-[13px] sm:text-[14px] 2xl:text-[15.5px] tracking-tight leading-snug mb-1 sm:mb-1.5 ${
+              isLight ? 'text-zinc-950 font-black' : 'text-white font-semibold'
+            }`}
+          >
+            {card.manifesto[locale].replace(/^\d+\.\s*/, '')}
+          </h3>
+
+          {/* Crisp Human Body Narrative */}
+          <p
+            className={`text-[11px] sm:text-[11.5px] 2xl:text-[12.5px] leading-relaxed mb-2.5 sm:mb-3 ${
+              isLight ? 'text-zinc-800 font-medium' : 'text-zinc-300/90 font-normal'
+            }`}
+          >
+            {card.desc[locale]}
+          </p>
+
+          {/* Apple Frosted Footer Meta & Action Pill */}
+          <div
+            className={`flex items-center justify-between pt-2 sm:pt-2.5 border-t text-[10.5px] ${
+              isLight ? 'border-black/10' : 'border-white/[0.08]'
+            }`}
+          >
+            <span
+              className={`truncate flex-1 min-w-0 pr-2.5 font-mono tracking-tight text-[10px] sm:text-[10.5px] 2xl:text-[11px] ${
+                isLight ? 'text-zinc-700 font-bold' : 'text-zinc-400'
+              }`}
+            >
+              {card.meta[locale].replace(/\s*\/\/\s*/g, ' · ')}
+            </span>
+            <a
+              href={card.actionLink}
+              className={`group/btn shrink-0 inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[10.5px] font-bold transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
+                isLight
+                  ? 'bg-amber-400 hover:bg-amber-300 text-zinc-950 border-amber-400 shadow-[0_1px_4px_rgba(245,158,11,0.25)]'
+                  : 'bg-white/[0.08] hover:bg-white/[0.16] text-white border-white/[0.14] hover:border-white/[0.28]'
+              }`}
+            >
+              <span>{card.actionText[locale].replace(/[\s↘↗→]+$/, '')}</span>
+              <svg
+                className="w-2.5 h-2.5 text-zinc-950 dark:text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2.2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H9M17 7V15" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </GlassCard>
     </div>
   );
 });
