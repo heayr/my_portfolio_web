@@ -14,9 +14,9 @@ export const ru = {
     description: 'Соединяю дерзость инженеров эпохи Возрождения со сверхзвуковой современной веб-архитектурой. Разрабатываю zero-leak коммерческие SaaS-платформы, распределенные edge-бэкенды и кинематографичные Awwwards-интерфейсы на React 19 и Next.js 15.',
     scrollDown: 'Крутите вниз для перехода к кейсам',
     metrics: {
-      speed: '100/100 Core Web Vitals',
-      blocking: '0ms Total Blocking Time',
-      uptime: 'Высокая стабильность Linux VDS'
+      speed: 'Green Core Web Vitals',
+      blocking: '<50мс Total Blocking Time',
+      uptime: 'Продакшен Linux & Docker SLA'
     }
   },
   works: {

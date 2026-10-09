@@ -42,7 +42,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
       {/* Structured Content Container Constrained to Standard 1800px / 2K Grid */}
       <div className="relative z-20 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto h-full flex flex-col justify-between px-6 sm:px-12 lg:px-16 xl:px-24">
         {/* Top Header Bar (Arpeggio Signature) */}
-        <div className="pt-24 sm:pt-28 flex flex-wrap items-center justify-between gap-4 font-mono text-xs 2xl:text-sm">
+        <div className="pt-18 sm:pt-20 lg:pt-20 xl:pt-20 2xl:pt-28 flex flex-wrap items-center justify-between gap-4 font-mono text-xs 2xl:text-sm">
           <div className="flex items-center gap-3 sm:gap-4">
             <span className="px-3 py-1 rounded-full bg-black/85 border border-white/25 text-amber-400 font-bold shadow-md">
               0{index + 1} // 0{total}
@@ -66,7 +66,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
         </div>
 
         {/* Center Cinematic Editorial Text */}
-        <div className="max-w-4xl 2xl:max-w-5xl my-auto py-6">
+        <div className="max-w-4xl 2xl:max-w-5xl my-auto py-3 sm:py-4 lg:py-6">
           <span className="inline-block font-mono text-xs 2xl:text-sm tracking-widest text-amber-400 uppercase font-bold mb-3">
             // {t.works.sectionTag} · ARCHITECTURAL HIGHLIGHT
           </span>
@@ -79,7 +79,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
         </div>
 
         {/* Bottom Bar: Engineering Metrics, Stack & CTAs */}
-        <div className="pb-10 sm:pb-12 2xl:pb-16 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+        <div className="pb-6 sm:pb-8 lg:pb-10 2xl:pb-16 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
           {/* Left: Metrics & Tech Stack */}
           <div className="flex flex-col gap-3 max-w-2xl 2xl:max-w-3xl">
             {/* Key Metrics Chips */}

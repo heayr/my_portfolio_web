@@ -87,7 +87,7 @@ export const CurtainFooter: React.FC = () => {
       role="contentinfo"
       onMouseMove={handleFooterMouseMove}
       onMouseLeave={handleFooterMouseLeave}
-      className="relative z-20 min-h-screen w-full bg-[#050508] text-white overflow-hidden flex flex-col justify-between pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-50px_120px_rgba(0,0,0,0.98)] border-t border-white/15 select-none"
+      className="relative z-20 min-h-[85vh] xl:min-h-screen w-full bg-[#050508] text-white overflow-hidden flex flex-col justify-between pt-10 sm:pt-14 lg:pt-16 2xl:pt-24 pb-6 sm:pb-8 lg:pb-12 rounded-t-[36px] md:rounded-t-[56px] shadow-[0_-50px_120px_rgba(0,0,0,0.98)] border-t border-white/15 select-none"
     >
       {/* Dynamic Cursor Spotlight (Direct DOM Mutation, 0 Re-renders) */}
       <div

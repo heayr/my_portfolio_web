@@ -27,6 +27,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const savedLocale = localStorage.getItem('yegor_locale') as Locale;
     if (savedLocale === 'en' || savedLocale === 'ru') {
       setLocaleState(savedLocale);
+      document.documentElement.lang = savedLocale;
+    } else {
+      document.documentElement.lang = 'ru';
     }
 
     const savedTheme = localStorage.getItem('yegor_theme') as Theme;
@@ -42,6 +45,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const setLocale = (loc: Locale) => {
     setLocaleState(loc);
     localStorage.setItem('yegor_locale', loc);
+    document.documentElement.lang = loc;
   };
 
   const toggleLocale = () => {

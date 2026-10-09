@@ -121,7 +121,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
       }`}
     >
       <GlassCard
-        className={`w-full p-3.5 sm:p-4.5 2xl:p-5 rounded-2xl transition-all duration-300 ${
+        className={`w-full p-2.5 sm:p-3 lg:p-3.5 2xl:p-5 rounded-2xl transition-all duration-300 ${
           isLight ? 'shadow-[0_20px_50px_rgba(0,0,0,0.12)] !text-zinc-950' : ''
         }`}
         sheen={true}
@@ -129,9 +129,9 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
       >
         <div key={activeAct} className="transition-opacity duration-300">
           {/* Apple Frosted Pill & Phase Indicator */}
-          <div className="flex items-center justify-between gap-2 mb-2 sm:mb-2.5">
+          <div className="flex items-center justify-between gap-1.5 mb-1.5 sm:mb-2 2xl:mb-2.5">
             <div
-              className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border text-[10px] font-mono tracking-wider backdrop-blur-md ${
+              className={`inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 rounded-full border text-[9px] sm:text-[9.5px] 2xl:text-[10px] font-mono tracking-wider backdrop-blur-md ${
                 isLight
                   ? 'bg-black/[0.06] border-black/10 shadow-[0_1px_3px_rgba(0,0,0,0.05)] text-zinc-950 font-extrabold'
                   : 'bg-white/[0.08] border-white/[0.14] text-zinc-200'
@@ -143,7 +143,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
               </span>
             </div>
             <span
-              className={`font-mono text-[10px] tracking-widest shrink-0 ${
+              className={`font-mono text-[9px] sm:text-[9.5px] 2xl:text-[10px] tracking-widest shrink-0 ${
                 isLight ? 'text-zinc-800 font-extrabold' : 'text-zinc-400/80 font-medium'
               }`}
             >
@@ -153,7 +153,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
 
           {/* Apple-style Refined Manifesto Headline */}
           <h3
-            className={`text-[13px] sm:text-[14px] 2xl:text-[15.5px] tracking-tight leading-snug mb-1 sm:mb-1.5 ${
+            className={`text-[11.5px] sm:text-[12px] lg:text-[13px] 2xl:text-[15.5px] tracking-tight leading-snug mb-1 2xl:mb-1.5 ${
               isLight ? 'text-zinc-950 font-black' : 'text-white font-semibold'
             }`}
           >
@@ -162,7 +162,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
 
           {/* Crisp Human Body Narrative */}
           <p
-            className={`text-[11px] sm:text-[11.5px] 2xl:text-[12.5px] leading-relaxed mb-2.5 sm:mb-3 ${
+            className={`text-[9.5px] sm:text-[10px] lg:text-[11px] 2xl:text-[12.5px] leading-relaxed mb-1.5 sm:mb-2 2xl:mb-3 ${
               isLight ? 'text-zinc-800 font-medium' : 'text-zinc-300/90 font-normal'
             }`}
           >
@@ -171,12 +171,12 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
 
           {/* Apple Frosted Footer Meta & Action Pill */}
           <div
-            className={`flex items-center justify-between pt-2 sm:pt-2.5 border-t text-[10.5px] ${
+            className={`flex items-center justify-between pt-1.5 sm:pt-2 2xl:pt-2.5 border-t text-[9.5px] sm:text-[10px] 2xl:text-[10.5px] ${
               isLight ? 'border-black/10' : 'border-white/[0.08]'
             }`}
           >
             <span
-              className={`truncate flex-1 min-w-0 pr-2.5 font-mono tracking-tight text-[10px] sm:text-[10.5px] 2xl:text-[11px] ${
+              className={`truncate flex-1 min-w-0 pr-2 font-mono tracking-tight text-[9px] sm:text-[9.5px] lg:text-[10px] 2xl:text-[11px] ${
                 isLight ? 'text-zinc-700 font-bold' : 'text-zinc-400'
               }`}
             >
@@ -184,7 +184,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
             </span>
             <a
               href={card.actionLink}
-              className={`group/btn shrink-0 inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[10.5px] font-bold transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
+              className={`group/btn shrink-0 inline-flex items-center gap-1 px-2 sm:px-2.5 2xl:px-3 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[9.5px] 2xl:text-[10.5px] font-bold transition-all duration-200 active:scale-95 border shadow-sm backdrop-blur-md ${
                 isLight
                   ? 'bg-amber-400 hover:bg-amber-300 text-zinc-950 border-amber-400 shadow-[0_1px_4px_rgba(245,158,11,0.25)]'
                   : 'bg-white/[0.08] hover:bg-white/[0.16] text-white border-white/[0.14] hover:border-white/[0.28]'
@@ -192,7 +192,7 @@ export const NarrativeCards: React.FC<NarrativeCardsProps> = React.memo(({ activ
             >
               <span>{card.actionText[locale].replace(/[\s↘↗→]+$/, '')}</span>
               <svg
-                className="w-2.5 h-2.5 text-zinc-950 dark:text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                className="w-2 sm:w-2.5 h-2 sm:h-2.5 text-zinc-950 dark:text-amber-500 transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

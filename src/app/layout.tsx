@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Yegor — Frontend & Fullstack Engineer | Portfolio',
   description:
-    'Portfolio of Yegor (heayr): Frontend & Fullstack Engineer specializing in React 19, Next.js 15, TypeScript, commercial SaaS, and high-performance Awwwards-caliber digital experiences.',
+    'Portfolio of Yegor (heayr): Frontend & Fullstack Engineer specializing in React 19, Next.js 15, TypeScript, commercial SaaS, and high-performance interactive web experiences.',
   keywords: [
     'Frontend Engineer',
     'Fullstack Engineer',
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     'NoLogs SaaS',
     'Radiotochka',
     'Core Web Vitals',
-    'Awwwards',
+    'Creative Development',
   ],
   authors: [{ name: 'Yegor (heayr)' }],
   openGraph: {
     title: 'Yegor — Frontend & Fullstack Engineer',
     description:
-      'Engineering high-performance commercial SaaS, B2B platforms, and bespoke Awwwards-caliber digital experiences. 100/100 PageSpeed obsessed.',
+      'Engineering high-performance commercial SaaS, B2B platforms, and interactive digital experiences with strict performance and UI standards.',
     images: ['/projects/nologs.webp'],
   },
 };
@@ -56,7 +56,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="ru"
       className={`dark ${inter.variable} ${jetbrainsMono.variable} ${playfairDisplay.variable}`}
       suppressHydrationWarning
     >

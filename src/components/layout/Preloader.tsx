@@ -10,18 +10,6 @@ export const Preloader: React.FC = () => {
   const [removed, setRemoved] = useState(false);
 
   useEffect(() => {
-    // If Lighthouse/automation audit, dismiss immediately so LCP is measured instantly
-    const isBot =
-      typeof navigator !== 'undefined' &&
-      (/bot|googlebot|crawler|spider|robot|crawling|lighthouse|headlesschrome/i.test(navigator.userAgent) ||
-        (navigator as any).webdriver);
-
-    if (isBot) {
-      setIsDone(true);
-      setRemoved(true);
-      return;
-    }
-
     // Lock scroll during preloader
     document.body.style.overflow = 'hidden';
 

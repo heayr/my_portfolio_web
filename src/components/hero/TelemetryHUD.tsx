@@ -109,10 +109,10 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
       {/* Bottom Telemetry Line: Trajectory + Actions */}
       <div className="hud-bottom">
         {/* Left Column: Narrative Card (Anchored Above) + Trajectory Progress (Strictly Unified Left Alignment) */}
-        <div className="relative w-full sm:w-[380px] 2xl:w-[440px] max-w-[calc(100vw-32px)] pointer-events-auto">
+        <div className="relative w-full sm:w-[280px] md:w-[290px] lg:w-[310px] xl:w-[330px] 2xl:w-[440px] max-w-[calc(100vw-32px)] pointer-events-auto">
           {children}
-          <GlassCard intensity="crystal" sheen={true} className="hud-progress-wrap pointer-events-auto p-3 sm:p-3.5 w-full">
-            <div className="flex justify-between text-[11px] sm:text-xs font-mono font-bold tracking-wider mb-1.5 sm:mb-2">
+          <GlassCard intensity="crystal" sheen={true} className="hud-progress-wrap pointer-events-auto p-2.5 sm:p-2.5 lg:p-3 2xl:p-3.5 w-full">
+            <div className="flex justify-between text-[10px] sm:text-[10.5px] lg:text-[11px] 2xl:text-xs font-mono font-bold tracking-wider mb-1 sm:mb-1.5 2xl:mb-2">
               <span className="text-zinc-100 [html.light_&]:text-zinc-950 font-bold">{locale === 'ru' ? 'ТРАЕКТОРИЯ' : 'TRAJECTORY'}</span>
               <span className="text-amber-400 [html.light_&]:text-amber-600 font-black tracking-widest drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">VEL: {current.velocity}</span>
             </div>

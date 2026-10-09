@@ -247,6 +247,12 @@ html.lenis body {
   }
 }
 
+@media (max-width: 1440px) {
+  .stage-hud {
+    padding: 74px 32px 24px;
+  }
+}
+
 @media (max-width: 640px) {
   .stage-hud {
     padding: 72px 16px 20px;
@@ -690,4 +696,32 @@ html.light #contact .apple-glass::before {
   color: #ffffff;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.95), 0 0 16px rgba(245, 158, 11, 0.3);
   white-space: nowrap;
+}
+
+@media (max-width: 1440px) {
+  .museum-cartouche {
+    gap: 10px;
+    padding: 6px 20px;
+  }
+  .museum-cartouche-ornament {
+    font-size: 11px;
+  }
+  .museum-cartouche-text {
+    font-size: clamp(11px, 0.85vw, 13px);
+    letter-spacing: 0.08em;
+  }
+}
+
+@media (max-width: 1024px) {
+  .museum-cartouche {
+    gap: 8px;
+    padding: 5px 14px;
+  }
+  .museum-cartouche-ornament {
+    font-size: 9px;
+  }
+  .museum-cartouche-text {
+    font-size: 10.5px;
+    letter-spacing: 0.06em;
+  }
 }

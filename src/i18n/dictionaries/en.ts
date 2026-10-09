@@ -14,9 +14,9 @@ export const en = {
     description: 'Bridging the audacity of Renaissance inventors with hypersonic modern web architecture. Crafting zero-leak commercial SaaS platforms, distributed edge backends, and cinematic Awwwards-caliber digital experiences with React 19 & Next.js 15.',
     scrollDown: 'Scroll to explore works',
     metrics: {
-      speed: '100/100 Core Web Vitals',
-      blocking: '0ms Total Blocking Time',
-      uptime: 'High-Uptime Linux VDS Topology'
+      speed: 'Green Core Web Vitals',
+      blocking: '<50ms Total Blocking Time',
+      uptime: 'Production Linux & Docker SLA'
     }
   },
   works: {

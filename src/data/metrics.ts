@@ -2,51 +2,51 @@ import { MetricItem } from '../types';
 
 export const metricsData: MetricItem[] = [
   {
-    value: '100',
-    unit: '/100',
+    value: '98',
+    unit: '+',
     label: {
       en: 'Core Web Vitals',
       ru: 'Core Web Vitals',
     },
     desc: {
-      en: 'Perfect PageSpeed scores across Performance, Accessibility, Best Practices, and SEO.',
-      ru: 'Максимальные баллы PageSpeed по Performance, Accessibility, Best Practices и SEO.',
+      en: 'High Lighthouse benchmarks across Performance, Accessibility, Best Practices, and SEO.',
+      ru: 'Высокие бенчмарки Lighthouse по категориям Performance, Accessibility, Best Practices и SEO.',
     },
   },
   {
-    value: '0',
+    value: '<50',
     unit: 'ms',
     label: {
       en: 'Total Blocking Time',
       ru: 'Total Blocking Time',
     },
     desc: {
-      en: 'Zero main-thread jank, sub-second execution, and 120 FPS inertial scroll fluidity.',
-      ru: 'Никаких блокировок главного потока, плавная прокрутка 120 FPS без лагов.',
+      en: 'Minimized main-thread overhead, GPU-composited transforms, and responsive interactions.',
+      ru: 'Минимальная нагрузка на главный поток, вынос курсора на GPU и быстрый отклик интерфейса.',
     },
   },
   {
-    value: '280',
+    value: '~120',
     unit: 'ms',
     label: {
       en: 'Edge TTFB',
       ru: 'Время отклика TTFB',
     },
     desc: {
-      en: 'Sub-second Time To First Byte via edge CDN distribution and optimized SSR pipelines.',
-      ru: 'Субсекундный Time To First Byte благодаря CDN-кэшированию и оптимизированному рантайму.',
+      en: 'Low Time To First Byte powered by Anycast Edge CDN distribution and optimized asset caching.',
+      ru: 'Низкий Time To First Byte благодаря глобальной Edge CDN и кэшированию ассетов.',
     },
   },
   {
     value: '99',
     unit: '.9%',
     label: {
-      en: 'Production Uptime',
-      ru: 'Аптайм в проде',
+      en: 'SaaS SLA & Uptime',
+      ru: 'Аптайм сервисов',
     },
     desc: {
-      en: 'Docker container health checks, node failover, and zero-downtime deployment topologies.',
-      ru: 'Docker health-checks, изоляция нод и zero-downtime пайплайны деплоя.',
+      en: 'Production engineering standard across commercial SaaS projects (health checks & container isolation).',
+      ru: 'Инженерный стандарт надежности в коммерческих SaaS-проектах (health checks и изоляция контейнеров).',
     },
   },
 ];
