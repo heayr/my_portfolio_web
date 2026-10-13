@@ -59,7 +59,7 @@ export const MoscowClock: React.FC<MoscowClockProps> = React.memo(({
   return (
     <div
       suppressHydrationWarning
-      className={`text-3xl sm:text-4xl lg:text-[44px] font-mono font-black tracking-tight text-white group-hover/widget:text-amber-400 transition-colors duration-300 ${className}`}
+      className={`text-2xl sm:text-4xl lg:text-[44px] font-mono font-black tracking-tight text-white group-hover/widget:text-amber-400 transition-colors duration-300 ${className}`}
     >
       {clock}
     </div>

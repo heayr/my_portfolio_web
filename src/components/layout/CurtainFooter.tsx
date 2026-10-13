@@ -95,29 +95,29 @@ export const CurtainFooter: React.FC = () => {
         className="pointer-events-none absolute inset-0 transition-opacity duration-300 z-0 opacity-0"
       />
 
-      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-10 sm:gap-12">
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-16 xl:px-24 flex-1 flex flex-col justify-between gap-8 sm:gap-10 lg:gap-12">
         {/* Top Header Narrative */}
         <div className="max-w-3xl">
-          <p className="text-lg sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed">
+          <p className="text-base sm:text-xl lg:text-2xl text-zinc-300 font-normal leading-relaxed">
             {t.footer.subtext}
           </p>
         </div>
 
         {/* Central Monumental Architecture + Telemetry Widget Column */}
-        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-8 sm:gap-12 my-auto py-4 sm:py-6 w-full">
+        <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-6 sm:gap-10 lg:gap-12 my-auto py-3 sm:py-6 w-full min-w-0">
           {/* Borderless Monumental Typography */}
-          <div className="flex-1 select-none group/title cursor-default max-w-full">
+          <div className="flex-1 select-none group/title cursor-default w-full min-w-0">
             <h2
-              className={`relative z-10 text-[clamp(2.2rem,5vw,6.2rem)] font-black uppercase max-w-full ${
+              className={`relative z-10 text-[clamp(1.4rem,5.5vw,5.6rem)] font-black uppercase w-full max-w-full break-words [overflow-wrap:anywhere] ${
                 locale === 'ru'
-                  ? 'leading-[1.08] sm:leading-[1.12] tracking-[0.03em] sm:tracking-[0.05em]'
-                  : 'leading-[0.92] tracking-tight sm:tracking-normal'
+                  ? 'leading-[1.08] sm:leading-[1.12] tracking-tight sm:tracking-[0.03em] lg:tracking-[0.05em]'
+                  : 'leading-[0.95] tracking-tight sm:tracking-normal'
               }`}
             >
-              <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 max-w-full mb-2 sm:mb-4">
+              <span className="block text-zinc-300 group-hover/title:text-white transition-colors duration-500 w-full max-w-full mb-1.5 sm:mb-3">
                 {headline.line1}
               </span>
-              <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] max-w-full">
+              <span className="block bg-gradient-to-r from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent group-hover/title:from-amber-300 group-hover/title:via-amber-100 group-hover/title:to-amber-400 transition-all duration-500 drop-shadow-[0_0_40px_rgba(245,158,11,0.35)] w-full max-w-full">
                 {headline.line2}
               </span>
             </h2>
@@ -127,7 +127,7 @@ export const CurtainFooter: React.FC = () => {
           <GlassCard
             intensity="crystal"
             sheen={true}
-            className="relative z-10 w-full sm:w-auto xl:w-[380px] shrink-0 p-6 sm:p-7 rounded-3xl flex flex-col justify-between gap-5 transition-all duration-300 shadow-2xl group/widget hover:border-amber-400/40 hover:shadow-[0_0_40px_rgba(245,158,11,0.16)]"
+            className="relative z-10 w-full xl:w-[380px] shrink-0 p-4 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl flex flex-col justify-between gap-4 sm:gap-5 transition-all duration-300 shadow-2xl group/widget hover:border-amber-400/40 hover:shadow-[0_0_40px_rgba(245,158,11,0.16)]"
           >
             {telemetryItems.map((item, idx) => (
               <React.Fragment key={item.id}>
@@ -145,14 +145,14 @@ export const CurtainFooter: React.FC = () => {
         </div>
 
         {/* Action Controls: Dynamic Hologram Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-6 my-2 sm:my-4 items-stretch w-full">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-4 lg:gap-6 my-2 sm:my-4 items-stretch w-full">
           {contactCards.map((card) => (
             <ContactCardItem key={card.id} card={card} />
           ))}
         </div>
 
         {/* Bottom Rights Bar with Borderless Large Back to Top Button */}
-        <div className="pt-8 sm:pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-6 font-mono text-xs sm:text-sm text-zinc-500">
+        <div className="pt-6 sm:pt-10 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 font-mono text-xs sm:text-sm text-zinc-500">
           <span className="order-2 md:order-1 text-center md:text-left">
             © 2026 YEGOR.DEV // SOFTWARE & FULLSTACK ENGINEER
           </span>

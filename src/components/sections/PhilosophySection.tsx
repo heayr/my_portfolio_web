@@ -9,14 +9,14 @@ export const PhilosophySection: React.FC = () => {
   const isLight = theme === 'light';
 
   return (
-    <section id="philosophy" className="py-24 sm:py-32 border-t border-[var(--border-subtle)] bg-[var(--bg-root)] transition-colors duration-300">
-      <div className="w-full max-w-[1800px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-24">
+    <section id="philosophy" className="py-16 sm:py-28 lg:py-32 border-t border-[var(--border-subtle)] bg-[var(--bg-root)] transition-colors duration-300">
+      <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-16 xl:px-24">
         {/* Section Header (Unified Universal Component) */}
         <SectionHeader
           eyebrow={t.philosophy.tag}
           title={t.philosophy.title}
           description={t.philosophy.description}
-          className="mb-16 sm:mb-20"
+          className="mb-12 sm:mb-18"
         />
 
         {/* 5 Stacked Full-Width Service / Principle Rows (The Arpeggio Layout) */}
@@ -24,7 +24,7 @@ export const PhilosophySection: React.FC = () => {
           {t.philosophy.pillars.map((pillar) => (
             <div
               key={pillar.num}
-              className={`group relative border-b border-[var(--border-subtle)] py-10 sm:py-14 lg:py-16 transition-all duration-300 -mx-4 px-4 sm:-mx-8 sm:px-8 rounded-3xl ${
+              className={`group relative border-b border-[var(--border-subtle)] py-8 sm:py-12 lg:py-16 transition-all duration-300 -mx-2 px-2 sm:-mx-6 sm:px-6 rounded-2xl sm:rounded-3xl ${
                 isLight ? 'hover:bg-black/[0.03]' : 'hover:bg-white/[0.02]'
               }`}
             >
@@ -34,11 +34,11 @@ export const PhilosophySection: React.FC = () => {
                 aria-hidden="true"
               />
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-10 items-start">
                 {/* 1. Large Monospace Number: {01} */}
                 <div className="lg:col-span-2 flex flex-row lg:flex-col items-baseline lg:items-start justify-between">
                   <span
-                    className={`font-mono text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight transition-colors duration-300 ${
+                    className={`font-mono text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight transition-colors duration-300 ${
                       isLight
                         ? 'text-zinc-400 group-hover:text-amber-600'
                         : 'text-zinc-500 group-hover:text-amber-400'
@@ -57,7 +57,7 @@ export const PhilosophySection: React.FC = () => {
 
                 {/* 2. Main Title, Subtitle & Comprehensive Description */}
                 <div className="lg:col-span-6 flex flex-col">
-                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight flex items-baseline gap-3 transition-all">
+                  <h3 className="text-xl sm:text-2xl lg:text-4xl font-black tracking-tight flex items-baseline gap-2 sm:gap-3 transition-all flex-wrap sm:flex-nowrap">
                     <span
                       className={`group-hover:translate-x-2 transition-transform duration-300 inline-block ${
                         isLight

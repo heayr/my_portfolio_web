@@ -39,17 +39,17 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
     <>
       <header
         role="banner"
-        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center px-4 sm:px-12 2xl:px-16 transition-all duration-300 ${headerBg}`}
+        className={`fixed top-0 inset-x-0 ${menuOpen ? 'z-[100]' : 'z-40'} h-[60px] sm:h-[70px] flex items-center px-3 sm:px-8 lg:px-12 2xl:px-16 transition-all duration-300 ${headerBg}`}
       >
         <div className="w-full max-w-[clamp(1200px,92vw,1800px)] mx-auto flex items-center justify-between">
           {/* Left: Semantic Navbar rendered via data-driven array and universal Button */}
           <Navbar copiedEmail={isCopied} onCopyEmail={handleCopyEmail} />
 
           {/* Mobile Left: Optical balance spacer so center wordmark stays centered */}
-          <div className="sm:hidden w-8" aria-hidden="true" />
+          <div className="sm:hidden w-6" aria-hidden="true" />
 
           {/* Center: Dedicated slot reserved for the Morphing Hero Wordmark */}
-          <div className="w-[100px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
+          <div className="w-[90px] sm:w-[200px] h-[30px] pointer-events-none" aria-hidden="true" />
 
           {/* Right: Controls + Minimalist 2-line Burger Menu */}
           <div className="flex items-center gap-1 sm:gap-2 font-mono text-xs">

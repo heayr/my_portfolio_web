@@ -72,39 +72,39 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = React.memo(({
       <div className="stage-hud-inner">
         {/* Top Telemetry Line */}
         <div className="hud-top">
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hud-epoch-badge px-3 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-xs tracking-wider shadow-xl flex items-center gap-2">
-            <span className="hud-pulse shrink-0" />
-            <span className="text-white font-extrabold tracking-wider hidden sm:inline-block w-[260px] lg:w-[280px] whitespace-nowrap">{current.badge[locale]}</span>
-            <span className="text-white font-extrabold tracking-wider sm:hidden">{current.short}</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="hud-epoch-badge px-2.5 sm:px-4 py-1.5 rounded-full bg-[#06060a]/90 backdrop-blur-md border border-white/25 text-white font-mono text-[10.5px] sm:text-xs tracking-wider shadow-xl flex items-center gap-1.5 sm:gap-2">
+              <span className="hud-pulse shrink-0" />
+              <span className="text-white font-extrabold tracking-wider hidden sm:inline-block w-[260px] lg:w-[280px] whitespace-nowrap">{current.badge[locale]}</span>
+              <span className="text-white font-extrabold tracking-wider sm:hidden">{current.short}</span>
+            </div>
+
+            {/* Interactive Act Tabs - Rendered with .map() via Universal Button */}
+            <div className="hidden sm:flex items-center gap-1.5 pointer-events-auto ml-2">
+              {ACTS_META.map((act, idx) => (
+                <Button
+                  key={idx}
+                  variant={activeAct === idx ? 'primary' : 'glass'}
+                  size="xs"
+                  onClick={() => onSelectAct(idx)}
+                  className={`rounded-full transition-all duration-300 w-[96px] whitespace-nowrap justify-center ${
+                    activeAct === idx
+                      ? 'scale-105'
+                      : 'bg-black/75 text-zinc-200 border-white/20 hover:border-amber-400/50'
+                  }`}
+                  title={`Jump to Phase ${idx + 1}`}
+                >
+                  {act.short}
+                </Button>
+              ))}
+            </div>
           </div>
 
-          {/* Interactive Act Tabs - Rendered with .map() via Universal Button */}
-          <div className="hidden sm:flex items-center gap-1.5 pointer-events-auto ml-2">
-            {ACTS_META.map((act, idx) => (
-              <Button
-                key={idx}
-                variant={activeAct === idx ? 'primary' : 'glass'}
-                size="xs"
-                onClick={() => onSelectAct(idx)}
-                className={`rounded-full transition-all duration-300 w-[96px] whitespace-nowrap justify-center ${
-                  activeAct === idx
-                    ? 'scale-105'
-                    : 'bg-black/75 text-zinc-200 border-white/20 hover:border-amber-400/50'
-                }`}
-                title={`Jump to Phase ${idx + 1}`}
-              >
-                {act.short}
-              </Button>
-            ))}
+          {/* Year Badge */}
+          <div className="hud-stat px-2 sm:px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-zinc-100 font-mono text-[10px] sm:text-xs font-bold tracking-wider sm:tracking-widest shadow-lg min-w-[100px] sm:min-w-[140px] lg:min-w-[160px] text-center flex items-center justify-center">
+            <span>{current.year}</span>
           </div>
         </div>
-
-        {/* Year Badge */}
-        <div className="hud-stat px-2.5 sm:px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-zinc-100 font-mono text-[11px] sm:text-xs font-bold tracking-wider sm:tracking-widest shadow-lg min-w-[140px] lg:min-w-[160px] text-center flex items-center justify-center">
-          <span>{current.year}</span>
-        </div>
-      </div>
 
       {/* Bottom Telemetry Line: Trajectory + Actions */}
       <div className="hud-bottom">

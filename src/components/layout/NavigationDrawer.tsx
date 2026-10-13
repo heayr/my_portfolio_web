@@ -69,7 +69,7 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
       {/* ── UNIFIED RIGHT SLIDE-OVER DRAWER (Translucent Frosted Glass) ── */}
       <aside
-        className={`fixed top-0 right-0 bottom-0 z-[90] w-full sm:w-[540px] md:w-[600px] lg:w-[660px] max-w-full flex flex-col justify-between px-6 sm:px-10 md:px-12 pb-8 sm:pb-10 pt-[78px] sm:pt-[92px] shadow-2xl transition-transform duration-300 ease-out border-l backdrop-blur-2xl ${
+        className={`fixed top-0 right-0 bottom-0 z-[90] w-full sm:w-[540px] md:w-[600px] lg:w-[660px] max-w-full flex flex-col justify-between px-5 sm:px-10 md:px-12 pb-6 sm:pb-10 pt-[72px] sm:pt-[92px] shadow-2xl transition-transform duration-300 ease-out border-l backdrop-blur-2xl ${
           isLight
             ? 'bg-[#faf9f5]/85 border-black/10 text-zinc-900'
             : 'bg-[#06060a]/80 border-white/10 text-white'
@@ -78,13 +78,13 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
       >
         {/* Drawer Meta: Moscow Timezone, Live Clock & Status */}
         <div
-          className={`flex flex-col gap-2 pb-6 border-b shrink-0 ${
+          className={`flex flex-col gap-2 pb-5 sm:pb-6 border-b shrink-0 ${
             isLight ? 'border-black/10' : 'border-white/10'
           }`}
         >
           <MoscowClock variant="drawer" isLight={isLight} fallback={clock} />
           <span
-            className={`font-mono text-xs sm:text-sm uppercase tracking-wider ${
+            className={`font-mono text-[11px] sm:text-sm uppercase tracking-wider ${
               isLight ? 'text-zinc-600' : 'text-zinc-400'
             }`}
           >
@@ -95,21 +95,21 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
         </div>
 
         {/* Main Navigation Links: Large clean numbers (NO YELLOW), large bold titles */}
-        <nav className="flex flex-col gap-3 sm:gap-5 my-auto py-6 sm:py-8 overflow-y-auto">
+        <nav className="flex flex-col gap-2.5 sm:gap-5 my-auto py-4 sm:py-8 overflow-y-auto">
           {menuItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
               onClick={onClose}
-              className={`group flex items-baseline justify-between py-2 transition-all duration-300 hover:translate-x-2 ${
+              className={`group flex items-baseline justify-between py-1.5 sm:py-2 transition-all duration-300 hover:translate-x-2 ${
                 isLight
                   ? 'text-zinc-800 hover:text-zinc-950'
                   : 'text-zinc-100 hover:text-white'
               }`}
             >
-              <div className="flex items-baseline gap-4 sm:gap-6">
+              <div className="flex items-baseline gap-3 sm:gap-6 min-w-0">
                 <span
-                  className={`font-mono text-lg sm:text-2xl font-bold tracking-wider transition-colors ${
+                  className={`font-mono text-base sm:text-2xl font-bold tracking-wider transition-colors shrink-0 ${
                     isLight
                       ? 'text-zinc-400 group-hover:text-zinc-800'
                       : 'text-zinc-500 group-hover:text-zinc-200'
@@ -117,12 +117,12 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
                 >
                   [{item.num}]
                 </span>
-                <span className="text-2xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight transition-colors">
+                <span className="text-xl sm:text-4xl lg:text-5xl font-black uppercase tracking-tight transition-colors truncate">
                   {item.label}
                 </span>
               </div>
               <span
-                className={`font-mono text-xl sm:text-2xl transition-all duration-300 group-hover:translate-x-1.5 group-hover:translate-y-1 ${
+                className={`font-mono text-lg sm:text-2xl transition-all duration-300 group-hover:translate-x-1.5 group-hover:translate-y-1 shrink-0 ${
                   isLight
                     ? 'text-zinc-400 group-hover:text-zinc-900'
                     : 'text-zinc-500 group-hover:text-white'
@@ -136,11 +136,11 @@ export const NavigationDrawer: React.FC<NavigationDrawerProps> = ({
 
         {/* Footer Direct Contacts & Signature */}
         <div
-          className={`pt-6 sm:pt-8 border-t font-mono text-xs flex flex-col gap-4 shrink-0 ${
+          className={`pt-5 sm:pt-8 border-t font-mono text-xs flex flex-col gap-3 sm:gap-4 shrink-0 ${
             isLight ? 'border-black/10' : 'border-white/10'
           }`}
         >
-          <div className="flex flex-wrap items-center gap-4 sm:gap-6 font-bold text-sm sm:text-base">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 font-bold text-xs sm:text-base">
             {socialLinks.map((s) => (
               <a
                 key={s.name}

@@ -51,14 +51,14 @@ export const ContactCardItem: React.FC<ContactCardItemProps> = React.memo(({ car
       {/* Top Row: Icon Badge & Action Symbol */}
       <div className="relative z-20 flex items-center justify-between">
         <div
-          className={`w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 shadow-md ${card.iconBorder}`}
+          className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center transition-all duration-300 shadow-md ${card.iconBorder}`}
         >
           {card.icon}
         </div>
 
         {card.id === 'email' ? (
           <div
-            className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold transition-all duration-300 ${
               card.isCopied
                 ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-400/50 scale-110 font-bold shadow-[0_0_15px_rgba(16,185,129,0.4)]'
                 : 'text-zinc-400 group-hover:text-amber-300 group-hover:scale-110'
@@ -67,9 +67,9 @@ export const ContactCardItem: React.FC<ContactCardItemProps> = React.memo(({ car
             {card.isCopied ? '✓' : '⧉'}
           </div>
         ) : (
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-white transition-all duration-300">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-zinc-400 group-hover:text-white transition-all duration-300">
             <svg
-              className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -85,14 +85,14 @@ export const ContactCardItem: React.FC<ContactCardItemProps> = React.memo(({ car
       </div>
 
       {/* Bottom Row: Meta Info */}
-      <div className="relative z-20 flex flex-col pt-4">
-        <span className="text-xs font-mono tracking-wider text-zinc-400 group-hover:text-amber-300 transition-colors uppercase font-medium">
+      <div className="relative z-20 flex flex-col pt-3 sm:pt-4 min-w-0">
+        <span className="text-[10px] sm:text-xs font-mono tracking-wider text-zinc-400 group-hover:text-amber-300 transition-colors uppercase font-medium truncate">
           {card.label}
         </span>
-        <span className="text-lg sm:text-xl font-bold text-white tracking-tight mt-1 truncate drop-shadow-sm group-hover:text-white">
+        <span className="text-sm sm:text-xl font-bold text-white tracking-tight mt-0.5 sm:mt-1 truncate drop-shadow-sm group-hover:text-white">
           {card.value}
         </span>
-        <span className="text-[11px] font-mono text-zinc-500 group-hover:text-zinc-300 mt-1 transition-colors">
+        <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 group-hover:text-zinc-300 mt-0.5 sm:mt-1 transition-colors truncate">
           {card.subtext}
         </span>
       </div>
@@ -100,7 +100,7 @@ export const ContactCardItem: React.FC<ContactCardItemProps> = React.memo(({ car
   );
 
   const containerClasses =
-    'group relative p-4 sm:p-6 sm:p-7 rounded-2xl sm:rounded-3xl bg-zinc-950/85 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.95)] text-left flex flex-col justify-between cursor-pointer w-full select-none';
+    'group relative p-3 sm:p-5 lg:p-7 rounded-2xl sm:rounded-3xl bg-zinc-950/85 border border-white/10 hover:border-white/30 overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.95)] text-left flex flex-col justify-between cursor-pointer w-full select-none min-w-0';
 
   const Component = card.type === 'button' ? 'button' : 'a';
 

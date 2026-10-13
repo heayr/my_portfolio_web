@@ -40,14 +40,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
       </div>
 
       {/* Structured Content Container Constrained to Standard 1800px / 2K Grid */}
-      <div className="relative z-20 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto h-full flex flex-col justify-between px-6 sm:px-12 lg:px-16 xl:px-24">
+      <div className="relative z-20 w-full max-w-[1800px] 2xl:max-w-[1920px] mx-auto h-full flex flex-col justify-between px-4 sm:px-8 lg:px-16 xl:px-24">
         {/* Top Header Bar (Arpeggio Signature) */}
-        <div className="pt-18 sm:pt-20 lg:pt-20 xl:pt-20 2xl:pt-28 flex flex-wrap items-center justify-between gap-4 font-mono text-xs 2xl:text-sm">
-          <div className="flex items-center gap-3 sm:gap-4">
-            <span className="px-3 py-1 rounded-full bg-black/85 border border-white/25 text-amber-400 font-bold shadow-md">
+        <div className="pt-16 sm:pt-20 lg:pt-20 xl:pt-20 2xl:pt-28 flex flex-wrap items-center justify-between gap-3 sm:gap-4 font-mono text-xs 2xl:text-sm">
+          <div className="flex items-center gap-2 sm:gap-4 flex-wrap">
+            <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/85 border border-white/25 text-amber-400 font-bold shadow-md text-[11px] sm:text-xs">
               0{index + 1} // 0{total}
             </span>
-            <h3 className="text-lg sm:text-2xl 2xl:text-3xl font-black uppercase tracking-tight text-white drop-shadow-sm">
+            <h3 className="text-base sm:text-2xl 2xl:text-3xl font-black uppercase tracking-tight text-white drop-shadow-sm">
               {project.title}
             </h3>
             <span className="h-4 w-[1px] bg-white/30 hidden sm:inline-block" />
@@ -56,38 +56,38 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full bg-black/80 border border-white/20 text-zinc-300 font-semibold shadow-md">
+            <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/80 border border-white/20 text-zinc-300 font-semibold shadow-md text-[11px] sm:text-xs">
               {project.role[locale]}
             </span>
-            <span className="px-3 py-1 rounded-full bg-black/75 border border-white/15 text-zinc-400 hidden md:inline-block shadow-md">
+            <span className="px-2.5 sm:px-3 py-1 rounded-full bg-black/75 border border-white/15 text-zinc-400 hidden md:inline-block shadow-md text-[11px] sm:text-xs">
               {project.period}
             </span>
           </div>
         </div>
 
         {/* Center Cinematic Editorial Text */}
-        <div className="max-w-4xl 2xl:max-w-5xl my-auto py-3 sm:py-4 lg:py-6">
-          <span className="inline-block font-mono text-xs 2xl:text-sm tracking-widest text-amber-400 uppercase font-bold mb-3">
+        <div className="max-w-4xl 2xl:max-w-5xl my-auto py-2 sm:py-4 lg:py-6">
+          <span className="inline-block font-mono text-[10px] sm:text-xs 2xl:text-sm tracking-widest text-amber-400 uppercase font-bold mb-1.5 sm:mb-3">
             // {t.works.sectionTag} · ARCHITECTURAL HIGHLIGHT
           </span>
-          <h4 className="text-2xl sm:text-4xl lg:text-5xl 2xl:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
+          <h4 className="text-xl sm:text-3xl lg:text-5xl 2xl:text-6xl font-extrabold text-white tracking-tight leading-tight drop-shadow-md">
             {project.tagline[locale]}
           </h4>
-          <p className="mt-4 text-sm sm:text-base 2xl:text-lg text-zinc-300 max-w-2xl 2xl:max-w-3xl leading-relaxed drop-shadow">
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-base 2xl:text-lg text-zinc-300 max-w-2xl 2xl:max-w-3xl leading-relaxed drop-shadow line-clamp-3 sm:line-clamp-none">
             {project.description[locale]}
           </p>
         </div>
 
         {/* Bottom Bar: Engineering Metrics, Stack & CTAs */}
-        <div className="pb-6 sm:pb-8 lg:pb-10 2xl:pb-16 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+        <div className="pb-5 sm:pb-8 lg:pb-10 2xl:pb-16 flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6">
           {/* Left: Metrics & Tech Stack */}
-          <div className="flex flex-col gap-3 max-w-2xl 2xl:max-w-3xl">
+          <div className="flex flex-col gap-2.5 sm:gap-3 max-w-2xl 2xl:max-w-3xl">
             {/* Key Metrics Chips */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {project.metrics.slice(0, 3).map((metric, mIdx) => (
                 <span
                   key={mIdx}
-                  className="px-3 py-1 rounded-full bg-black/85 border border-white/20 text-xs 2xl:text-sm text-zinc-200 font-medium flex items-center gap-1.5 shadow-md"
+                  className="px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-black/85 border border-white/20 text-[11px] sm:text-xs 2xl:text-sm text-zinc-200 font-medium flex items-center gap-1.5 shadow-md"
                 >
                   <span className="text-amber-400 font-bold">✓</span>
                   <span>{metric[locale]}</span>
@@ -108,8 +108,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
             </div>
           </div>
 
-          {/* Right: Actions with 42px touch target */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Right: Actions with responsive wrapping */}
+          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             {project.liveUrl && (
               <Button
                 as="a"
@@ -118,7 +118,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
                 variant="primary"
                 size="sm"
                 iconRight={<span className="font-mono">↗</span>}
-                className="shadow-xl"
+                className="shadow-xl flex-1 sm:flex-none justify-center"
               >
                 {t.works.visitLive}
               </Button>
@@ -131,7 +131,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = React.memo(({
                 variant="secondary"
                 size="sm"
                 iconRight={<span className="font-mono">↗</span>}
-                className="shadow-xl font-mono"
+                className="shadow-xl font-mono flex-1 sm:flex-none justify-center"
               >
                 {t.works.viewGithub}
               </Button>

@@ -42,11 +42,11 @@ export const SectionHeader: React.FC<SectionHeaderProps> = React.memo(({
           <span>{displayTag}</span>
         </div>
       )}
-      <HeadingTag className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[var(--text-primary)] leading-[1.08]">
+      <HeadingTag className="text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight text-[var(--text-primary)] leading-[1.08] break-words">
         {title}
       </HeadingTag>
       {description && (
-        <p className={`mt-5 text-base sm:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed ${isCenter ? 'max-w-2xl mx-auto' : 'max-w-3xl'}`}>
+        <p className={`mt-3 sm:mt-5 text-sm sm:text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed ${isCenter ? 'max-w-2xl mx-auto' : 'max-w-3xl'}`}>
           {description}
         </p>
       )}
